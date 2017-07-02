@@ -1,4 +1,5 @@
 import { Patients } from '../imports/api/patients/patients.js';
+
 if (Patients.find().count() === 0) {
 	Patients.insert({
 		first: 'Robert',

@@ -11,6 +11,8 @@ import {
 	Switch,
 	Redirect
 } from 'react-router-dom';
+
+// Components
 import { Navigation } from '../navigation/navigation.jsx';
 
 // App Component
@@ -20,7 +22,10 @@ export const App = appProps => {
 			<div className="App">
 				<Navigation {...appProps} />
 				<Grid>
-					<Switch />
+					<Switch>
+						<Route name="home" path="/" />
+						<Route name="newpatient" path="/newpatient" />
+					</Switch>
 				</Grid>
 			</div>
 		</Router>
