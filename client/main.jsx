@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 
 // Accounts
 import '../imports/startup/client/accounts-config.js';
+import { App } from '../imports/ui/components/app/app.jsx';
 
 // Main
 import './main.html';
