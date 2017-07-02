@@ -33,7 +33,6 @@ Meteor.methods({
 		let patient = {
 			userId: userId,
 			email: user.emails[0].address,
-			color: color,
 			createdAt: new Date()
 		};
 
