@@ -1,6 +1,7 @@
 // Atmosphere and NPM
 import { Meteor } from 'meteor/meteor';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { composeWithTracker } from 'react-komposer';
 import { Grid } from 'react-bootstrap';
 import {
@@ -10,10 +11,10 @@ import {
 	Switch,
 	Redirect
 } from 'react-router-dom';
-import { Navigation } from '../navigation';
+import { Navigation } from '../navigation/navigation.jsx';
 
 // App Component
-const App = appProps => {
+export const App = appProps => {
 	return (
 		<Router>
 			<div className="App">
@@ -25,5 +26,3 @@ const App = appProps => {
 		</Router>
 	);
 };
-
-export App;
