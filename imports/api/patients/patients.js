@@ -5,8 +5,11 @@ export const Patients = new Mongo.Collection('patients');
 
 // Publications
 if (Meteor.isServer) {
-	Meteor.publish('patients', match => {
+	Meteor.publish('patients', () => {
 		return Patients.find({}, { sort: { createdAt: -1 } });
+	});
+	Meteor.publish('patient', ({ match }) => {
+		return Patients.findOne(match.params._id);
 	});
 }
 

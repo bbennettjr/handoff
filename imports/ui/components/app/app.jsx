@@ -15,6 +15,7 @@ import {
 // Components
 import { Navigation } from '../navigation/navigation.jsx';
 import PatientList from '../patients/patient_list/patient-list.jsx';
+import Patient from '../patients/patient/patient.jsx';
 
 // App Component
 export const App = appProps => {
@@ -35,6 +36,7 @@ export const App = appProps => {
 							path="/newpatient"
 							component={NewPatient}
 						/>
+						<Route path="/patient/:_id" component={Patient} />
 					</Switch>
 				</Grid>
 			</div>

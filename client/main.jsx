@@ -10,6 +10,8 @@ import { App } from '../imports/ui/components/app/app.jsx';
 // Main
 import './main.html';
 
+import '../imports/api/patients/patients.js';
+
 Meteor.startup(() => {
 	// render to the root div
 	ReactDOM.render(App(), document.getElementById('root'), (error, result) => {
