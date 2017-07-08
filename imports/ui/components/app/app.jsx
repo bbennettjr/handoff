@@ -2,7 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { composeWithTracker } from 'react-komposer';
+import { compose } from 'react-komposer';
 import { Grid } from 'react-bootstrap';
 import {
 	BrowserRouter as Router,
@@ -14,6 +14,7 @@ import {
 
 // Components
 import { Navigation } from '../navigation/navigation.jsx';
+import PatientList from '../patients/patient_list/patient-list.jsx';
 
 // App Component
 export const App = appProps => {
@@ -23,11 +24,28 @@ export const App = appProps => {
 				<Navigation {...appProps} />
 				<Grid>
 					<Switch>
-						<Route name="home" path="/" />
-						<Route name="newpatient" path="/newpatient" />
+						<Route
+							name="home"
+							exact
+							path="/"
+							component={PatientList}
+						/>
+						<Route
+							name="newpatient"
+							path="/newpatient"
+							component={NewPatient}
+						/>
 					</Switch>
 				</Grid>
 			</div>
 		</Router>
+	);
+};
+
+const NewPatient = props => {
+	return (
+		<div>
+			<h1>New Patient</h1>
+		</div>
 	);
 };
