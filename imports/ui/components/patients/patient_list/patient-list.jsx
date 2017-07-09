@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Panel } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { compose } from 'react-komposer';
 import { Patients } from '../../../../api/patients/patients.js';
 
@@ -11,11 +11,11 @@ class PatientList extends React.Component {
 		return patients.map(patient => {
 			const url = `/patient/${patient._id}`;
 			return (
-				<Link to={url}>
+				<LinkContainer to={url}>
 					<Panel header={`${patient.first} ${patient.last}`}>
 						{`${patient.diagnosis}, condition: ${patient.condition}`}
 					</Panel>
-				</Link>
+				</LinkContainer>
 			);
 		});
 	}

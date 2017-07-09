@@ -41,7 +41,7 @@ export const App = appProps => {
 
 // Placeholders
 const Team = props => {
-	return <h1>X Team's Patient</h1>;
+	return <h1>Your Team's Patients</h1>;
 };
 const Cover = props => {
 	return <h1>Cover List</h1>;
