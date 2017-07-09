@@ -16,6 +16,7 @@ import {
 import { Navigation } from '../navigation/navigation.jsx';
 import PatientList from '../patients/patient_list/patient-list.jsx';
 import Patient from '../patients/patient/patient.jsx';
+import { NewPatient } from '../patients/patient/new-patient.jsx';
 
 // App Component
 export const App = appProps => {
@@ -25,18 +26,12 @@ export const App = appProps => {
 				<Navigation {...appProps} />
 				<Grid>
 					<Switch>
-						<Route
-							name="home"
-							exact
-							path="/"
-							component={PatientList}
-						/>
-						<Route
-							name="newpatient"
-							path="/newpatient"
-							component={NewPatient}
-						/>
 						<Route path="/patient/:_id" component={Patient} />
+						<Route path="/team" component={Team} />
+						<Route path="/cover" component={Cover} />
+
+						<Route path="/newpatient" component={NewPatient} />
+						<Route path="/" component={PatientList} />
 					</Switch>
 				</Grid>
 			</div>
@@ -44,10 +39,10 @@ export const App = appProps => {
 	);
 };
 
-const NewPatient = props => {
-	return (
-		<div>
-			<h1>New Patient</h1>
-		</div>
-	);
+// Placeholders
+const Team = props => {
+	return <h1>X Team's Patient</h1>;
+};
+const Cover = props => {
+	return <h1>Cover List</h1>;
 };

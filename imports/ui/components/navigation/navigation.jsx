@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import AccountsWrapper from '../accounts/accounts-wrapper.jsx';
 
 export const Navigation = appProps => {
@@ -14,18 +15,19 @@ export const Navigation = appProps => {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
-          <NavItem eventKey={1} href="#">NavLink</NavItem>
-          <NavItem eventKey={2} href="#">NavLink</NavItem>
+          <LinkContainer to="/team">
+            <NavItem>Team</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/cover">
+            <NavItem>Cover</NavItem>
+          </LinkContainer>
         </Nav>
         <Nav pullRight>
-          <NavItem><NavLink to="/newpatient">Test button</NavLink></NavItem>
-          <NavItem
-            eventKey={1}
-            href="/newpatient"
-            onClick={e => e.preventDefault()}
-          >
-            New Patient
-          </NavItem>
+          <LinkContainer to="/newpatient">
+            <NavItem>
+              New Patient
+            </NavItem>
+          </LinkContainer>
           <NavItem eventKey={2}><AccountsWrapper /></NavItem>
         </Nav>
       </Navbar.Collapse>
