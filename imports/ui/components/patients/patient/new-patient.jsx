@@ -20,8 +20,9 @@ export class NewPatient extends React.Component {
 	onSubmit(e) {
 		e.preventDefault();
 
-		// Build patient object. => Can we build this with ES6 key: value methods
-		// and destructuring with for-of?  Evaluate to shorten this code
+		// Build patient object. => Can we build this with ES6 key: value methods,
+		// destructuring, variable key creation and for-of?
+		// Evaluate to shorten this code
 		const patient = {
 			first: ReactDOM.findDOMNode(this.refs.first).value,
 			last: ReactDOM.findDOMNode(this.refs.last).value,
