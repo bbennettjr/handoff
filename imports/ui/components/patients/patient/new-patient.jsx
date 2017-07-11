@@ -1,6 +1,7 @@
 // Atmosphere and NPM
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import {
 	Grid,
@@ -18,8 +19,24 @@ import {
 export class NewPatient extends React.Component {
 	onSubmit(e) {
 		e.preventDefault();
+
+		// Build patient object. => Can we build this with ES6 key: value methods
+		// and destructuring with for-of?  Evaluate to shorten this code
+		const patient = {
+			first: ReactDOM.findDOMNode(this.refs.first).value,
+			last: ReactDOM.findDOMNode(this.refs.last).value,
+			diagnosis: ReactDOM.findDOMNode(this.refs.diagnosis).value,
+			loc: ReactDOM.findDOMNode(this.refs.loc).value,
+			condition: ReactDOM.findDOMNode(this.refs.condition).value,
+			vitals: ReactDOM.findDOMNode(this.refs.vitals).value,
+			hpi: ReactDOM.findDOMNode(this.refs.hpi).value,
+			pmh: ReactDOM.findDOMNode(this.refs.pmh).value,
+			meds: ReactDOM.findDOMNode(this.refs.meds).value,
+			todo: ReactDOM.findDOMNode(this.refs.todo).value,
+			cover: ReactDOM.findDOMNode(this.refs.cover).value
+		};
+
 		// Meteor insert method
-		console.log(this.first);
 	}
 	render() {
 		return (
@@ -27,34 +44,36 @@ export class NewPatient extends React.Component {
 				<form>
 					<Row>
 						<Col xs={6}>
-							<FieldGroup
-								id="formControlsText"
-								type="text"
-								label="First Name"
-								placeholder="Enter first name"
-								ref={first => {
-									debugger;
-									this.first = first;
-								}}
-							/>
+							<FormGroup controlId="formControlsText">
+								<ControlLabel label="First Name" />
+								<FormControl
+									type="text"
+									placeholder="Enter first name"
+									ref="first"
+								/>
+							</FormGroup>
 						</Col>
 						<Col xs={6}>
-							<FieldGroup
-								id="formControlsText"
-								type="text"
-								label="Last Name"
-								placeholder="Enter last name"
-							/>
+							<FormGroup controlId="formControlsText">
+								<ControlLabel label="Last Name" />
+								<FormControl
+									type="text"
+									placeholder="Enter last name"
+									ref="last"
+								/>
+							</FormGroup>
 						</Col>
 					</Row>
 					<Row>
 						<Col xs={6}>
-							<FieldGroup
-								id="formControlsText"
-								type="text"
-								label="Diagnosis"
-								placeholder="Enter diagnosis"
-							/>
+							<FormGroup controlId="formControlsText">
+								<ControlLabel label="Diagnosis" />
+								<FormControl
+									type="text"
+									placeholder="Enter diagnosis"
+									ref="diagnosis"
+								/>
+							</FormGroup>
 						</Col>
 						<Col xs={6}>
 							<FormGroup>
@@ -77,20 +96,24 @@ export class NewPatient extends React.Component {
 					</Row>
 					<Row>
 						<Col xs={6}>
-							<FieldGroup
-								id="formControlsText"
-								type="text"
-								label="Condition"
-								placeholder="Enter condition"
-							/>
+							<FormGroup controlId="formControlsText">
+								<ControlLabel label="Condition" />
+								<FormControl
+									type="text"
+									placeholder="Enter condition"
+									ref="condition"
+								/>
+							</FormGroup>
 						</Col>
 						<Col xs={6}>
-							<FieldGroup
-								id="formControlsText"
-								type="text"
-								label="Vitals"
-								placeholder="Enter vitals"
-							/>
+							<FormGroup controlId="formControlsText">
+								<ControlLabel label="Vitals" />
+								<FormControl
+									type="text"
+									placeholder="Enter vitals"
+									ref="vitals"
+								/>
+							</FormGroup>
 						</Col>
 					</Row>
 					<Row>
@@ -102,13 +125,13 @@ export class NewPatient extends React.Component {
 								<FormControl
 									componentClass="textarea"
 									placeholder="HPI"
+									ref="hpi"
 								/>
 							</FormGroup>
 						</Col>
 					</Row>
 					<Row>
 						<Col xs={12}>
-
 							<FormGroup controlId="formControlsTextarea">
 								<ControlLabel>
 									Past Medical History
@@ -116,6 +139,7 @@ export class NewPatient extends React.Component {
 								<FormControl
 									componentClass="textarea"
 									placeholder="PMH"
+									ref="pmh"
 								/>
 							</FormGroup>
 						</Col>
@@ -128,26 +152,31 @@ export class NewPatient extends React.Component {
 								<FormControl
 									componentClass="textarea"
 									placeholder="Medications"
+									ref="medications"
 								/>
 							</FormGroup>
 						</Col>
 					</Row>
 					<Row>
 						<Col xs={6}>
-							<FieldGroup
-								id="formControlsText"
-								type="text"
-								label="To Do"
-								placeholder="Enter To Do's"
-							/>
+							<FormGroup controlId="formControlsText">
+								<ControlLabel label="To Do" />
+								<FormControl
+									type="text"
+									placeholder="Enter To Dos"
+									ref="todo"
+								/>
+							</FormGroup>
 						</Col>
 						<Col xs={6}>
-							<FieldGroup
-								id="formControlsText"
-								type="text"
-								label="Cover"
-								placeholder="Enter cover"
-							/>
+							<FormGroup controlId="formControlsText">
+								<ControlLabel label="Cover" />
+								<FormControl
+									type="text"
+									placeholder="Enter cover"
+									ref="cover"
+								/>
+							</FormGroup>
 						</Col>
 					</Row>
 					<Row>
@@ -171,14 +200,4 @@ export class NewPatient extends React.Component {
 			</Grid>
 		);
 	}
-}
-
-function FieldGroup({ id, label, help, ...props }) {
-	return (
-		<FormGroup controlId={id}>
-			<ControlLabel>{label}</ControlLabel>
-			<FormControl {...props} />
-			{help && <HelpBlock>{help}</HelpBlock>}
-		</FormGroup>
-	);
 }
