@@ -28,6 +28,10 @@ export class NewPatient extends React.Component {
 		}
 
 		// Meteor insert method
+		Meteor.call('patient.insert', patient, (error, result) => {
+			if (error) console.log(error.reason);
+			if (result._id) console.log('Patient _id: ' + result._id);
+		});
 	}
 	render() {
 		return (

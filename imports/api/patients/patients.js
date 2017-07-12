@@ -15,11 +15,11 @@ if (Meteor.isServer) {
 
 Meteor.methods({
 	// insert a patient
-	'patient.insert'(color) {
+	'patient.insert'(patient) {
 		// validate against schema
-		new SimpleSchema({
-			color: { type: String }
-		}).validate({ color });
+		// new SimpleSchema({
+		// 	patient: { type: Object }
+		// }).validate({ patient });
 
 		// check that a user is signed in
 		let userId = Meteor.userId();
@@ -31,11 +31,11 @@ Meteor.methods({
 
 		// create the patient obj
 		let user = Meteor.user();
-		let patient = {
+		Object.assign(patient, {
 			userId: userId,
 			email: user.emails[0].address,
 			createdAt: new Date()
-		};
+		});
 
 		// insert the patient
 		let patientId = Patients.insert(patient);
