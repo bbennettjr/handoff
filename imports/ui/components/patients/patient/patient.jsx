@@ -42,7 +42,7 @@ const Patient = patient => {
 				</Col>
 				<Col xs={6}>
 					{`Cross Cover:
-				${patient.crossCover}`}
+				${patient.cover}`}
 				</Col>
 			</Row>
 		</Grid>

@@ -20,22 +20,12 @@ export class NewPatient extends React.Component {
 	onSubmit(e) {
 		e.preventDefault();
 
-		// Build patient object. => Can we build this with ES6 key: value methods,
-		// destructuring, variable key creation and for-of?
-		// Evaluate to shorten this code
-		const patient = {
-			first: ReactDOM.findDOMNode(this.refs.first).value,
-			last: ReactDOM.findDOMNode(this.refs.last).value,
-			diagnosis: ReactDOM.findDOMNode(this.refs.diagnosis).value,
-			loc: ReactDOM.findDOMNode(this.refs.loc).value,
-			condition: ReactDOM.findDOMNode(this.refs.condition).value,
-			vitals: ReactDOM.findDOMNode(this.refs.vitals).value,
-			hpi: ReactDOM.findDOMNode(this.refs.hpi).value,
-			pmh: ReactDOM.findDOMNode(this.refs.pmh).value,
-			meds: ReactDOM.findDOMNode(this.refs.meds).value,
-			todo: ReactDOM.findDOMNode(this.refs.todo).value,
-			cover: ReactDOM.findDOMNode(this.refs.cover).value
-		};
+		// Build patient object. => ES6 style. for-of, destruc,
+		// Object class methods and dynamic prop names
+		const patient = {};
+		for (const [key, val] of Object.entries(this.refs)) {
+			Object.assign(patient, { [key]: ReactDOM.findDOMNode(val).value });
+		}
 
 		// Meteor insert method
 	}
