@@ -33,19 +33,23 @@ class PatientList extends React.Component {
 
 		return users.map(user => {
 			return (
-				<MenuItem onClick={() => this.signOffToThisUser(user._id)}>
+				<MenuItem
+					onClick={() => this.signOffToThisUser(user._id)}
+					key={user._id}
+				>
 					{user.emails[0].address}
 				</MenuItem>
 			)
 		})
 	}
 	render() {
-		console.log("Users", this.props.users)
 		return (
 			<div>
 				<h3>
 					Your Patients
-					<DropdownButton pullRight>{this.renderUsers()}</DropdownButton>
+					<DropdownButton pullRight title="Handoff" id="Handoff">
+						{this.renderUsers()}
+					</DropdownButton>
 				</h3>
 				{this.renderPatients()}
 			</div>
