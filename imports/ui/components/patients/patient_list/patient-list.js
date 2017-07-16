@@ -34,7 +34,14 @@ class PatientList extends React.Component {
 }
 
 export default createContainer(() => {
+	let user = Meteor.user()
+	let coveredPatients = []
+	if (user && user.profile && user.profile.coveredPatients) {
+		coveredPatients = user.profile.coveredPatients
+	}
 	const subscription = Meteor.subscribe("patients")
-	const patients = Patients.find({}).fetch()
+	const patients = Patients.find({
+		_id: { $in: coveredPatients }
+	}).fetch()
 	return { patients }
 }, PatientList)
