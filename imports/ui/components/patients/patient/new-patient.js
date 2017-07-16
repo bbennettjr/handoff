@@ -1,8 +1,8 @@
 // Atmosphere and NPM
-import { Meteor } from 'meteor/meteor';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Meteor } from "meteor/meteor"
+import React from "react"
+import ReactDOM from "react-dom"
+import { LinkContainer } from "react-router-bootstrap"
 import {
 	Grid,
 	Row,
@@ -14,26 +14,32 @@ import {
 	HelpBlock,
 	Button,
 	ButtonToolbar
-} from 'react-bootstrap';
-
-export class NewPatient extends React.Component {
+} from "react-bootstrap"
+import { withRouter } from "react-router"
+class NewPatient extends React.Component {
 	onSubmit(e) {
-		e.preventDefault();
+		e.preventDefault()
 
 		// Build patient object. => ES6 style. for-of, destruc,
 		// Object class methods and dynamic prop names
-		const patient = {};
+		const patient = {}
 		for (const [key, val] of Object.entries(this.refs)) {
-			Object.assign(patient, { [key]: ReactDOM.findDOMNode(val).value });
+			Object.assign(patient, { [key]: ReactDOM.findDOMNode(val).value })
 		}
 
 		// Meteor insert method
-		Meteor.call('patient.insert', patient, (error, result) => {
-			if (error) console.log(error.reason);
-			if (result._id) console.log('Patient _id: ' + result._id);
-		});
+		Meteor.call("patient.insert", patient, (error, result) => {
+			if (error) {
+				console.log(error.reason)
+			}
+			if (result._id) {
+				console.log("Patient _id: " + result._id)
+				this.props.history.push("/")
+			}
+		})
 	}
 	render() {
+		// console.log(this.props.history)
 		return (
 			<Grid>
 				<form>
@@ -77,11 +83,11 @@ export class NewPatient extends React.Component {
 									<Radio name="radioGroup" inline>
 										1
 									</Radio>
-									{' '}
+									{" "}
 									<Radio name="radioGroup" inline>
 										2
 									</Radio>
-									{' '}
+									{" "}
 									<Radio name="radioGroup" inline>
 										3
 									</Radio>
@@ -182,10 +188,7 @@ export class NewPatient extends React.Component {
 										Cancel
 									</Button>
 								</LinkContainer>
-								<Button
-									bsStyle="success"
-									onClick={e => this.onSubmit(e)}
-								>
+								<Button bsStyle="success" onClick={e => this.onSubmit(e)}>
 									Success
 								</Button>
 							</ButtonToolbar>
@@ -193,6 +196,8 @@ export class NewPatient extends React.Component {
 					</Row>
 				</form>
 			</Grid>
-		);
+		)
 	}
 }
+
+export default withRouter(NewPatient)

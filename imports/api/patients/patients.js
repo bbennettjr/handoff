@@ -63,7 +63,7 @@ Meteor.methods({
 		let patientId = Patients.insert(patient)
 		Meteor.users.update(
 			{ _id: userId },
-			{ $addToSet: { "profile.coveredPatients": [patientId] } }
+			{ $addToSet: { "profile.coveredPatients": patientId } }
 		)
 		return { _id: patientId }
 	},
