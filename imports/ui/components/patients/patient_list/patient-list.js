@@ -13,7 +13,10 @@ class PatientList extends React.Component {
 			const url = `/patient/${patient._id}`
 			return (
 				<LinkContainer to={url} key={patient._id}>
-					<Panel header={`${patient.first} ${patient.last}`}>
+					<Panel
+						header={`${patient.first} ${patient.last}`}
+						style={{ cursor: "pointer" }}
+					>
 						{`${patient.diagnosis}, condition: ${patient.condition}`}
 					</Panel>
 				</LinkContainer>
