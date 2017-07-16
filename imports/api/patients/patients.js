@@ -39,7 +39,10 @@ Meteor.methods({
 
 		// insert the patient
 		let patientId = Patients.insert(patient);
-
+		Meteor.users.update(
+			{ _id: userId },
+			{ $addToSet: { 'profile.coveredPatients': [patientId] } }
+		);
 		return { _id: patientId };
 	},
 	// update a patient
@@ -53,10 +56,7 @@ Meteor.methods({
 		// does the patient exist
 		let patient = Patients.findOne(patientId);
 		if (!patient)
-			throw new Meteor.Error(
-				'Does Not Exist',
-				'patient could not be found'
-			);
+			throw new Meteor.Error('Does Not Exist', 'patient could not be found');
 
 		// check that user exists and owns patient
 		let user = Meteor.user();
@@ -79,10 +79,7 @@ Meteor.methods({
 		// does the patient exist
 		let patient = Patients.findOne(patientId);
 		if (!patient)
-			throw new Meteor.Error(
-				'Does Not Exist',
-				'patient could not be found'
-			);
+			throw new Meteor.Error('Does Not Exist', 'patient could not be found');
 
 		// check that user exists and owns patient
 		let user = Meteor.user();
