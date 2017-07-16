@@ -23,12 +23,17 @@ class PatientList extends React.Component {
 			)
 		})
 	}
+
+	signOffToThisUser(userId) {
+		Meteor.call("addAllPatientsToOtherUserId", userId)
+	}
+
 	renderUsers() {
 		let users = this.props.users
 
 		return users.map(user => {
 			return (
-				<MenuItem>
+				<MenuItem onClick={() => this.signOffToThisUser(user._id)}>
 					{user.emails[0].address}
 				</MenuItem>
 			)

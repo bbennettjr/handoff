@@ -40,6 +40,29 @@ Meteor.methods({
 		)
 	},
 
+	addAllPatientsToOtherUserId(otherUserId) {
+		let me = Meteor.user()
+		let coveredPatients = me.profile.coveredPatients
+
+		Meteor.users.update(
+			{
+				_id: otherUserId
+			},
+			{
+				$addToSet: {
+					"profile.coveredPatients": { $each: coveredPatients }
+				}
+			}
+		)
+
+		Meteor.users.update(
+			{
+				_id: me._id
+			},
+			{ $set: { "profile.coveredPatients": [] } }
+		)
+	},
+
 	// insert a patient
 	"patient.insert"(patient) {
 		// validate against schema
