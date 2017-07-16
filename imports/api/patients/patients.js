@@ -20,7 +20,7 @@ Meteor.methods({
 			{ _id: userId },
 			{
 				$addToSet: {
-					"profile.coveredPatients": [patientId]
+					"profile.coveredPatients": patientId
 				}
 			}
 		)

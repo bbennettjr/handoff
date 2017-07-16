@@ -40,8 +40,11 @@ export default createContainer(() => {
 		coveredPatients = user.profile.coveredPatients
 	}
 	const subscription = Meteor.subscribe("patients")
+	// console.log(Patients.find().fetch())
+	console.log("covertedPatients", coveredPatients)
 	const patients = Patients.find({
 		_id: { $in: coveredPatients }
 	}).fetch()
+	console.log(patients)
 	return { patients }
 }, PatientList)
