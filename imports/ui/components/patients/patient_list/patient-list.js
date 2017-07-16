@@ -24,11 +24,12 @@ class PatientList extends React.Component {
 		})
 	}
 	renderUsers() {
-		let users = ["dan", "is", "way", "sexy"]
+		let users = this.props.users
+
 		return users.map(user => {
 			return (
 				<MenuItem>
-					{user}
+					{user.emails[0].address}
 				</MenuItem>
 			)
 		})
