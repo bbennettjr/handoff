@@ -10,7 +10,7 @@ if (Meteor.isServer) {
 		return Patients.find({}, { sort: { createdAt: -1 } })
 	})
 	Meteor.publish("patient", ({ match }) => {
-		return Patients.findOne(match.params._id)
+		return Patients.find({ _id: match.params._id })
 	})
 
 	Meteor.publish("allUsers", () => {

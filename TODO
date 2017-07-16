@@ -1,0 +1,10 @@
+Things to do:
+1. Rewrite with Material-ui
+2. Build mobile app
+3. Look up HIPAA compliance AWS situation (try to setup)
+4. Better "no-patient" view (description of app, "lift" to yourself)
+5. Edit button on patient view (reuse 'new patient view')
+6. Search feature for patient (another url search parameters)
+7. Either manually add users or do email verification somehow.
+8. Make a user put in their medical number and create an account. Two step verification
+9. 
