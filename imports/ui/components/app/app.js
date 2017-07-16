@@ -42,6 +42,6 @@ const App = appProps => {
 
 export default createContainer(() => {
 	Meteor.subscribe("allUsers")
-	let users = Meter.users.find().fetch()
+	let users = Meteor.users.find().fetch()
 	return { users }
 }, App)
