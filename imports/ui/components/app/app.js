@@ -13,9 +13,9 @@ import {
 } from 'react-router-dom';
 
 // Components
-import { Navigation } from '../navigation/navigation.jsx';
-import PatientList from '../patients/patient_list/patient-list.jsx';
-import Patient from '../patients/patient/patient.jsx';
+import { Navigation } from '../navigation/navigation.js';
+import PatientList from '../patients/patient_list/patient-list.js';
+import Patient from '../patients/patient/patient.js';
 import { NewPatient } from '../patients/patient/new-patient.js';
 
 // App Component

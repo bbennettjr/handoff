@@ -2,11 +2,11 @@ import React from "react"
 import { Navbar, Nav, NavItem } from "react-bootstrap"
 import { NavLink, Link } from "react-router-dom"
 import { LinkContainer } from "react-router-bootstrap"
-import AccountsWrapper from "../accounts/accounts-wrapper.jsx"
+import AccountsWrapper from "../accounts/accounts-wrapper.js"
 
 export const Navigation = appProps => {
   return (
-    <Navbar>
+    <Navbar style={{ marginBottom: "0" }}>
       <Navbar.Header>
         <Navbar.Brand>
           <Link to="/">Handoff</Link>
