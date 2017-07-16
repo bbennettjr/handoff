@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap"
 import { compose } from "react-komposer"
 import { Patients } from "../../../../api/patients/patients.js"
 import { createContainer } from "meteor/react-meteor-data"
-
+import PropTypes from "prop-types"
 class PatientList extends React.Component {
 	renderPatients() {
 		const patients = this.props.patients
@@ -24,6 +24,7 @@ class PatientList extends React.Component {
 		})
 	}
 	render() {
+		console.log("Users", this.props.users)
 		return (
 			<div>
 				<h3>Your Patients</h3>
@@ -40,11 +41,10 @@ export default createContainer(() => {
 		coveredPatients = user.profile.coveredPatients
 	}
 	const subscription = Meteor.subscribe("patients")
-	// console.log(Patients.find().fetch())
-	console.log("covertedPatients", coveredPatients)
+
 	const patients = Patients.find({
 		_id: { $in: coveredPatients }
 	}).fetch()
-	console.log(patients)
+
 	return { patients }
 }, PatientList)
