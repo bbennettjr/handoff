@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor"
 import React from "react"
-import { Panel } from "react-bootstrap"
+import { Panel, DropdownButton, MenuItem } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
 import { compose } from "react-komposer"
 import { Patients } from "../../../../api/patients/patients.js"
@@ -23,10 +23,23 @@ class PatientList extends React.Component {
 			)
 		})
 	}
+	renderUsers() {
+		let users = ["dan", "is", "way", "sexy"]
+		return users.map(user => {
+			return (
+				<MenuItem>
+					{user}
+				</MenuItem>
+			)
+		})
+	}
 	render() {
 		return (
 			<div>
-				<h3>Your Patients</h3>
+				<h3>
+					Your Patients
+					<DropdownButton pullRight>{this.renderUsers()}</DropdownButton>
+				</h3>
 				{this.renderPatients()}
 			</div>
 		)
