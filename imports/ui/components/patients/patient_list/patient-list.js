@@ -1,10 +1,10 @@
-import { Meteor } from "meteor/meteor"
-import React from "react"
-import { Panel } from "react-bootstrap"
-import { LinkContainer } from "react-router-bootstrap"
-import { compose } from "react-komposer"
-import { Patients } from "../../../../api/patients/patients.js"
-import { createContainer } from "meteor/react-meteor-data"
+import { Meteor } from 'meteor/meteor'
+import React from 'react'
+import { Panel } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { compose } from 'react-komposer'
+import { Patients } from '../../../../api/patients/patients.js'
+import { createContainer } from 'meteor/react-meteor-data'
 
 class PatientList extends React.Component {
 	renderPatients() {
@@ -15,7 +15,7 @@ class PatientList extends React.Component {
 				<LinkContainer to={url} key={patient._id}>
 					<Panel
 						header={`${patient.first} ${patient.last}`}
-						style={{ cursor: "pointer" }}
+						style={{ cursor: 'pointer' }}
 					>
 						{`${patient.diagnosis}, condition: ${patient.condition}`}
 					</Panel>
@@ -39,9 +39,10 @@ export default createContainer(() => {
 	if (user && user.profile && user.profile.coveredPatients) {
 		coveredPatients = user.profile.coveredPatients
 	}
-	const subscription = Meteor.subscribe("patients")
+	const subscription = Meteor.subscribe('patients')
 	const patients = Patients.find({
 		_id: { $in: coveredPatients }
 	}).fetch()
+	debugger
 	return { patients }
 }, PatientList)
