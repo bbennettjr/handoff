@@ -62,4 +62,4 @@ if (Patients.find().count() === 0) {
 		crossCover: crossCover,
 		createdAt: new Date()
 	});
-}
+
