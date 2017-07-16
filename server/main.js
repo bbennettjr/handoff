@@ -1,11 +1,15 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from "meteor/meteor"
+import { Accounts } from "meteor/accounts-base"
 
 // Fixtures
-import './fixtures.js';
+import "./fixtures.js"
 
 // Collections
-import '../imports/api/patients/patients.js';
+import "../imports/api/patients/patients.js"
 
-Meteor.startup(() => {
-	// code to run on server at startup
-});
+Accounts.onCreateUser((options, user) => {
+  let profile = user.profile || {}
+  profile.coveredPatients = []
+  user.profile = profile
+  return user
+})

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import { NavLink, Link } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
-import AccountsWrapper from '../accounts/accounts-wrapper.jsx';
+import React from "react"
+import { Navbar, Nav, NavItem } from "react-bootstrap"
+import { NavLink, Link } from "react-router-dom"
+import { LinkContainer } from "react-router-bootstrap"
+import AccountsWrapper from "../accounts/accounts-wrapper.jsx"
 
 export const Navigation = appProps => {
   return (
@@ -14,15 +14,8 @@ export const Navigation = appProps => {
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
-        <Nav>
-          <LinkContainer to="/team">
-            <NavItem>Team</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/cover">
-            <NavItem>Cover</NavItem>
-          </LinkContainer>
-        </Nav>
-        <Nav pullRight>
+
+        <Nav pullLeft>
           <LinkContainer to="/newpatient">
             <NavItem>
               New Patient
@@ -32,5 +25,5 @@ export const Navigation = appProps => {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  );
-};
+  )
+}

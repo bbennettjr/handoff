@@ -1,23 +1,24 @@
-import { Meteor } from 'meteor/meteor';
-import React from 'react';
-import { Panel } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { compose } from 'react-komposer';
-import { Patients } from '../../../../api/patients/patients.js';
+import { Meteor } from "meteor/meteor"
+import React from "react"
+import { Panel } from "react-bootstrap"
+import { LinkContainer } from "react-router-bootstrap"
+import { compose } from "react-komposer"
+import { Patients } from "../../../../api/patients/patients.js"
+import { createContainer } from "meteor/react-meteor-data"
 
 class PatientList extends React.Component {
 	renderPatients() {
-		const patients = this.props.patients;
+		const patients = this.props.patients
 		return patients.map(patient => {
-			const url = `/patient/${patient._id}`;
+			const url = `/patient/${patient._id}`
 			return (
-				<LinkContainer to={url}>
+				<LinkContainer to={url} key={patient._id}>
 					<Panel header={`${patient.first} ${patient.last}`}>
 						{`${patient.diagnosis}, condition: ${patient.condition}`}
 					</Panel>
 				</LinkContainer>
-			);
-		});
+			)
+		})
 	}
 	render() {
 		return (
@@ -25,18 +26,12 @@ class PatientList extends React.Component {
 				<h3>Your Patients</h3>
 				{this.renderPatients()}
 			</div>
-		);
+		)
 	}
 }
 
-function dataLoader(props, onData) {
-	const subscription = Meteor.subscribe('patients');
-	const patients = Patients.find({}).fetch();
-	onData(null, { patients });
-}
-
-const options = {
-	loadingHandler: () => <h1>Loading...</h1>
-};
-
-export default compose(dataLoader, options)(PatientList);
+export default createContainer(() => {
+	const subscription = Meteor.subscribe("patients")
+	const patients = Patients.find({}).fetch()
+	return { patients }
+}, PatientList)
