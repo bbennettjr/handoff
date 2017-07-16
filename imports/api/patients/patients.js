@@ -61,10 +61,14 @@ Meteor.methods({
 
 		// insert the patient
 		let patientId = Patients.insert(patient)
-
+		Meteor.users.update(
+			{ _id: userId },
+			{ $addToSet: { "profile.coveredPatients": [patientId] } }
+		)
 		return { _id: patientId }
 	},
 	// update a patient
+
 	// "patient.update.color"(patientId, color) {
 	// 	// validate
 	// 	new SimpleSchema({
