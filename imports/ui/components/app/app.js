@@ -18,23 +18,26 @@ import PatientList from "../patients/patient_list/patient-list.js"
 import Patient from "../patients/patient/patient.js"
 import NewPatient from "../patients/patient/new-patient.js"
 import { createContainer } from "meteor/react-meteor-data"
+
 // App Component
 const App = appProps => {
 	return (
-		<Router>
-			<MuiThemeProvider>
-				<Navigation {...appProps} />
-				<Switch>
-					<Route path="/patient/:_id" component={Patient} />
+		<MuiThemeProvider>
+			<Router>
+				<div className="App">
+					<Navigation {...appProps} />
+					<Switch>
+						<Route path="/patient/:_id" component={Patient} />
 
-					<Route path="/newpatient" component={NewPatient} />
-					<Route
-						path="/"
-						component={() => <PatientList users={appProps.users} />}
-					/>
-				</Switch>
-			</MuiThemeProvider>
-		</Router>
+						<Route path="/newpatient" component={NewPatient} />
+						<Route
+							path="/"
+							component={() => <PatientList users={appProps.users} />}
+						/>
+					</Switch>
+				</div>
+			</Router>
+		</MuiThemeProvider>
 	)
 }
 
