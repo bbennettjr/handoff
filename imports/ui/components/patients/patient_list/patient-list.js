@@ -39,7 +39,7 @@ class PatientList extends React.Component {
 		return users.map(user => {
 			return (
 				<MenuItem
-					label='Doctors"
+					label="Doctors"
 					primaryText={user.emails[0].address}
 					onChange={() => this.signOffToThisUser(user._id)}
 					key={user._id}
