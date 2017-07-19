@@ -2,8 +2,8 @@
 import { Meteor } from "meteor/meteor"
 import React from "react"
 import PropTypes from "prop-types"
-import { compose } from "react-komposer"
-import { Grid } from "react-bootstrap"
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
+import injectTapEventPlugin from "react-tap-event-plugin"
 import {
 	BrowserRouter as Router,
 	Route,
@@ -22,20 +22,18 @@ import { createContainer } from "meteor/react-meteor-data"
 const App = appProps => {
 	return (
 		<Router>
-			<div className="App">
+			<MuiThemeProvider>
 				<Navigation {...appProps} />
-				<Grid>
-					<Switch>
-						<Route path="/patient/:_id" component={Patient} />
+				<Switch>
+					<Route path="/patient/:_id" component={Patient} />
 
-						<Route path="/newpatient" component={NewPatient} />
-						<Route
-							path="/"
-							component={() => <PatientList users={appProps.users} />}
-						/>
-					</Switch>
-				</Grid>
-			</div>
+					<Route path="/newpatient" component={NewPatient} />
+					<Route
+						path="/"
+						component={() => <PatientList users={appProps.users} />}
+					/>
+				</Switch>
+			</MuiThemeProvider>
 		</Router>
 	)
 }

@@ -1,8 +1,11 @@
 import { Meteor } from "meteor/meteor"
 import React from "react"
-import { Panel, DropdownButton, MenuItem } from "react-bootstrap"
-import { LinkContainer } from "react-router-bootstrap"
-import { compose } from "react-komposer"
+import { Card, CardActions, CardHeader, CardText } from "material-ui/Card"
+import FlatButton from "material-ui/FlatButton"
+import DropDownMenu from "material-ui/DropDownMenu"
+import MenuItem from "material-ui/MenuItem"
+import { Link } from "react-router-dom"
+
 import { Patients } from "../../../../api/patients/patients.js"
 import { createContainer } from "meteor/react-meteor-data"
 import PropTypes from "prop-types"
@@ -12,11 +15,16 @@ class PatientList extends React.Component {
 		return patients.map(patient => {
 			const url = `/patient/${patient._id}`
 			return (
-				<LinkContainer to={url} key={patient._id}>
-					<Panel header={`${patient.first} ${patient.last}`}>
-						{`${patient.diagnosis}, condition: ${patient.condition}`}
-					</Panel>
-				</LinkContainer>
+				<Link to={url} key={patient._id}>
+					<Card>
+						<CardHeader
+							title={`${patient.first} ${patient.last}`}
+							subtitle={`${patient.diagnosis}, condition: ${patient.condition}`}
+							showExpandableButton={true}
+						/>
+						<CardText expandable={true}>{patient.todo}</CardText>
+					</Card>
+				</Link>
 			)
 		})
 	}
@@ -31,11 +39,10 @@ class PatientList extends React.Component {
 		return users.map(user => {
 			return (
 				<MenuItem
+					label={user.emails[0].address}
 					onClick={() => this.signOffToThisUser(user._id)}
 					key={user._id}
-				>
-					{user.emails[0].address}
-				</MenuItem>
+				/>
 			)
 		})
 	}
@@ -44,9 +51,9 @@ class PatientList extends React.Component {
 			<div>
 				<h3>
 					Your Patients
-					<DropdownButton pullRight title="Handoff" id="Handoff">
+					<DropDownMenu>
 						{this.renderUsers()}
-					</DropdownButton>
+					</DropDownMenu>
 				</h3>
 				{this.renderPatients()}
 			</div>
