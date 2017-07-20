@@ -5,10 +5,11 @@ import FlatButton from "material-ui/FlatButton"
 import DropDownMenu from "material-ui/DropDownMenu"
 import MenuItem from "material-ui/MenuItem"
 import { Link } from "react-router-dom"
+import { createContainer } from "meteor/react-meteor-data"
 
 import { Patients } from "../../../../api/patients/patients.js"
-import { createContainer } from "meteor/react-meteor-data"
-import PropTypes from "prop-types"
+import DoctorsMenu from "../../doctors/doctors-menu.js"
+
 class PatientList extends React.Component {
 	renderPatients() {
 		const patients = this.props.patients
@@ -29,32 +30,12 @@ class PatientList extends React.Component {
 		})
 	}
 
-	signOffToThisUser(userId) {
-		Meteor.call("addAllPatientsToOtherUserId", userId)
-	}
-
-	renderUsers() {
-		let users = this.props.users
-
-		return users.map(user => {
-			return (
-				<MenuItem
-					label="Doctors"
-					primaryText={user.emails[0].address}
-					onChange={() => this.signOffToThisUser(user._id)}
-					key={user._id}
-				/>
-			)
-		})
-	}
 	render() {
 		return (
 			<div>
 				<h3>
 					Your Patients
-					<DropDownMenu>
-						{this.renderUsers()}
-					</DropDownMenu>
+					<DoctorsMenu users={this.props.users} />
 				</h3>
 				{this.renderPatients()}
 			</div>

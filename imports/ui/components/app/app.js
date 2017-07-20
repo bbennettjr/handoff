@@ -11,6 +11,7 @@ import {
 	Switch,
 	Redirect
 } from "react-router-dom"
+import createHistory from "history/createBrowserHistory"
 
 // Components
 import { Navigation } from "../navigation/navigation.js"
@@ -20,10 +21,10 @@ import NewPatient from "../patients/patient/new-patient.js"
 import { createContainer } from "meteor/react-meteor-data"
 
 // App Component
-const App = appProps => {
+const App = ({ history, users, ...appProps }) => {
 	return (
 		<MuiThemeProvider>
-			<Router>
+			<Router history={history}>
 				<div className="App">
 					<Navigation {...appProps} />
 					<Switch>
@@ -32,7 +33,7 @@ const App = appProps => {
 						<Route path="/newpatient" component={NewPatient} />
 						<Route
 							path="/"
-							component={() => <PatientList users={appProps.users} />}
+							component={() => <PatientList users={users} {...appProps} />}
 						/>
 					</Switch>
 				</div>
@@ -41,8 +42,10 @@ const App = appProps => {
 	)
 }
 
+const history = createHistory()
+
 export default createContainer(() => {
 	Meteor.subscribe("allUsers")
 	let users = Meteor.users.find().fetch()
-	return { users }
+	return { history, users }
 }, App)
