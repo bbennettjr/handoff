@@ -16,21 +16,24 @@ const styles = {
 }
 
 export const Navigation = appProps => {
-  return (
-    <AppBar
-      title={<Link to="/" style={styles.title}><span>Handoff</span></Link>}
-      iconElementLeft={leftButtons}
-      iconElementRight={rightButtons}
-    />
-  )
+  return <AppBar title={titleButtons} iconElementRight={rightButtons} />
 }
 
-const leftButtons = <AccountsWrapper />
+const titleButtons = (
+  <Link to="/" style={styles.title}><span>Handoff</span></Link>
+)
 
 const rightButtons = (
-  <FlatButton
-    label="New Patient"
-    labelStyle={styles.buttons}
-    containerElement={<Link to="/newpatient" />}
-  />
+  <div>
+    <FlatButton
+      label="New Patient"
+      labelStyle={styles.buttons}
+      containerElement={<Link to="/newpatient" />}
+    />
+    <FlatButton
+      label="Sign In"
+      labelStyle={styles.buttons}
+      containerElement={<AccountsWrapper />}
+    />
+  </div>
 )
