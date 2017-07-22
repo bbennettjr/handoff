@@ -22,7 +22,7 @@ class NewPatient extends React.Component {
 
 		// Build patient object. => ES6 style. for-of, destruc,
 		// Object class methods and dynamic prop names
-		const patient = {}
+		const patient = { doctors: new Set([Meteor.userId()]) }
 		for (const [key, val] of Object.entries(this.refs)) {
 			Object.assign(patient, { [key]: ReactDOM.findDOMNode(val).value })
 		}

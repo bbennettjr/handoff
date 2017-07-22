@@ -9,19 +9,9 @@ export default class DoctorsMenu extends React.Component {
     this.state = {
       value: 1
     }
-    this.signOffToThisUser = this.signOffToThisUser.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  signOffToThisUser(userId) {
-    Meteor.call("addAllPatientsToOtherUserId", userId)
-  }
-
-  handleChange(value) {
-    console.log(value)
-    this.setState({
-      value: value
-    })
+    this.signOffToThisUser = userId =>
+      Meteor.call("addAllPatientsToOtherUserId", userId)
+    this.handleChange = value => this.setState(value)
   }
 
   renderDoctors() {
@@ -33,6 +23,7 @@ export default class DoctorsMenu extends React.Component {
           label="Doctors"
           value={index++}
           primaryText={user.emails[0].address}
+          onChange={this.signOffToThisUser()}
           key={user._id}
         />
       )
@@ -41,10 +32,7 @@ export default class DoctorsMenu extends React.Component {
 
   render() {
     return (
-      <DropDownMenu
-        value={this.state.value}
-        onChange={() => this.handleChange()}
-      >
+      <DropDownMenu value={this.state.value} onChange={this.handleChange()}>
         {this.renderDoctors()}
       </DropDownMenu>
     )
