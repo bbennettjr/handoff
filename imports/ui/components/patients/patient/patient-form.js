@@ -2,8 +2,7 @@
 import { Meteor } from "meteor/meteor"
 import React from "react"
 import ReactDOM from "react-dom"
-import { LinkContainer } from "react-router-bootstrap"
-import { Grid, Row, Col, ButtonToolbar, Button } from "react-bootstrap"
+import { Grid, Row, Col } from "react-bootstrap"
 import TextField from "material-ui/TextField"
 import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton"
 import RaisedButton from "material-ui/RaisedButton"
@@ -27,8 +26,6 @@ class PatientForm extends React.Component {
 			Object.assign(patient, { [key]: ReactDOM.findDOMNode(val).value })
 		}
 
-		debugger
-
 		// Meteor insert method
 		Meteor.call("patient.insert", patient, (error, result) => {
 			if (error) {
@@ -36,7 +33,7 @@ class PatientForm extends React.Component {
 			}
 			if (result._id) {
 				console.log("Patient _id: " + result._id)
-				this.props.history.push(`/patient/${this.props.patient._id}`)
+				this.props.history.push("/")
 			}
 		})
 	}
