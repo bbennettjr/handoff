@@ -66,9 +66,9 @@ Meteor.methods({
 	// insert a patient
 	"patient.insert"(patient) {
 		// validate against schema
-		// new SimpleSchema({
-		// 	patient: { type: Object }
-		// }).validate({ patient });
+		new SimpleSchema({
+			patient: { type: Object }
+		}).validate({ patient })
 
 		// check that a user is signed in
 		let userId = Meteor.userId()
@@ -94,31 +94,32 @@ Meteor.methods({
 		)
 		return { _id: patientId }
 	},
+
 	// update a patient
+	"patient.update"(patientId, color) {
+		// validate
+		new SimpleSchema({
+			patientId: { type: String },
+			color: { type: String }
+		}).validate({ patientId, color })
 
-	// "patient.update.color"(patientId, color) {
-	// 	// validate
-	// 	new SimpleSchema({
-	// 		patientId: { type: String },
-	// 		color: { type: String }
-	// 	}).validate({ patientId, color })
+		// does the patient exist
+		let patient = Patients.findOne(patientId)
+		if (!patient)
+			throw new Meteor.Error("Does Not Exist", "patient could not be found")
 
-	// 	// does the patient exist
-	// 	let patient = Patients.findOne(patientId)
-	// 	if (!patient)
-	// 		throw new Meteor.Error("Does Not Exist", "patient could not be found")
+		// check that user exists and owns patient
+		let user = Meteor.user()
+		if (patient.userId !== user._id)
+			throw new Meteor.Error(
+				"Not Authorized",
+				"You are not the owner of this patient"
+			)
 
-	// 	// check that user exists and owns patient
-	// 	let user = Meteor.user()
-	// 	if (patient.userId !== user._id)
-	// 		throw new Meteor.Error(
-	// 			"Not Authorized",
-	// 			"You are not the owner of this patient"
-	// 		)
+		// update the color
+		Patients.update(patientId, { $set: { color: color } })
+	},
 
-	// 	// update the color
-	// 	Patients.update(patientId, { $set: { color: color } })
-	// },
 	// remove a patient
 	"patient.remove"(patientId) {
 		// validate

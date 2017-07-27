@@ -1,9 +1,9 @@
-import React from 'react';
-import { Patients } from '../../../../api/patients/patients.js';
-import { compose } from 'react-komposer';
-import { Grid, Row, Col } from 'react-bootstrap';
+import React from "react"
+import { Patients } from "../../../../api/patients/patients.js"
+import { compose } from "react-komposer"
+import { Grid, Row, Col } from "react-bootstrap"
 
-const Patient = patient => {
+const PatientDisplay = patient => {
 	return (
 		<Grid>
 			<Row>
@@ -11,9 +11,7 @@ const Patient = patient => {
 					{`${patient.first} ${patient.last}
 			${patient.diagnosis}`}
 				</Col>
-				<Col
-					xs={8}
-				>{`LOC: ${patient.loc} Condition: ${patient.condition}
+				<Col xs={8}>{`LOC: ${patient.loc} Condition: ${patient.condition}
 				Vital Signs: ${patient.vitals}`}</Col>
 			</Row>
 
@@ -31,7 +29,7 @@ const Patient = patient => {
 			<Row>
 				<Col xs={12}>
 					{`Medications:
-				meds`}
+				${patient.medications}`}
 				</Col>
 			</Row>
 
@@ -46,14 +44,14 @@ const Patient = patient => {
 				</Col>
 			</Row>
 		</Grid>
-	);
-};
-
-function dataLoader(props, onData) {
-	Meteor.subscribe('patient', props);
-	const _id = props.match.params._id;
-	const patient = Patients.findOne(_id);
-	onData(null, patient);
+	)
 }
 
-export default compose(dataLoader)(Patient);
+function dataLoader(props, onData) {
+	Meteor.subscribe("patient", props)
+	const _id = props.match.params._id
+	const patient = Patients.findOne(_id)
+	onData(null, patient)
+}
+
+export default compose(dataLoader)(PatientDisplay)

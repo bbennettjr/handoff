@@ -23,7 +23,7 @@ export default class DoctorsMenu extends React.Component {
           label="Doctors"
           value={index++}
           primaryText={user.emails[0].address}
-          onChange={this.signOffToThisUser()}
+          onChange={() => this.signOffToThisUser()}
           key={user._id}
         />
       )
@@ -32,7 +32,10 @@ export default class DoctorsMenu extends React.Component {
 
   render() {
     return (
-      <DropDownMenu value={this.state.value} onChange={this.handleChange()}>
+      <DropDownMenu
+        value={this.state.value}
+        onChange={() => this.handleChange()}
+      >
         {this.renderDoctors()}
       </DropDownMenu>
     )

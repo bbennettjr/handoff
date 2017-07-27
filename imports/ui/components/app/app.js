@@ -16,8 +16,9 @@ import createHistory from "history/createBrowserHistory"
 // Components
 import { Navigation } from "../navigation/navigation.js"
 import PatientList from "../patients/patient_list/patient-list.js"
-import Patient from "../patients/patient/patient.js"
+import PatientDisplay from "../patients/patient/patient-display.js"
 import NewPatient from "../patients/patient/new-patient.js"
+import PatientForm from "../patients/patient/patient-form.js"
 import { createContainer } from "meteor/react-meteor-data"
 
 // App Component
@@ -28,9 +29,9 @@ const App = ({ history, users, ...appProps }) => {
 				<div className="App">
 					<Navigation {...appProps} />
 					<Switch>
-						<Route path="/patient/:_id" component={Patient} />
+						<Route path="/patient/:_id" component={PatientDisplay} />
 
-						<Route path="/newpatient" component={NewPatient} />
+						<Route path="/newpatient" component={PatientForm} />
 						<Route
 							path="/"
 							component={() => <PatientList users={users} {...appProps} />}

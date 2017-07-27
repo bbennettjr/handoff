@@ -16,6 +16,7 @@ import {
 	ButtonToolbar
 } from "react-bootstrap"
 import { withRouter } from "react-router"
+
 class NewPatient extends React.Component {
 	onSubmit(e) {
 		e.preventDefault()
@@ -82,12 +83,10 @@ class NewPatient extends React.Component {
 								<div>
 									<Radio name="radioGroup" inline>
 										1
-									</Radio>
-									{" "}
+									</Radio>{" "}
 									<Radio name="radioGroup" inline>
 										2
-									</Radio>
-									{" "}
+									</Radio>{" "}
 									<Radio name="radioGroup" inline>
 										3
 									</Radio>
@@ -120,9 +119,7 @@ class NewPatient extends React.Component {
 					<Row>
 						<Col xs={12}>
 							<FormGroup controlId="formControlsTextarea">
-								<ControlLabel>
-									History of Present Illness
-								</ControlLabel>
+								<ControlLabel>History of Present Illness</ControlLabel>
 								<FormControl
 									componentClass="textarea"
 									placeholder="HPI"
@@ -134,9 +131,7 @@ class NewPatient extends React.Component {
 					<Row>
 						<Col xs={12}>
 							<FormGroup controlId="formControlsTextarea">
-								<ControlLabel>
-									Past Medical History
-								</ControlLabel>
+								<ControlLabel>Past Medical History</ControlLabel>
 								<FormControl
 									componentClass="textarea"
 									placeholder="PMH"
@@ -147,7 +142,6 @@ class NewPatient extends React.Component {
 					</Row>
 					<Row>
 						<Col xs={12}>
-
 							<FormGroup controlId="formControlsTextarea">
 								<ControlLabel>Medications</ControlLabel>
 								<FormControl
@@ -184,9 +178,7 @@ class NewPatient extends React.Component {
 						<Col xs={6} xsOffset={6}>
 							<ButtonToolbar>
 								<LinkContainer to="/">
-									<Button>
-										Cancel
-									</Button>
+									<Button>Cancel</Button>
 								</LinkContainer>
 								<Button bsStyle="success" onClick={e => this.onSubmit(e)}>
 									Success
