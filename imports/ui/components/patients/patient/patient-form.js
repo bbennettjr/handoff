@@ -3,18 +3,22 @@ import { Meteor } from "meteor/meteor"
 import React from "react"
 import ReactDOM from "react-dom"
 import { LinkContainer } from "react-router-bootstrap"
-import { Grid, Row, Col } from "react-bootstrap"
+import { Grid, Row, Col, ButtonToolbar, Button } from "react-bootstrap"
 import TextField from "material-ui/TextField"
 import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton"
+import RaisedButton from "material-ui/RaisedButton"
 import { withRouter } from "react-router"
+import { Link } from "react-router-dom"
 import { Patients } from "../../../../api/patients/patients.js"
 import { createContainer } from "meteor/react-meteor-data"
+
+const style = {
+	margin: 12
+}
 
 class PatientForm extends React.Component {
 	onSubmit(e) {
 		e.preventDefault()
-
-		debugger
 
 		// Build patient object. => ES6 style. for-of, destruc,
 		// Object class methods and dynamic prop names
@@ -23,6 +27,8 @@ class PatientForm extends React.Component {
 			Object.assign(patient, { [key]: ReactDOM.findDOMNode(val).value })
 		}
 
+		debugger
+
 		// Meteor insert method
 		Meteor.call("patient.insert", patient, (error, result) => {
 			if (error) {
@@ -30,7 +36,7 @@ class PatientForm extends React.Component {
 			}
 			if (result._id) {
 				console.log("Patient _id: " + result._id)
-				this.props.history.push("/")
+				this.props.history.push(`/patient/${this.props.patient._id}`)
 			}
 		})
 	}
@@ -44,7 +50,9 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter first name"
 								floatingLabelText="First Name"
-								defaultValue={this.patient ? this.patient.first : ""}
+								defaultValue={
+									this.props.patient ? this.props.patient.first : ""
+								}
 								ref="first"
 							/>
 						</Col>
@@ -52,46 +60,33 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter last name"
 								floatingLabelText="Last Name"
-								defaultValue={this.patient ? this.patient.last : ""}
+								defaultValue={this.props.patient ? this.props.patient.last : ""}
 								ref="last"
 							/>
 						</Col>
 					</Row>
 					<Row>
 						<Col xs={6}>
-							{" "}<TextField
+							{" "}
+							<TextField
 								hintText="Enter diagnosis"
 								floatingLabelText="Diagnosis"
-								defaultValue={this.patient ? this.patient.diagnosis : ""}
+								defaultValue={
+									this.props.patient ? this.props.patient.diagnosis : ""
+								}
 								ref="diagnosis"
 							/>
 						</Col>
-						<Col xs={6}>
-							<RadioButtonGroup
-								name="advancedDirective"
-								defaultSelected="fullCode"
-								ref="loc"
-							>
-								<RadioButton value="fullCode" label="Full Code" />
-								<RadioButton value="dnr" label="Do Not Resuscitate" />
-								<RadioButton value="dni" label="Do Not Intubate" />{" "}
-								<RadioButton
-									value="dnr_dni"
-									label="Do Not Resuscitate & Do Not Intubate"
-								/>
-								<RadioButton
-									value="comfortMeasures"
-									label="Comfort Measures Only"
-								/>
-							</RadioButtonGroup>
-						</Col>
+						<Col xs={6} />
 					</Row>
 					<Row>
 						<Col xs={6}>
 							<TextField
 								hintText="Enter condition"
 								floatingLabelText="Condition"
-								defaultValue={this.patient ? this.patient.condition : ""}
+								defaultValue={
+									this.props.patient ? this.props.patient.condition : ""
+								}
 								ref="condition"
 							/>
 						</Col>
@@ -99,7 +94,9 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter vitals"
 								floatingLabelText="Vitals"
-								defaultValue={this.patient ? this.patient.vitals : ""}
+								defaultValue={
+									this.props.patient ? this.props.patient.vitals : ""
+								}
 								ref="vitals"
 							/>
 						</Col>
@@ -107,9 +104,9 @@ class PatientForm extends React.Component {
 					<Row>
 						<Col xs={12}>
 							<TextField
-								hintText="Enter history of present Illness"
+								hintText="Enter HPI"
 								floatingLabelText="History of Present Illness"
-								defaultValue={this.patient ? this.patient.hpi : ""}
+								defaultValue={this.props.patient ? this.props.patient.hpi : ""}
 								multiLine={true}
 								ref="hpi"
 							/>
@@ -118,9 +115,9 @@ class PatientForm extends React.Component {
 					<Row>
 						<Col xs={12}>
 							<TextField
-								hintText="Enter past medical history"
+								hintText="Enter PMH"
 								floatingLabelText="Past Medical History"
-								defaultValue={this.patient ? this.patient.pmh : ""}
+								defaultValue={this.props.patient ? this.props.patient.pmh : ""}
 								multiLine={true}
 								ref="pmh"
 							/>
@@ -131,7 +128,9 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter medications"
 								floatingLabelText="Medications"
-								defaultValue={this.patient ? this.patient.medications : ""}
+								defaultValue={
+									this.props.patient ? this.props.patient.medications : ""
+								}
 								multiLine={true}
 								ref="medications"
 							/>
@@ -140,9 +139,9 @@ class PatientForm extends React.Component {
 					<Row>
 						<Col xs={6}>
 							<TextField
-								hintText="Enter to do next morning"
+								hintText="Enter morning to do"
 								floatingLabelText="To Do"
-								defaultValue={this.patient ? this.patient.todo : ""}
+								defaultValue={this.props.patient ? this.props.patient.todo : ""}
 								multiLine={true}
 								ref="todo"
 							/>
@@ -151,7 +150,9 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter coverage to do"
 								floatingLabelText="Coverage To Do"
-								defaultValue={this.patient ? this.patient.cover : ""}
+								defaultValue={
+									this.props.patient ? this.props.patient.cover : ""
+								}
 								multiLine={true}
 								ref="cover"
 							/>
@@ -159,14 +160,25 @@ class PatientForm extends React.Component {
 					</Row>
 					<Row>
 						<Col xs={6} xsOffset={6}>
-							<ButtonToolbar>
-								<LinkContainer to="/">
-									<Button>Cancel</Button>
-								</LinkContainer>
-								<Button bsStyle="success" onClick={e => this.onSubmit(e)}>
-									Success
-								</Button>
-							</ButtonToolbar>
+							<RaisedButton
+								label="Cancel"
+								style={style}
+								containerElement={
+									<Link
+										to={
+											this.props.patient
+												? `/patient/${this.props.patient._id}`
+												: "/"
+										}
+									/>
+								}
+							/>
+							<RaisedButton
+								label="Save"
+								secondary={true}
+								style={style}
+								onTouchTap={e => this.onSubmit(e)}
+							/>
 						</Col>
 					</Row>
 				</form>
@@ -175,12 +187,14 @@ class PatientForm extends React.Component {
 	}
 }
 
-export default createContainer(({ match }) => {
-	debugger
-	const _id = match.params._id
+export default createContainer(({ ...props }) => {
+	const _id = props.match.params._id
 	if (_id) {
-		Meteor.subscribe("patient", match)
-		const patient = Patient.findOne(_id)
+		Meteor.subscribe("patient", props)
+		const patient = Patients.findOne(_id)
+		console.log(`Count of Patients collection: ${Patients.find({}).count()}
+			returned patient: ${patient}`)
 		return { patient }
 	}
+	return {}
 }, PatientForm)

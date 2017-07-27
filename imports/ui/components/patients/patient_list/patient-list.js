@@ -22,7 +22,7 @@ class PatientList extends React.Component {
 			? <NoPatientsList />
 			: patients.map(patient => {
 					const url = `/patient/${patient._id}`
-					return <PatientCard url={url} patient={patient} />
+					return <PatientCard key={patient._id} url={url} patient={patient} />
 				})
 	}
 

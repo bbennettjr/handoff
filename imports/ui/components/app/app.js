@@ -17,7 +17,6 @@ import createHistory from "history/createBrowserHistory"
 import { Navigation } from "../navigation/navigation.js"
 import PatientList from "../patients/patient_list/patient-list.js"
 import PatientDisplay from "../patients/patient/patient-display.js"
-import NewPatient from "../patients/patient/new-patient.js"
 import PatientForm from "../patients/patient/patient-form.js"
 import { createContainer } from "meteor/react-meteor-data"
 

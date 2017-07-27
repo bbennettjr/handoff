@@ -8,9 +8,13 @@ import {
 } from "material-ui/Toolbar"
 import AppBar from "material-ui/AppBar"
 import FlatButton from "material-ui/FlatButton"
+import { cyan500 } from "material-ui/styles/colors"
 import AccountsWrapper from "../accounts/accounts-wrapper.js"
 
 const styles = {
+  toolbar: {
+    backgroundColor: cyan500.toString()
+  },
   title: {
     cursor: "pointer",
     color: "white",
@@ -23,9 +27,9 @@ const styles = {
 
 export const Navigation = appProps => {
   return (
-    <Toolbar>
-      <Link to="/">
-        <ToolbarTitle text="Handoff" style={styles.title} />
+    <Toolbar style={styles.toolbar}>
+      <Link to="/" style={styles.title}>
+        <ToolbarTitle text="Handoff" />
       </Link>
       <ToolbarGroup lastChild={true}>
         <FlatButton
@@ -33,6 +37,7 @@ export const Navigation = appProps => {
           labelStyle={styles.buttons}
           containerElement={<Link to="/newpatient" />}
         />
+        <ToolbarSeparator />
         <FlatButton
           label="Sign In"
           labelStyle={styles.buttons}
@@ -42,9 +47,3 @@ export const Navigation = appProps => {
     </Toolbar>
   )
 }
-
-const titleButtons = (
-  <Link to="/" style={styles.title}>
-    <span>Handoff</span>
-  </Link>
-)

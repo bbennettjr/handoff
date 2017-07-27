@@ -2,10 +2,26 @@ import React from "react"
 import { Patients } from "../../../../api/patients/patients.js"
 import { compose } from "react-komposer"
 import { Grid, Row, Col } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import RaisedButton from "material-ui/RaisedButton"
+
+const style = {
+	margin: 12
+}
 
 const PatientDisplay = patient => {
 	return (
 		<Grid>
+			<Row>
+				<Col xs={12}>
+					<RaisedButton
+						label="Edit"
+						secondary={true}
+						style={style}
+						containerElement={<Link to={`/patient/${patient._id}/edit`} />}
+					/>
+				</Col>
+			</Row>
 			<Row>
 				<Col xs={4}>
 					{`${patient.first} ${patient.last}
