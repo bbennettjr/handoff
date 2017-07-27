@@ -22,9 +22,11 @@ class PatientForm extends React.Component {
 		// Build patient object. => ES6 style. for-of, destruc,
 		// Object class methods and dynamic prop names
 		const patient = { doctors: new Set([Meteor.userId()]) }
-		for (const [key, val] of Object.entries(this.refs)) {
-			Object.assign(patient, { [key]: ReactDOM.findDOMNode(val).value })
+		for (const key in this.refs) {
+			Object.assign(patient, { [key]: this.refs[key].getValue() })
 		}
+
+		debugger
 
 		// Meteor insert method
 		Meteor.call("patient.insert", patient, (error, result) => {
@@ -174,7 +176,7 @@ class PatientForm extends React.Component {
 								label="Save"
 								secondary={true}
 								style={style}
-								onTouchTap={e => this.onSubmit(e)}
+								onClick={e => this.onSubmit(e)}
 							/>
 						</Col>
 					</Row>
