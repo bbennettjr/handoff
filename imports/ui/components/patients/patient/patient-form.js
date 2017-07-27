@@ -7,12 +7,10 @@ import { Grid, Row, Col } from "react-bootstrap"
 import TextField from "material-ui/TextField"
 import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton"
 import { withRouter } from "react-router"
+import { Patients } from "../../../../api/patients/patients.js"
+import { createContainer } from "meteor/react-meteor-data"
 
 class PatientForm extends React.Component {
-	constructor(props) {
-		super()
-		this.state = { isNew: !!this.props.patient }
-	}
 	onSubmit(e) {
 		e.preventDefault()
 
@@ -46,7 +44,7 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter first name"
 								floatingLabelText="First Name"
-								defaultValue={this.state.isNew ? "" : this.props.patient.first}
+								defaultValue={this.patient ? this.patient.first : ""}
 								ref="first"
 							/>
 						</Col>
@@ -54,7 +52,7 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter last name"
 								floatingLabelText="Last Name"
-								defaultValue={this.state.isNew ? "" : this.props.patient.last}
+								defaultValue={this.patient ? this.patient.last : ""}
 								ref="last"
 							/>
 						</Col>
@@ -64,9 +62,7 @@ class PatientForm extends React.Component {
 							{" "}<TextField
 								hintText="Enter diagnosis"
 								floatingLabelText="Diagnosis"
-								defaultValue={
-									this.state.isNew ? "" : this.props.patient.diagnosis
-								}
+								defaultValue={this.patient ? this.patient.diagnosis : ""}
 								ref="diagnosis"
 							/>
 						</Col>
@@ -95,9 +91,7 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter condition"
 								floatingLabelText="Condition"
-								defaultValue={
-									this.state.isNew ? "" : this.props.patient.condition
-								}
+								defaultValue={this.patient ? this.patient.condition : ""}
 								ref="condition"
 							/>
 						</Col>
@@ -105,7 +99,7 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter vitals"
 								floatingLabelText="Vitals"
-								defaultValue={this.state.isNew ? "" : this.props.patient.vitals}
+								defaultValue={this.patient ? this.patient.vitals : ""}
 								ref="vitals"
 							/>
 						</Col>
@@ -115,7 +109,7 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter history of present Illness"
 								floatingLabelText="History of Present Illness"
-								defaultValue={this.state.isNew ? "" : this.props.patient.hpi}
+								defaultValue={this.patient ? this.patient.hpi : ""}
 								multiLine={true}
 								ref="hpi"
 							/>
@@ -126,7 +120,7 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter past medical history"
 								floatingLabelText="Past Medical History"
-								defaultValue={this.state.isNew ? "" : this.props.patient.pmh}
+								defaultValue={this.patient ? this.patient.pmh : ""}
 								multiLine={true}
 								ref="pmh"
 							/>
@@ -137,9 +131,7 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter medications"
 								floatingLabelText="Medications"
-								defaultValue={
-									this.state.isNew ? "" : this.props.patient.medications
-								}
+								defaultValue={this.patient ? this.patient.medications : ""}
 								multiLine={true}
 								ref="medications"
 							/>
@@ -150,7 +142,7 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter to do next morning"
 								floatingLabelText="To Do"
-								defaultValue={this.state.isNew ? "" : this.props.patient.todo}
+								defaultValue={this.patient ? this.patient.todo : ""}
 								multiLine={true}
 								ref="todo"
 							/>
@@ -159,7 +151,7 @@ class PatientForm extends React.Component {
 							<TextField
 								hintText="Enter coverage to do"
 								floatingLabelText="Coverage To Do"
-								defaultValue={this.state.isNew ? "" : this.props.patient.cover}
+								defaultValue={this.patient ? this.patient.cover : ""}
 								multiLine={true}
 								ref="cover"
 							/>
@@ -183,4 +175,12 @@ class PatientForm extends React.Component {
 	}
 }
 
-export default withRouter(PatientForm)
+export default createContainer(({ match }) => {
+	debugger
+	const _id = match.params._id
+	if (_id) {
+		Meteor.subscribe("patient", match)
+		const patient = Patient.findOne(_id)
+		return { patient }
+	}
+}, PatientForm)

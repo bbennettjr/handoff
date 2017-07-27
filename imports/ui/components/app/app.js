@@ -29,8 +29,8 @@ const App = ({ history, users, ...appProps }) => {
 				<div className="App">
 					<Navigation {...appProps} />
 					<Switch>
+						<Route path="/patient/:_id/edit" component={PatientForm} />
 						<Route path="/patient/:_id" component={PatientDisplay} />
-
 						<Route path="/newpatient" component={PatientForm} />
 						<Route
 							path="/"
