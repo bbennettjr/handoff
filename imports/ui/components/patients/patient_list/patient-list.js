@@ -11,6 +11,11 @@ import PatientCard from "./patient-card.js"
 import DoctorsMenu from "../../doctors/doctors-menu.js"
 
 class PatientList extends React.Component {
+	onClick(patientId) {
+		const userId = Meteor.userId()
+		Meteor.call("removePatientFromUser", patientId, userId)
+	}
+
 	renderPatientCards() {
 		const patients = this.props.patients
 		return patients.length === 0
