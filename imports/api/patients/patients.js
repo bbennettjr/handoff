@@ -64,7 +64,7 @@ Meteor.methods({
 	},
 
 	// insert a patient
-	"patient.insert"(patient) {
+	"patient.upsert"(patient) {
 		// validate against schema
 		new SimpleSchema({
 			patient: { type: Object }
@@ -78,21 +78,23 @@ Meteor.methods({
 				"You must sign in to create a patient"
 			)
 
-		// create the patient obj
-		let user = Meteor.user()
-		Object.assign(patient, {
-			userId: userId,
-			email: user.emails[0].address,
-			createdAt: new Date()
-		})
+		if (!!patient._id) {
+			// create the patient obj
+			let user = Meteor.user()
+			Object.assign(patient, {
+				userId: userId,
+				email: user.emails[0].address,
+				createdAt: new Date()
+			})
+		}
 
 		// insert the patient
-		let patientId = Patients.insert(patient)
+		let { insertedId } = Patients.upsert(patient._id, patient)
 		Meteor.users.update(
 			{ _id: userId },
-			{ $addToSet: { "profile.coveredPatients": patientId } }
+			{ $addToSet: { "profile.coveredPatients": insertedId } }
 		)
-		return { _id: patientId }
+		return { _id: insertedId }
 	},
 
 	// update a patient

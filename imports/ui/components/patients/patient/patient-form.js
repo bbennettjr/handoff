@@ -18,18 +18,23 @@ const style = {
 class PatientForm extends React.Component {
 	onSubmit(e) {
 		e.preventDefault()
+		debugger
+
+		if (!!this.props.patient) {
+			const { _id, doctors, userId, email, createdAt } = this.props.patient
+			const patient = Object.assign(_id, doctors, userId, email, createdAt)
+		} else {
+			const patient = { doctors: new Set([Meteor.userId()]) }
+		}
 
 		// Build patient object. => ES6 style. for-of, destruc,
 		// Object class methods and dynamic prop names
-		const patient = { doctors: new Set([Meteor.userId()]) }
 		for (const key in this.refs) {
 			Object.assign(patient, { [key]: this.refs[key].getValue() })
 		}
 
-		debugger
-
 		// Meteor insert method
-		Meteor.call("patient.insert", patient, (error, result) => {
+		Meteor.call("patient.upsert", patient, (error, result) => {
 			if (error) {
 				console.log(error.reason)
 			}
@@ -66,8 +71,7 @@ class PatientForm extends React.Component {
 					</Row>
 					<Row>
 						<Col xs={6}>
-							{" "}
-							<TextField
+							{" "}<TextField
 								hintText="Enter diagnosis"
 								floatingLabelText="Diagnosis"
 								defaultValue={
