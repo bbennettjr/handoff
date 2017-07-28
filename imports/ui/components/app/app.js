@@ -3,7 +3,6 @@ import { Meteor } from "meteor/meteor"
 import React from "react"
 import PropTypes from "prop-types"
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
-import injectTapEventPlugin from "react-tap-event-plugin"
 import {
 	BrowserRouter as Router,
 	Route,

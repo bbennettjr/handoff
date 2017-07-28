@@ -15,7 +15,7 @@ const PatientCard = ({ url, patient, ...appProps }) => {
             <FlatButton
               label="Remove"
               primary={true}
-              onTouchTap={e => appProps.onClick(patient._id)}
+              onClick={e => appProps.onClick(patient._id)}
             />
           }
         />
