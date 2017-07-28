@@ -63,33 +63,16 @@ Meteor.methods({
 		)
 	},
 
-	// insert a patient
-	"patient.upsert"(patient) {
-		// validate against schema
-		new SimpleSchema({
-			patient: { type: Object }
-		}).validate({ patient })
-
-		// check that a user is signed in
+	"patient.insert"(patient) {
 		let userId = Meteor.userId()
-		if (!userId)
+		if (!userId) {
 			throw new Meteor.Error(
 				"Not authorized",
 				"You must sign in to create a patient"
 			)
-
-		if (!!patient._id) {
-			// create the patient obj
-			let user = Meteor.user()
-			Object.assign(patient, {
-				userId: userId,
-				email: user.emails[0].address,
-				createdAt: new Date()
-			})
 		}
 
-		// insert the patient
-		let { insertedId } = Patients.upsert(patient._id, patient)
+		let insertedId = Patients.insert(patient)
 		Meteor.users.update(
 			{ _id: userId },
 			{ $addToSet: { "profile.coveredPatients": insertedId } }
@@ -97,38 +80,36 @@ Meteor.methods({
 		return { _id: insertedId }
 	},
 
-	// update a patient
-	"patient.update"(patientId, color) {
-		// validate
-		new SimpleSchema({
-			patientId: { type: String },
-			color: { type: String }
-		}).validate({ patientId, color })
-
-		// does the patient exist
-		let patient = Patients.findOne(patientId)
-		if (!patient)
-			throw new Meteor.Error("Does Not Exist", "patient could not be found")
-
-		// check that user exists and owns patient
-		let user = Meteor.user()
-		if (patient.userId !== user._id)
+	// insert a patient
+	"patient.update"(patient) {
+		// check that a user is signed in
+		let userId = Meteor.userId()
+		if (!userId) {
 			throw new Meteor.Error(
-				"Not Authorized",
-				"You are not the owner of this patient"
+				"Not authorized",
+				"You must sign in to create a patient"
 			)
+		}
 
-		// update the color
-		Patients.update(patientId, { $set: { color: color } })
+		if (!patient._id) {
+			throw new Meteor.Error(
+				"Patient has no _id!",
+				"You must give patient an _id"
+			)
+		}
+
+		// insert the patient
+		let insertedId = Patients.update({ _id: patient._id }, { $set: patient })
+
+		Meteor.users.update(
+			{ _id: userId },
+			{ $addToSet: { "profile.coveredPatients": patient._id } }
+		)
+		return { _id: patient._id }
 	},
 
 	// remove a patient
 	"patient.remove"(patientId) {
-		// validate
-		new SimpleSchema({
-			patientId: { type: String }
-		}).validate({ patientId })
-
 		// does the patient exist
 		let patient = Patients.findOne(patientId)
 		if (!patient)

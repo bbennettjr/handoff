@@ -10,7 +10,7 @@ import { withRouter } from "react-router"
 import { Link } from "react-router-dom"
 import { Patients } from "../../../../api/patients/patients.js"
 import { createContainer } from "meteor/react-meteor-data"
-
+import PropTypes from "prop-types"
 const style = {
 	margin: 12
 }
@@ -18,30 +18,33 @@ const style = {
 class PatientForm extends React.Component {
 	onSubmit(e) {
 		e.preventDefault()
-		debugger
+		// debugger
 
+		let patient = {}
+		let meteorCall = ""
+		// if Edit
 		if (!!this.props.patient) {
-			const { _id, doctors, userId, email, createdAt } = this.props.patient
-			const patient = Object.assign(_id, doctors, userId, email, createdAt)
+			patient = Object.assign({}, this.props.patient)
+			meteorCall = "patient.update"
 		} else {
-			const patient = { doctors: new Set([Meteor.userId()]) }
+			// if new
+			patient = { doctors: [Meteor.userId()] }
+			meteorCall = "patient.insert"
 		}
 
 		// Build patient object. => ES6 style. for-of, destruc,
 		// Object class methods and dynamic prop names
 		for (const key in this.refs) {
-			Object.assign(patient, { [key]: this.refs[key].getValue() })
+			patient[key] = this.refs[key].getValue()
 		}
-
 		// Meteor insert method
-		Meteor.call("patient.upsert", patient, (error, result) => {
+		Meteor.call(meteorCall, patient, (error, result) => {
+			// console.log(result)
 			if (error) {
 				console.log(error.reason)
 			}
-			if (result._id) {
-				console.log("Patient _id: " + result._id)
-				this.props.history.push("/")
-			}
+
+			this.props.history.push("/")
 		})
 	}
 	render() {
@@ -71,7 +74,8 @@ class PatientForm extends React.Component {
 					</Row>
 					<Row>
 						<Col xs={6}>
-							{" "}<TextField
+							{" "}
+							<TextField
 								hintText="Enter diagnosis"
 								floatingLabelText="Diagnosis"
 								defaultValue={
@@ -195,8 +199,6 @@ export default createContainer(({ ...props }) => {
 	if (_id) {
 		Meteor.subscribe("patient", props)
 		const patient = Patients.findOne(_id)
-		console.log(`Count of Patients collection: ${Patients.find({}).count()}
-			returned patient: ${patient}`)
 		return { patient }
 	}
 	return {}

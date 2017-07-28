@@ -11,19 +11,16 @@ import PatientCard from "./patient-card.js"
 import DoctorsMenu from "../../doctors/doctors-menu.js"
 
 class PatientList extends React.Component {
-	onClick(patientId) {
-		const userId = Meteor.userId()
-		Meteor.call("removePatientFromUser", patientId, userId)
-	}
-
 	renderPatientCards() {
 		const patients = this.props.patients
-		return patients.length === 0
-			? <NoPatientsList />
-			: patients.map(patient => {
-					const url = `/patient/${patient._id}`
-					return <PatientCard key={patient._id} url={url} patient={patient} />
-				})
+		if (patients.length === 0) {
+			return <NoPatientsList />
+		}
+
+		return patients.map(patient => {
+			const url = `/patient/${patient._id}`
+			return <PatientCard key={patient._id} url={url} patient={patient} />
+		})
 	}
 
 	render() {

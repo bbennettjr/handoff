@@ -17,7 +17,7 @@ export default class DoctorsMenu extends React.Component {
   renderDoctors() {
     let users = this.props.users
     return users.map((user, index) => {
-      console.log(`index ${index}`)
+      //console.log(`index ${index}`)
       return (
         <MenuItem
           label="Doctors"
