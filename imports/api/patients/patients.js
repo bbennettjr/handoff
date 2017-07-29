@@ -63,6 +63,7 @@ Meteor.methods({
 		)
 	},
 
+	// insert a patient
 	"patient.insert"(patient) {
 		let userId = Meteor.userId()
 		if (!userId) {
@@ -80,7 +81,7 @@ Meteor.methods({
 		return { _id: insertedId }
 	},
 
-	// insert a patient
+	// update a patient
 	"patient.update"(patient) {
 		// check that a user is signed in
 		let userId = Meteor.userId()
@@ -98,13 +99,14 @@ Meteor.methods({
 			)
 		}
 
-		// insert the patient
-		let insertedId = Patients.update({ _id: patient._id }, { $set: patient })
+		// update the patient
+		// kvothe: throwing Meteor.Error reason: "MinimongoError: Mod on _id not allowed"
+		// IDK what this is.
+		Patients.update(patient._id, { $set: patient })
 
-		Meteor.users.update(
-			{ _id: userId },
-			{ $addToSet: { "profile.coveredPatients": patient._id } }
-		)
+		Meteor.users.update(userId, {
+			$addToSet: { "profile.coveredPatients": patient._id }
+		})
 		return { _id: patient._id }
 	},
 

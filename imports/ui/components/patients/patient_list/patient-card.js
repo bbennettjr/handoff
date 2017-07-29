@@ -6,6 +6,7 @@ import FlatButton from "material-ui/FlatButton"
 class PatientCard extends React.Component {
   onClick(e) {
     e.stopPropagation()
+    e.preventDefault()
     const userId = Meteor.userId()
     Meteor.call("removePatientFromUser", this.props.patient._id, userId)
   }
