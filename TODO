@@ -8,3 +8,13 @@ Things to do:
 7. Either manually add users or do email verification somehow.
 8. Make a user put in their medical number and create an account. Two step verification
 9. 
+
+(TOP BUTTONS - add all of these on select to the top navigation bar)
+Single patient buttons
+2. "Handoff" patient with single/multiple doctors
+3. "Individual remove" patient removed from me
+3. "Transfer" / "Discharge (mass remove)" patient (automatically removed from all doctors)
+
+List buttons
+1. "Handoff" or "handoff all" on selected patients
+2. "Sort" with dropdown menu for sort options (status, location, diagnosis, etc)
