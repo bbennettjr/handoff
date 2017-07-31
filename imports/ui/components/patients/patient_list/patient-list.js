@@ -9,7 +9,7 @@ import { Patients } from "../../../../api/patients/patients.js"
 import NoPatientsList from "./no-patients.js"
 import PatientCard from "./patient-card.js"
 import DoctorsMenu from "../../doctors/doctors-menu.js"
-
+import AddNewPatientButton from "../patient/AddNewPatientButton"
 class PatientList extends React.Component {
 	renderPatientCards() {
 		const patients = this.props.patients
@@ -26,11 +26,18 @@ class PatientList extends React.Component {
 	render() {
 		return (
 			<div>
-				<h3>
-					Your Patients
-					<DoctorsMenu users={this.props.users} />
-				</h3>
-				{this.renderPatientCards()}
+				<div style={{ display: "flex" }}>
+					<h3 style={{ marginLeft: "20px" }}>
+						Your Patients
+					</h3>
+					<div style={{ marginTop: "5px" }}>
+						<DoctorsMenu users={this.props.users} />
+					</div>
+				</div>
+				<div>
+					{this.renderPatientCards()}
+				</div>
+				<div><AddNewPatientButton /></div>
 			</div>
 		)
 	}
