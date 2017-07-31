@@ -39,11 +39,9 @@ Meteor.methods({
 			}
 		)
 	},
-
 	addAllPatientsToOtherUserId(otherUserId) {
 		let me = Meteor.user()
 		let coveredPatients = me.profile.coveredPatients
-
 		Meteor.users.update(
 			{
 				_id: otherUserId
@@ -53,13 +51,6 @@ Meteor.methods({
 					"profile.coveredPatients": { $each: coveredPatients }
 				}
 			}
-		)
-
-		Meteor.users.update(
-			{
-				_id: me._id
-			},
-			{ $set: { "profile.coveredPatients": [] } }
 		)
 	},
 
@@ -110,8 +101,8 @@ Meteor.methods({
 		return { _id: patient._id }
 	},
 
-	// remove a patient
-	"patient.remove"(patientId) {
+	// delete a patient
+	"patient.delete"(patientId) {
 		// does the patient exist
 		let patient = Patients.findOne(patientId)
 		if (!patient)
@@ -125,7 +116,7 @@ Meteor.methods({
 				"You are not the owner of this patient"
 			)
 
-		// remove the patient
+		// delete the patient
 		Patients.remove(patientId)
 	}
 })
