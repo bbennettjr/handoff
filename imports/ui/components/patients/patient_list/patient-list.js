@@ -9,7 +9,7 @@ import { Patients } from "../../../../api/patients/patients.js"
 import NoPatientsList from "./no-patients.js"
 import PatientCard from "./patient-card.js"
 import DoctorsMenu from "../../doctors/doctors-menu.js"
-
+import AddNewPatientButton from "../patient/AddNewPatientButton"
 class PatientList extends React.Component {
 	renderPatientCards() {
 		const patients = this.props.patients
@@ -37,6 +37,7 @@ class PatientList extends React.Component {
 				<div>
 					{this.renderPatientCards()}
 				</div>
+				<div><AddNewPatientButton /></div>
 			</div>
 		)
 	}
