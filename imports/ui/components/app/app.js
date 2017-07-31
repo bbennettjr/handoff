@@ -21,11 +21,12 @@ import { createContainer } from "meteor/react-meteor-data"
 
 // App Component
 const App = ({ history, users, ...appProps }) => {
+	console.log(history)
 	return (
 		<MuiThemeProvider>
 			<Router history={history}>
 				<div className="App">
-					<Navigation {...appProps} />
+					<Navigation history={history} />
 					<Switch>
 						<Route path="/patient/:_id/edit" component={PatientForm} />
 						<Route path="/patient/:_id" component={PatientDisplay} />

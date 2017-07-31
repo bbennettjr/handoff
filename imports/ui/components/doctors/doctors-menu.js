@@ -31,9 +31,32 @@ export default class DoctorsMenu extends React.Component {
       )
     })
   }
+  
+  handleOpenMenu = () => {
+    this.setState({
+      openMenu: true,
+    });
+  }
 
+  handleOnRequestChange = (value) => {
+    this.setState({
+      openMenu: value,
+    });
+  }
   render() {
     return (
+       <IconMenu
+          iconButtonElement={<IconButton><FileFileDownload /></IconButton>}
+          open={this.state.openMenu}
+          onRequestChange={this.handleOnRequestChange}
+        >
+          <MenuItem value="1" primaryText="Windows App" />
+          <MenuItem value="2" primaryText="Mac App" />
+          <MenuItem value="3" primaryText="Android App" />
+          <MenuItem value="4" primaryText="iOS App" />
+        </IconMenu>
+        <RaisedButton onTouchTap={this.handleOpenMenu} label="Downloads" />
+
       <DropDownMenu>
         {this.renderDoctors()}
       </DropDownMenu>

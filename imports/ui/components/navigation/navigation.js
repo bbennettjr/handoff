@@ -8,8 +8,10 @@ import {
 } from "material-ui/Toolbar"
 import AppBar from "material-ui/AppBar"
 import FlatButton from "material-ui/FlatButton"
-import { cyan500 } from "material-ui/styles/colors"
+import IconButton from "material-ui/IconButton"
+import { cyan500, pink500 } from "material-ui/styles/colors"
 import AccountsWrapper from "../accounts/accounts-wrapper.js"
+import SocialPersonAdd from "material-ui/svg-icons/social/person-add"
 
 const styles = {
   toolbar: {
@@ -25,18 +27,22 @@ const styles = {
   }
 }
 
-export const Navigation = appProps => {
+export const Navigation = props => {
+  console.log(props)
   return (
     <Toolbar style={styles.toolbar}>
       <Link to="/" style={styles.title}>
         <ToolbarTitle text="Handoff" />
       </Link>
       <ToolbarGroup lastChild={true}>
-        <FlatButton
-          label="New Patient"
-          labelStyle={styles.buttons}
-          containerElement={<Link to="/newpatient" />}
-        />
+        <Link to="/newpatient">
+          <IconButton tooltip="Add Patient" style={styles.buttons}>
+            <SocialPersonAdd
+              color={styles.buttons.color}
+              hoverColor={pink500}
+            />
+          </IconButton>
+        </Link>
         <ToolbarSeparator />
         <FlatButton
           label="Sign In"
