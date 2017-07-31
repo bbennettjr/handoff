@@ -11,7 +11,7 @@ import FlatButton from "material-ui/FlatButton"
 import IconButton from "material-ui/IconButton"
 import { cyan500, pink500 } from "material-ui/styles/colors"
 import AccountsWrapper from "../accounts/accounts-wrapper.js"
-import SocialPersonAdd from "material-ui/svg-icons/social/person-add"
+import OurAccounts from "../accounts/AtForm"
 
 const styles = {
   toolbar: {
@@ -47,7 +47,7 @@ export const Navigation = props => {
         <FlatButton
           label="Sign In"
           labelStyle={styles.buttons}
-          containerElement={<AccountsWrapper />}
+          containerElement={<OurAccounts />}
         />
       </ToolbarGroup>
     </Toolbar>
