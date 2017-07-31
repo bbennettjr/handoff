@@ -2,6 +2,10 @@ import { Meteor } from "meteor/meteor"
 import React from "react"
 import DropDownMenu from "material-ui/DropDownMenu"
 import MenuItem from "material-ui/MenuItem"
+import RaisedButton from "material-ui/RaisedButton"
+import IconButton from "material-ui/IconButton"
+import FileFileDownload from "material-ui/svg-icons/file/file-download"
+import IconMenu from "material-ui/IconMenu"
 
 export default class DoctorsMenu extends React.Component {
   constructor() {
@@ -31,22 +35,27 @@ export default class DoctorsMenu extends React.Component {
       )
     })
   }
-  
+
   handleOpenMenu = () => {
     this.setState({
-      openMenu: true,
-    });
+      openMenu: true
+    })
   }
 
-  handleOnRequestChange = (value) => {
+  handleOnRequestChange = value => {
     this.setState({
-      openMenu: value,
-    });
+      openMenu: value
+    })
   }
   render() {
     return (
-       <IconMenu
-          iconButtonElement={<IconButton><FileFileDownload /></IconButton>}
+      <div>
+        <IconMenu
+          iconButtonElement={
+            <IconButton>
+              <FileFileDownload />
+            </IconButton>
+          }
           open={this.state.openMenu}
           onRequestChange={this.handleOnRequestChange}
         >
@@ -57,9 +66,10 @@ export default class DoctorsMenu extends React.Component {
         </IconMenu>
         <RaisedButton onTouchTap={this.handleOpenMenu} label="Downloads" />
 
-      <DropDownMenu>
-        {this.renderDoctors()}
-      </DropDownMenu>
+        <DropDownMenu>
+          {this.renderDoctors()}
+        </DropDownMenu>
+      </div>
     )
   }
 }
