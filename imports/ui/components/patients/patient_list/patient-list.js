@@ -26,11 +26,17 @@ class PatientList extends React.Component {
 	render() {
 		return (
 			<div>
-				<h3>
-					Your Patients
-					<DoctorsMenu users={this.props.users} />
-				</h3>
-				{this.renderPatientCards()}
+				<div style={{ display: "flex" }}>
+					<h3 style={{ marginLeft: "20px" }}>
+						Your Patients
+					</h3>
+					<div style={{ marginTop: "5px" }}>
+						<DoctorsMenu users={this.props.users} />
+					</div>
+				</div>
+				<div>
+					{this.renderPatientCards()}
+				</div>
 			</div>
 		)
 	}
