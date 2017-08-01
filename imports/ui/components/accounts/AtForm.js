@@ -9,7 +9,8 @@ import { createContainer } from "meteor/react-meteor-data"
 class AtForm extends React.Component {
   static propTypes = {
     formState: PropTypes.string,
-    user: PropTypes.object
+    user: PropTypes.object,
+    closePopover: PropTypes.func.isRequired
   }
 
   state = { form: this.props.formState || "signUp" }
@@ -24,10 +25,14 @@ class AtForm extends React.Component {
             padding: "0px 0px 16px 0px"
           }}
         >
-          <SignUpForm isMobile={this.props.isMobile} user={this.props.user} />
+          <SignUpForm
+            isMobile={this.props.isMobile}
+            user={this.props.user}
+            closePopover={this.props.closePopover}
+          />
           <div style={{ textAlign: "center", padding: " 5px 10px" }}>
             <span>
-              Already use Commit? &nbsp;
+              Already use Handoff? &nbsp;
               <a
                 style={{ cursor: "pointer", textDecoration: "underline" }}
                 onTouchTap={
@@ -50,7 +55,10 @@ class AtForm extends React.Component {
     if (this.state.form === "signIn")
       return (
         <div style={{ maxWidth: "300px", margin: "auto", padding: "16px 0px" }}>
-          <SignInForm user={this.props.user} />
+          <SignInForm
+            user={this.props.user}
+            closePopover={this.props.closePopover}
+          />
 
           <div
             style={{
@@ -100,7 +108,10 @@ class AtForm extends React.Component {
     if (this.state.form === "forgotPassword")
       return (
         <div style={{ maxWidth: "300px", margin: "auto", padding: "16px 0px" }}>
-          <ForgotPassword user={this.props.user} />
+          <ForgotPassword
+            user={this.props.user}
+            closePopover={this.props.closePopover}
+          />
 
           <div
             style={{

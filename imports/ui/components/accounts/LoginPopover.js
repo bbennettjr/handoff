@@ -21,7 +21,11 @@ class LoginPopover extends React.Component {
         onRequestClose={this.props.closeFunc}
         style={{ backgroundColor: "#fff" }}
       >
-        <AtForm isMobile={false} formState={this.props.formState} />
+        <AtForm
+          isMobile={false}
+          formState={this.props.formState}
+          closePopover={() => this.setState({ open: false })}
+        />
       </Popover>
     )
   }

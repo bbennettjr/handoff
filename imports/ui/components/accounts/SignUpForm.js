@@ -11,7 +11,8 @@ import { createContainer } from "meteor/react-meteor-data"
 
 class SignUpForm extends React.Component {
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
+    closePopover: PropTypes.func.isRequired
   }
 
   state = {
@@ -30,8 +31,7 @@ class SignUpForm extends React.Component {
       emailError: "",
       password1Error: "",
       password2Error: "",
-      selectError: "",
-      selectErrorFacebook: ""
+      selectError: ""
     })
   }
 
@@ -75,6 +75,7 @@ class SignUpForm extends React.Component {
             console.log("Create Account error: " + err.reason)
             this.setState({ snackOpen: true, message: err.reason })
           } else {
+            this.props.closePopover()
             // this.context.router.push("/app")
           }
         }
@@ -129,62 +130,6 @@ class SignUpForm extends React.Component {
             onClick={Meteor.isCordova ? this.signUp : undefined}
           />
         </div>
-
-        {/*Meteor.isCordova*/ true
-          ? null
-          : <div>
-              <div
-                className="commitinlineflex"
-                style={{
-                  justifyContent: "center",
-                  WebkitJustifyContent: "center"
-                }}
-              >
-                <div
-                  style={{
-                    width: "100px",
-                    height: "8px",
-                    borderBottom: "1px solid " + grey400
-                  }}
-                />
-                <div
-                  style={{
-                    fontSize: "16px",
-                    color: grey700,
-                    padding: "0px 16px"
-                  }}
-                >
-                  OR
-                </div>
-                <div
-                  style={{
-                    width: "100px",
-                    height: "8px",
-                    borderBottom: "1px solid " + grey400
-                  }}
-                />
-              </div>
-
-              <SelectField
-                style={{ textAlign: "left" }}
-                floatingLabelText="Athlete or Coach"
-                errorText={this.state.selectErrorFacebook}
-                value={this.state.userTypeFacebook}
-                onChange={this.handleCoachOrAthleteChangeFacebook}
-                fullWidth={this.props.isMobile}
-              >
-                <MenuItem value={"coach"} primaryText="Coach" />
-                <MenuItem value={"athlete"} primaryText="Athlete" />
-              </SelectField>
-              <div
-                style={{
-                  textAlign: "center",
-                  marginTop: "8px",
-                  marginBottom: "8px"
-                }}
-              />
-              <br />
-            </div>}
 
         <Snackbar
           open={this.state.snackOpen}

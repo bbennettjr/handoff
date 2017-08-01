@@ -11,7 +11,7 @@ import FlatButton from "material-ui/FlatButton"
 import IconButton from "material-ui/IconButton"
 import { cyan500, pink500 } from "material-ui/styles/colors"
 import AccountsWrapper from "../accounts/accounts-wrapper.js"
-import LoginPopover from "../accounts/LoginPopover"
+import CallToActionWeb from "../accounts/CallToActionWeb"
 import SocialPersonAdd from "material-ui/svg-icons/social/person-add"
 
 const styles = {
@@ -51,12 +51,7 @@ export default class Navigation extends React.Component {
           <FlatButton
             label="Sign In"
             labelStyle={styles.buttons}
-            containerElement={
-              <LoginPopover
-                open={this.state.open}
-                closeFunc={() => this.setState({ open: false })}
-              />
-            }
+            containerElement={<CallToActionWeb />}
           />
         </ToolbarGroup>
       </Toolbar>

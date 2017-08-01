@@ -4,7 +4,6 @@ import TextField from "material-ui/TextField"
 import { Accounts } from "meteor/accounts-base"
 import Snackbar from "material-ui/Snackbar"
 import RaisedButton from "material-ui/RaisedButton"
-import FaFacebook from "react-icons/lib/fa/facebook"
 import { createContainer } from "meteor/react-meteor-data"
 import { blue900, grey400, grey700 } from "material-ui/styles/colors"
 
@@ -16,19 +15,15 @@ const isIOSApp = function() {
 }
 
 class SignInForm extends React.Component {
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
+    closePopover: PropTypes.func.isRequired
   }
 
   state = {
     snackOpen: false,
     message: "",
-    label: "Log In",
-    labelFacebook: "Log in with Facebook"
+    label: "Log In"
   }
 
   isValidEmail = email => {
@@ -50,58 +45,6 @@ class SignInForm extends React.Component {
     }
   }
 
-  signinWithFacebook = () => {
-    Meteor.loginWithFacebook(
-      { requestPermissions: ["public_profile", "email"] },
-      err => {
-        if (err) {
-          this.setState({ labelFacebook: "Log in with Facebook" })
-          Logger.log("Log in with facebook error: " + err.reason || err.message)
-          this.setState({ snackOpen: true, message: err.reason || err.message })
-        } else {
-          let userId = this.props.user && this.props.user._id
-          Meteor.call("checkUserEmail", userId, err => {
-            this.setState({ labelFacebook: "Log in with Facebook" })
-            if (err) {
-              Meteor.logout()
-              Meteor.call("delete_User", userId)
-              if (err.reason === "already-exists") {
-                Logger.log(
-                  "After Log in with facebook error: " + err.reason ||
-                    err.message
-                )
-                this.setState({
-                  snackOpen: true,
-                  message: "Email already exists"
-                })
-              } else if (err.reason === "does-not-exist") {
-                Logger.log(
-                  "After Log in with facebook error: " + err.reason ||
-                    err.message
-                )
-                this.setState({
-                  snackOpen: true,
-                  message: "User does not exist"
-                })
-              } else {
-                Logger.log(
-                  "After Log in with facebook error: " + err.reason ||
-                    err.message
-                )
-                this.setState({
-                  snackOpen: true,
-                  message: err.reason || err.message
-                })
-              }
-            } else {
-              this.context.router.push("/app")
-            }
-          })
-        }
-      }
-    )
-  }
-
   signIn = e => {
     e.preventDefault()
     let email = this.refs.email.getValue()
@@ -113,22 +56,8 @@ class SignInForm extends React.Component {
       if (err) {
         this.setState({ snackOpen: true, message: err.reason })
       } else {
-        // Kvothe, these need to be Meteor.userId() and not use
-        // props because this callback fires before the props get down here
-        if (Meteor.isCordova) {
-          Meteor.call(
-            "update_Users",
-            { $set: { "profile.signedIntoMobileApp": true } },
-            Meteor.userId()
-          )
-        } else {
-          Meteor.call(
-            "update_Users",
-            { $set: { "profile.signedIntoWebApp": true } },
-            Meteor.userId()
-          )
-        }
-        this.context.router.push("/app")
+        this.props.closePopover()
+        // this.context.router.push("/app")
       }
     })
   }
@@ -139,21 +68,7 @@ class SignInForm extends React.Component {
 
   render() {
     let isMobileIOS = isIOSApp()
-    let facebookButton = null
-    if (this.props.renderFacebookButton) {
-      facebookButton = (
-        <RaisedButton
-          label={this.state.labelFacebook}
-          labelStyle={{ textTransform: "none" }}
-          style={{ width: "80%", maxWidth: "256px" }}
-          onTouchTap={Meteor.isCordova ? undefined : this.signinWithFacebook}
-          onClick={Meteor.isCordova ? this.signinWithFacebook : undefined}
-          backgroundColor={blue900}
-          labelColor={"white"}
-          icon={<FaFacebook />}
-        />
-      )
-    }
+
     return (
       <div
         onKeyPress={this.handleKeyPress}
@@ -189,53 +104,7 @@ class SignInForm extends React.Component {
             style={{ width: "80%", maxWidth: "256px" }}
           />
         </div>
-        {isMobileIOS
-          ? null
-          : <div>
-              <div
-                className="commitinlineflex"
-                style={{
-                  justifyContent: "center",
-                  WebkitJustifyContent: "center"
-                }}
-              >
-                <div
-                  style={{
-                    width: "100px",
-                    height: "8px",
-                    borderBottom: "1px solid " + grey400
-                  }}
-                />
-                <div
-                  style={{
-                    fontSize: "16px",
-                    color: grey700,
-                    padding: "0px 16px"
-                  }}
-                >
-                  OR
-                </div>
-                <div
-                  style={{
-                    width: "100px",
-                    height: "8px",
-                    borderBottom: "1px solid " + grey400
-                  }}
-                />
-              </div>
-              <br />
 
-              <div
-                style={{
-                  textAlign: "center",
-                  marginTop: "8px",
-                  marginBottom: "8px"
-                }}
-              >
-                {facebookButton}
-              </div>
-              <br />
-            </div>}
         <Snackbar
           open={this.state.snackOpen}
           message={this.state.message}
