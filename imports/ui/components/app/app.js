@@ -13,7 +13,7 @@ import {
 import createHistory from "history/createBrowserHistory"
 
 // Components
-import { Navigation } from "../navigation/navigation.js"
+import Navigation from "../navigation/navigation.js"
 import PatientList from "../patients/patient_list/patient-list.js"
 import PatientDisplay from "../patients/patient/patient-display.js"
 import PatientForm from "../patients/patient/patient-form.js"
@@ -21,7 +21,6 @@ import { createContainer } from "meteor/react-meteor-data"
 
 // App Component
 const App = ({ history, users, ...appProps }) => {
-	console.log(history)
 	return (
 		<MuiThemeProvider>
 			<Router history={history}>

@@ -11,7 +11,8 @@ import FlatButton from "material-ui/FlatButton"
 import IconButton from "material-ui/IconButton"
 import { cyan500, pink500 } from "material-ui/styles/colors"
 import AccountsWrapper from "../accounts/accounts-wrapper.js"
-import OurAccounts from "../accounts/AtForm"
+import LoginPopover from "../accounts/LoginPopover"
+import SocialPersonAdd from "material-ui/svg-icons/social/person-add"
 
 const styles = {
   toolbar: {
@@ -27,29 +28,38 @@ const styles = {
   }
 }
 
-export const Navigation = props => {
-  console.log(props)
-  return (
-    <Toolbar style={styles.toolbar}>
-      <Link to="/" style={styles.title}>
-        <ToolbarTitle text="Handoff" />
-      </Link>
-      <ToolbarGroup lastChild={true}>
-        <Link to="/newpatient">
-          <IconButton tooltip="Add Patient" style={styles.buttons}>
-            <SocialPersonAdd
-              color={styles.buttons.color}
-              hoverColor={pink500}
-            />
-          </IconButton>
+export default class Navigation extends React.Component {
+  state = {
+    open: false
+  }
+  render() {
+    return (
+      <Toolbar style={styles.toolbar}>
+        <Link to="/" style={styles.title}>
+          <ToolbarTitle text="Handoff" />
         </Link>
-        <ToolbarSeparator />
-        <FlatButton
-          label="Sign In"
-          labelStyle={styles.buttons}
-          containerElement={<OurAccounts />}
-        />
-      </ToolbarGroup>
-    </Toolbar>
-  )
+        <ToolbarGroup lastChild={true}>
+          <Link to="/newpatient">
+            <IconButton tooltip="Add Patient" style={styles.buttons}>
+              <SocialPersonAdd
+                color={styles.buttons.color}
+                hoverColor={pink500}
+              />
+            </IconButton>
+          </Link>
+          <ToolbarSeparator />
+          <FlatButton
+            label="Sign In"
+            labelStyle={styles.buttons}
+            containerElement={
+              <LoginPopover
+                open={this.state.open}
+                closeFunc={() => this.setState({ open: false })}
+              />
+            }
+          />
+        </ToolbarGroup>
+      </Toolbar>
+    )
+  }
 }

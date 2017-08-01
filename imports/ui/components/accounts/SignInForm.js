@@ -248,3 +248,4 @@ class SignInForm extends React.Component {
   }
 }
 
+export default SignInForm

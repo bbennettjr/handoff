@@ -1,9 +1,10 @@
 import PropTypes from "prop-types"
 import React from "react"
 
-import SignUpForm from "./SignUpForm.js"
-import SignInForm from "./SignInForm.js"
-import ForgotPassword from "./ForgotPassword.js"
+import SignUpForm from "./SignUpForm"
+import SignInForm from "./SignInForm"
+import ForgotPassword from "./ForgotPassword"
+
 import { createContainer } from "meteor/react-meteor-data"
 class AtForm extends React.Component {
   static propTypes = {

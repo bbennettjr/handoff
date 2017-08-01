@@ -7,10 +7,7 @@ import Snackbar from "material-ui/Snackbar"
 import SelectField from "material-ui/SelectField"
 import MenuItem from "material-ui/MenuItem"
 import { blue900, grey400, grey700 } from "material-ui/styles/colors"
-import { FacebookPixelCommit } from "meteor/commit-analytics"
-import FaFacebook from "react-icons/lib/fa/facebook"
 import { createContainer } from "meteor/react-meteor-data"
-import { AnalyticsCommit } from "meteor/commit-analytics"
 
 class SignUpForm extends React.Component {
   static propTypes = {
@@ -200,3 +197,5 @@ class SignUpForm extends React.Component {
     )
   }
 }
+
+export default SignUpForm
