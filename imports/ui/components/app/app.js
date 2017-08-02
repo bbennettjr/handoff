@@ -30,7 +30,7 @@ const App = ({ history, users, ...appProps }) => {
 						<Route path="/patient/:_id/edit" component={PatientForm} />
 						<Route path="/patient/:_id" component={PatientDisplay} />
 						<Route path="/newpatient" component={PatientForm} />
-						<Route path="/user/:_id" component={TempAccountPage} />
+						<Route path="/account/:_id" component={TempAccountPage} />
 						<Route
 							path="/"
 							component={() => <PatientList users={users} {...appProps} />}

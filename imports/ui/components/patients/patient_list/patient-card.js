@@ -1,5 +1,6 @@
 import React from "react"
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card"
+import Checkbox from "material-ui/Checkbox"
 import { Link } from "react-router-dom"
 import FlatButton from "material-ui/FlatButton"
 
@@ -14,7 +15,8 @@ class PatientCard extends React.Component {
     let { patient, url, ...appProps } = this.props
     return (
       <Link to={url} key={patient._id}>
-        <Card>
+        <Card style={{ display: "inline-flex", alginItems: "center" }}>
+          <Checkbox />
           <CardHeader
             title={`${patient.first} ${patient.last}`}
             subtitle={`${patient.diagnosis}, condition: ${patient.condition}`}

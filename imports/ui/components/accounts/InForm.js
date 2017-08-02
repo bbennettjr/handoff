@@ -43,11 +43,11 @@ class InForm extends React.Component {
           onTouchTap={
             Meteor.isCordova
               ? undefined
-              : () => this.setState({ form: "signIn" })
+              : () => this.props.history.push(`/account/${this.props.user._id}`)
           }
           onClick={
             Meteor.isCordova
-              ? () => this.setState({ form: "signIn" })
+              ? () => this.props.history.push(`/account/${this.props.user._id}`)
               : undefined
           }
         >

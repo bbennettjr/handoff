@@ -30,9 +30,6 @@ class PatientList extends React.Component {
 					<h3 style={{ marginLeft: "20px" }}>
 						Your Patients
 					</h3>
-					<div style={{ marginTop: "5px" }}>
-						<DoctorsMenu users={this.props.users} />
-					</div>
 				</div>
 				<div>
 					{this.renderPatientCards()}
