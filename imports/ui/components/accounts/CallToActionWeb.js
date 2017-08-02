@@ -27,7 +27,7 @@ class CallToActionWeb extends React.Component {
   render() {
     // Present SignIn or SignUp to new user
     return (
-      <div style={{ display: "inline-block" }}>
+      <div style={{ display: "inline-block", marginRight: "24px" }}>
         <FlatButton
           backgroundColor={orange500}
           hoverColor={orange400}

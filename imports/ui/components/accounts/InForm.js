@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import React from "react"
+import SignOutButton from "./SignOutButton"
 
 import IconButton from "material-ui/IconButton"
 import ActionAccountCircle from "material-ui/svg-icons/action/account-circle"
@@ -53,13 +54,7 @@ class InForm extends React.Component {
           <ActionAccountCircle />
         </IconButton>
         <Divider />
-        <RaisedButton
-          label="Sign out"
-          onTouchTap={Meteor.isCordova ? undefined : () => Meteor.logout()}
-          onClick={Meteor.isCordova ? () => Meteor.logout() : undefined}
-          labelStyle={{ textTransform: "none" }}
-          style={{ width: "80%", maxWidth: "256px" }}
-        />
+        <SignOutButton />
       </div>
     )
   }

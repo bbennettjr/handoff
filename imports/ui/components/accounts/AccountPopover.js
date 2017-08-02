@@ -8,7 +8,6 @@ import InForm from "./InForm.js"
 
 class AccountPopover extends React.Component {
   static propTypes = {
-    closeFunc: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
   }
 
@@ -29,14 +28,12 @@ class AccountPopover extends React.Component {
     return (
       <div>
         <IconButton
-          backgroundColor={orange500}
           style={{ color: white, display: "inline-block", height: "44px" }}
-          hoverColor={orange400}
           tooltip="Account"
           onTouchTap={Meteor.isCordova ? undefined : this.openPopover}
           onClick={Meteor.isCordova ? this.openPopover : undefined}
         >
-          <MoreVert />
+          <MoreVert color={orange500} hoverColor={orange400} />
         </IconButton>
         <Popover
           open={this.state.open}
@@ -44,7 +41,7 @@ class AccountPopover extends React.Component {
           anchorOrigin={{ horizontal: "left", vertical: "top" }}
           targetOrigin={{ horizontal: "left", vertical: "bottom" }}
           onRequestClose={() => this.setState({ open: false })}
-          style={{ backgroundColor: "#fff" }}
+          style={{ backgroundColor: "#fff", display: "flex" }}
         >
           <InForm
             isMobile={false}

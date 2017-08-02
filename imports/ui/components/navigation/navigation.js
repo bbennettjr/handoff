@@ -48,7 +48,7 @@ export default class Navigation extends React.Component {
               />
             </IconButton>
           </Link>
-          <ToolbarSeparator />
+          <ToolbarSeparator style={{ marginRight: "24px" }} />
           {Meteor.user()
             ? <AccountPopover history={this.props.history} />
             : <FlatButton
