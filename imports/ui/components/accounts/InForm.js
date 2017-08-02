@@ -10,14 +10,14 @@ import RaisedButton from "material-ui/RaisedButton"
 import { createContainer } from "meteor/react-meteor-data"
 
 const styles = {
-  mediumIcon: {
-    width: 48,
-    height: 48
+  largeIcon: {
+    width: 60,
+    height: 60
   },
-  medium: {
-    width: 96,
-    height: 96,
-    padding: 24
+  large: {
+    width: 120,
+    height: 120,
+    padding: 30
   }
 }
 
@@ -38,8 +38,8 @@ class InForm extends React.Component {
       >
 
         <IconButton
-          iconStyle={styles.mediumIcon}
-          style={styles.medium}
+          iconStyle={styles.largeIcon}
+          style={styles.large}
           onTouchTap={
             Meteor.isCordova
               ? undefined
