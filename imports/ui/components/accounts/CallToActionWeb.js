@@ -16,7 +16,7 @@ class CallToActionWeb extends React.Component {
     loginColor: grey50
   }
 
-  openSignInPopoverOrLogin = e => {
+  openPopover = e => {
     e.preventDefault()
     this.setState({
       open: true,
@@ -25,10 +25,7 @@ class CallToActionWeb extends React.Component {
   }
 
   render() {
-    if (this.props.user) {
-      return <div>{this.props.user.emails[0].address}</div>
-    }
-
+    // Present SignIn or SignUp to new user
     return (
       <div style={{ display: "inline-block" }}>
         <FlatButton
@@ -37,10 +34,8 @@ class CallToActionWeb extends React.Component {
           style={{ color: white, display: "inline-block", height: "44px" }}
           label={"Sign In"}
           labelStyle={{ textTransform: "none", fontSize: "1.2em" }}
-          onTouchTap={
-            Meteor.isCordova ? undefined : this.openSignInPopoverOrLogin
-          }
-          onClick={Meteor.isCordova ? this.openSignInPopoverOrLogin : undefined}
+          onTouchTap={Meteor.isCordova ? undefined : this.openPopover}
+          onClick={Meteor.isCordova ? this.openPopover : undefined}
         />
         <LoginPopover
           open={this.state.open}

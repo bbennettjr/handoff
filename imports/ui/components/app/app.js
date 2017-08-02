@@ -13,7 +13,7 @@ import {
 import createHistory from "history/createBrowserHistory"
 
 // Components
-import Navigation from "../navigation/navigation.js"
+import Navigation from "../navigation/Navigation.js"
 import PatientList from "../patients/patient_list/patient-list.js"
 import PatientDisplay from "../patients/patient/patient-display.js"
 import PatientForm from "../patients/patient/patient-form.js"
@@ -30,6 +30,7 @@ const App = ({ history, users, ...appProps }) => {
 						<Route path="/patient/:_id/edit" component={PatientForm} />
 						<Route path="/patient/:_id" component={PatientDisplay} />
 						<Route path="/newpatient" component={PatientForm} />
+						<Route path="/user/:_id" component={AccountPage} />
 						<Route
 							path="/"
 							component={() => <PatientList users={users} {...appProps} />}
@@ -48,3 +49,7 @@ export default createContainer(() => {
 	let users = Meteor.users.find().fetch()
 	return { history, users }
 }, App)
+
+const AccountPage = () => {
+	return <h1>Temp Account Page</h1>
+}

@@ -22,7 +22,7 @@ class LoginPopover extends React.Component {
         style={{ backgroundColor: "#fff" }}
       >
         <AtForm
-          isMobile={false}
+          isMobile={false} //kvothe: should be this.props.isMobile?
           formState={this.props.formState}
           closePopover={() => this.setState({ open: false })}
         />

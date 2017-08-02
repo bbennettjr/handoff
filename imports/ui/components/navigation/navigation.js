@@ -11,6 +11,7 @@ import FlatButton from "material-ui/FlatButton"
 import IconButton from "material-ui/IconButton"
 import { cyan500, pink400 } from "material-ui/styles/colors"
 import AccountsWrapper from "../accounts/accounts-wrapper.js"
+import AccountPopover from "../accounts/AccountPopover"
 import CallToActionWeb from "../accounts/CallToActionWeb"
 import SocialPersonAdd from "material-ui/svg-icons/social/person-add"
 
@@ -48,11 +49,13 @@ export default class Navigation extends React.Component {
             </IconButton>
           </Link>
           <ToolbarSeparator />
-          <FlatButton
-            label="Sign In"
-            labelStyle={styles.buttons}
-            containerElement={<CallToActionWeb />}
-          />
+          {Meteor.user()
+            ? <AccountPopover history={this.props.history} />
+            : <FlatButton
+                label="Sign In"
+                labelStyle={styles.buttons}
+                containerElement={<CallToActionWeb />}
+              />}
         </ToolbarGroup>
       </Toolbar>
     )
