@@ -28,12 +28,12 @@ class AccountPopover extends React.Component {
     return (
       <div>
         <IconButton
-          style={{ color: white, display: "inline-block", height: "44px" }}
+          style={{ display: "inline-block" }}
           tooltip="Account"
           onTouchTap={Meteor.isCordova ? undefined : this.openPopover}
           onClick={Meteor.isCordova ? this.openPopover : undefined}
         >
-          <ActionAccountCircle color={orange500} hoverColor={orange400} />
+          <ActionAccountCircle color={white} hoverColor={orange400} />
         </IconButton>
         <Popover
           open={this.state.open}

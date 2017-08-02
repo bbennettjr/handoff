@@ -30,7 +30,7 @@ const App = ({ history, users, ...appProps }) => {
 						<Route path="/patient/:_id/edit" component={PatientForm} />
 						<Route path="/patient/:_id" component={PatientDisplay} />
 						<Route path="/newpatient" component={PatientForm} />
-						<Route path="/user/:_id" component={AccountPage} />
+						<Route path="/user/:_id" component={TempAccountPage} />
 						<Route
 							path="/"
 							component={() => <PatientList users={users} {...appProps} />}
@@ -50,6 +50,7 @@ export default createContainer(() => {
 	return { history, users }
 }, App)
 
-const AccountPage = () => {
+const TempAccountPage = () => {
 	return <h1>Temp Account Page</h1>
 }
+
