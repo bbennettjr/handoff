@@ -9,7 +9,7 @@ import {
 import AppBar from "material-ui/AppBar"
 import FlatButton from "material-ui/FlatButton"
 import IconButton from "material-ui/IconButton"
-import { cyan500, pink500 } from "material-ui/styles/colors"
+import { cyan500, pink400 } from "material-ui/styles/colors"
 import AccountsWrapper from "../accounts/accounts-wrapper.js"
 import CallToActionWeb from "../accounts/CallToActionWeb"
 import SocialPersonAdd from "material-ui/svg-icons/social/person-add"
@@ -43,7 +43,7 @@ export default class Navigation extends React.Component {
             <IconButton tooltip="Add Patient" style={styles.buttons}>
               <SocialPersonAdd
                 color={styles.buttons.color}
-                hoverColor={pink500}
+                hoverColor={pink400}
               />
             </IconButton>
           </Link>
