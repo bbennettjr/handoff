@@ -17,7 +17,6 @@ class LoginPopover extends React.Component {
         open={this.props.open}
         anchorEl={this.props.anchorEl}
         anchorOrigin={{ horizontal: "left", vertical: "top" }}
-        targetOrigin={{ horizontal: "left", vertical: "bottom" }}
         onRequestClose={this.props.closeFunc}
         style={{ backgroundColor: "#fff" }}
       >

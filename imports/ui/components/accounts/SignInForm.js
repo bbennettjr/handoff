@@ -1,11 +1,8 @@
 import PropTypes from "prop-types"
 import React from "react"
 import TextField from "material-ui/TextField"
-import { Accounts } from "meteor/accounts-base"
 import Snackbar from "material-ui/Snackbar"
 import Button from "material-ui/Button"
-import { createContainer } from "meteor/react-meteor-data"
-import { blue, grey } from "material-ui/colors"
 
 const isIOSApp = function() {
   return (
@@ -81,14 +78,14 @@ class SignInForm extends React.Component {
           autoFocus={true}
           hintText="Email"
           type="email"
-          floatingLabelText="Email"
+          label="Email"
         />
         <br />
         <TextField
           ref="password"
           errorText={this.state.password1Error}
           hintText="Password"
-          floatingLabelText="Password"
+          label="Password"
           type="password"
         />
         <br />
@@ -98,7 +95,6 @@ class SignInForm extends React.Component {
           <Button
             onTouchTap={Meteor.isCordova ? undefined : this.signIn}
             onClick={Meteor.isCordova ? this.signIn : undefined}
-            labelStyle={{ textTransform: "none" }}
             style={{ width: "80%", maxWidth: "256px" }}
           >
             {this.state.label}

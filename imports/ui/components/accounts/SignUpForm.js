@@ -95,20 +95,20 @@ class SignUpForm extends React.Component {
           autoFocus={true}
           type="email"
           errorText={this.state.emailError}
-          floatingLabelText="Email"
+          label="Email"
         />
         <br />
         <TextField
           ref="password1"
           errorText={this.state.password1Error}
-          floatingLabelText="Password"
+          label="Password"
           type="password"
         />
         <br />
         <TextField
           ref="password2"
           errorText={this.state.password2Error}
-          floatingLabelText="Password (again)"
+          label="Password (again)"
           type="password"
         />
         <br />

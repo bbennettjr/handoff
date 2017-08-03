@@ -62,7 +62,7 @@ class ForgotPassword extends React.Component {
           ref="email"
           type="email"
           errorText={this.state.emailError}
-          floatingLabelText="Your Email"
+          label="Your Email"
         />
         <br />
         <div

@@ -38,7 +38,6 @@ class AccountPopover extends React.Component {
           open={this.state.open}
           anchorEl={this.state.popoverAnchor}
           anchorOrigin={{ horizontal: "left", vertical: "top" }}
-          targetOrigin={{ horizontal: "left", vertical: "bottom" }}
           onRequestClose={() => this.setState({ open: false })}
           style={{ backgroundColor: "#fff", display: "flex" }}
         >
