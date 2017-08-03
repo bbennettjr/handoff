@@ -32,10 +32,10 @@ const App = ({ history, users, ...appProps }) => {
 				<div className="App">
 					<Navigation history={history} />
 					<Switch>
-						<Route path="/patient/:_id/edit" component={PatientForm} />
-						<Route path="/patient/:_id" component={PatientDisplay} />
-						<Route path="/newpatient" component={PatientForm} />
-						<Route path="/account/:_id" component={TempAccountPage} />
+						<Route exact path="/patient/:_id/edit" component={PatientForm} />
+						<Route exact path="/patient/:_id" component={PatientDisplay} />
+						<Route exact path="/newpatient" component={PatientForm} />
+						<Route exact path="/account/:_id" component={TempAccountPage} />
 						<Route
 							path="/"
 							component={() => <PatientList users={users} {...appProps} />}

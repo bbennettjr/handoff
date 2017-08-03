@@ -5,9 +5,8 @@ import SignOutButton from "./SignOutButton"
 import IconButton from "material-ui/IconButton"
 import ActionAccountCircle from "material-ui-icons/AccountCircle"
 import Divider from "material-ui/Divider"
-import Button from "material-ui/Button"
-
 import { createContainer } from "meteor/react-meteor-data"
+import { Link } from "react-router-dom"
 
 const styles = {
   largeIcon: {
@@ -36,23 +35,11 @@ class InForm extends React.Component {
           padding: "0px 0px 16px 0px"
         }}
       >
-
-        <IconButton
-          iconStyle={styles.largeIcon}
-          style={styles.large}
-          onTouchTap={
-            Meteor.isCordova
-              ? undefined
-              : () => this.props.history.push(`/account/${this.props.user._id}`)
-          }
-          onClick={
-            Meteor.isCordova
-              ? () => this.props.history.push(`/account/${this.props.user._id}`)
-              : undefined
-          }
-        >
-          <ActionAccountCircle />
-        </IconButton>
+        <Link to={`/account/${this.props.user._id}`}>
+          <IconButton iconStyle={styles.largeIcon} style={styles.large}>
+            <ActionAccountCircle />
+          </IconButton>
+        </Link>
         <Divider />
         <SignOutButton />
       </div>
