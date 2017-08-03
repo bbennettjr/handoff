@@ -3,9 +3,9 @@ import React from "react"
 import TextField from "material-ui/TextField"
 import { Accounts } from "meteor/accounts-base"
 import Snackbar from "material-ui/Snackbar"
-import RaisedButton from "material-ui/RaisedButton"
+import Button from "material-ui/Button"
 import { createContainer } from "meteor/react-meteor-data"
-import { blue900, grey400, grey700 } from "material-ui/styles/colors"
+import { blue, grey } from "material-ui/colors"
 
 const isIOSApp = function() {
   return (
@@ -95,14 +95,15 @@ class SignInForm extends React.Component {
         <div
           style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
         >
-          <RaisedButton
+          <Button
             secondary={true}
-            label={this.state.label}
             onTouchTap={Meteor.isCordova ? undefined : this.signIn}
             onClick={Meteor.isCordova ? this.signIn : undefined}
             labelStyle={{ textTransform: "none" }}
             style={{ width: "80%", maxWidth: "256px" }}
-          />
+          >
+            {this.state.label}
+          </Button>
         </div>
 
         <Snackbar

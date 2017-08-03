@@ -3,7 +3,7 @@ import { Patients } from "../../../../api/patients/patients.js"
 import { compose } from "react-komposer"
 import { Grid, Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import RaisedButton from "material-ui/RaisedButton"
+import Button from "material-ui/Button"
 
 const style = {
 	margin: 12
@@ -14,12 +14,14 @@ const PatientDisplay = patient => {
 		<Grid>
 			<Row>
 				<Col xs={12}>
-					<RaisedButton
-						label="Edit"
+					<Button
+						raised={true}
 						secondary={true}
 						style={style}
 						containerElement={<Link to={`/patient/${patient._id}/edit`} />}
-					/>
+					>
+						Edit
+					</Button>
 				</Col>
 			</Row>
 			<Row>

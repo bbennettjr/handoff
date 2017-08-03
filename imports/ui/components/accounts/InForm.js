@@ -3,9 +3,9 @@ import React from "react"
 import SignOutButton from "./SignOutButton"
 
 import IconButton from "material-ui/IconButton"
-import ActionAccountCircle from "material-ui/svg-icons/action/account-circle"
+import ActionAccountCircle from "material-ui-icons/AccountCircle"
 import Divider from "material-ui/Divider"
-import RaisedButton from "material-ui/RaisedButton"
+import Button from "material-ui/Button"
 
 import { createContainer } from "meteor/react-meteor-data"
 

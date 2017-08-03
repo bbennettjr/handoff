@@ -1,13 +1,9 @@
 import PropTypes from "prop-types"
 import React from "react"
 import TextField from "material-ui/TextField"
-import RaisedButton from "material-ui/RaisedButton"
+import Button from "material-ui/Button"
 import { Accounts } from "meteor/accounts-base"
 import Snackbar from "material-ui/Snackbar"
-import SelectField from "material-ui/SelectField"
-import MenuItem from "material-ui/MenuItem"
-import { blue900, grey400, grey700 } from "material-ui/styles/colors"
-import { createContainer } from "meteor/react-meteor-data"
 
 class SignUpForm extends React.Component {
   static propTypes = {
@@ -121,14 +117,16 @@ class SignUpForm extends React.Component {
         <div
           style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
         >
-          <RaisedButton
+          <Button
+            raised={true}
             secondary={true}
             labelStyle={{ textTransform: "none" }}
             style={{ width: "80%", maxWidth: "256px" }}
-            label={this.state.label}
             onTouchTap={Meteor.isCordova ? undefined : this.signUp}
             onClick={Meteor.isCordova ? this.signUp : undefined}
-          />
+          >
+            {this.state.label}
+          </Button>
         </div>
 
         <Snackbar

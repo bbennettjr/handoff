@@ -1,9 +1,9 @@
 import PropTypes from "prop-types"
 import React from "react"
-import { white, orange500, orange400 } from "material-ui/styles/colors"
+import { white, orange } from "material-ui/colors"
 import IconButton from "material-ui/IconButton"
-import ActionAccountCircle from "material-ui/svg-icons/action/account-circle"
-import Popover from "material-ui/Popover"
+import ActionAccountCircle from "material-ui-icons/AccountCircle"
+import Popover from "material-ui/internal/Popover"
 import InForm from "./InForm.js"
 
 class AccountPopover extends React.Component {
@@ -33,7 +33,7 @@ class AccountPopover extends React.Component {
           onTouchTap={Meteor.isCordova ? undefined : this.openPopover}
           onClick={Meteor.isCordova ? this.openPopover : undefined}
         >
-          <ActionAccountCircle color={white} hoverColor={orange400} />
+          <ActionAccountCircle color={white} hoverColor={orange[400]} />
         </IconButton>
         <Popover
           open={this.state.open}

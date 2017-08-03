@@ -1,11 +1,9 @@
 import PropTypes from "prop-types"
 import React from "react"
 import TextField from "material-ui/TextField"
-import FlatButton from "material-ui/FlatButton"
+import Button from "material-ui/Button"
 import { Accounts } from "meteor/accounts-base"
 import Snackbar from "material-ui/Snackbar"
-import SelectField from "material-ui/SelectField"
-import MenuItem from "material-ui/MenuItem"
 
 class InviteForm extends React.Component {
   constructor(props) {
@@ -79,10 +77,8 @@ class InviteForm extends React.Component {
         err => {
           this.setState({ label: "Create Account" })
           if (err) {
-            Logger.log("Create Account error: " + err.reason)
             this.setState({ snackOpen: true, message: err.reason })
           } else {
-            // this.context.router.push("/app")
             //Handle accept notification here so it automatically syncs this user's account up via the invite... DOPE!
             Meteor.call("accept_Invite", this.props.notification)
           }
@@ -127,27 +123,16 @@ class InviteForm extends React.Component {
           type="password"
         />
         <br />
-        <SelectField
-          disabled={true}
-          floatingLabelText="Athlete or Coach"
-          errorText={this.state.selectError}
-          value={this.state.userType}
-          onChange={this.handleCoachOrAthleteChange}
-          fullWidth={this.props.isMobile}
-        >
-          <MenuItem value={"coach"} primaryText="Coach" />
-          <MenuItem value={"athlete"} primaryText="Athlete" />
-        </SelectField>
-        <br />
         <div
           style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
         >
-          <FlatButton
+          <Button
             secondary={true}
-            label={this.state.label}
             onTouchTap={Meteor.isCordova ? undefined : this.signUp}
             onClick={Meteor.isCordova ? this.signUp : undefined}
-          />
+          >
+            {this.state.label}
+          </Button>
         </div>
         <Snackbar
           open={this.state.snackOpen}

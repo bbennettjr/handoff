@@ -1,12 +1,9 @@
 // Atmosphere and NPM
 import { Meteor } from "meteor/meteor"
 import React from "react"
-import ReactDOM from "react-dom"
 import { Grid, Row, Col } from "react-bootstrap"
 import TextField from "material-ui/TextField"
-import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton"
-import RaisedButton from "material-ui/RaisedButton"
-import { withRouter } from "react-router"
+import Button from "material-ui/Button"
 import { Link } from "react-router-dom"
 import { Patients } from "../../../../api/patients/patients.js"
 import { createContainer } from "meteor/react-meteor-data"
@@ -167,8 +164,8 @@ class PatientForm extends React.Component {
 					</Row>
 					<Row>
 						<Col xs={6} xsOffset={6}>
-							<RaisedButton
-								label="Cancel"
+							<Button
+								raised={true}
 								style={style}
 								containerElement={
 									<Link
@@ -179,13 +176,17 @@ class PatientForm extends React.Component {
 										}
 									/>
 								}
-							/>
-							<RaisedButton
-								label="Save"
+							>
+								Cancel
+							</Button>
+							<Button
+								raised={true}
 								secondary={true}
 								style={style}
 								onClick={e => this.onSubmit(e)}
-							/>
+							>
+								Save
+							</Button>
 						</Col>
 					</Row>
 				</form>

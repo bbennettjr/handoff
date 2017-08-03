@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 import React from "react"
-import Popover from "material-ui/Popover"
+import Popover from "material-ui/internal/Popover"
 import AtForm from "./AtForm.js"
 
 class LoginPopover extends React.Component {

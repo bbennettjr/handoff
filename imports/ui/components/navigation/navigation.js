@@ -1,23 +1,19 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import {
-  Toolbar,
-  ToolbarGroup,
-  ToolbarSeparator,
-  ToolbarTitle
-} from "material-ui/Toolbar"
+
 import AppBar from "material-ui/AppBar"
-import FlatButton from "material-ui/FlatButton"
+import Toolbar from "material-ui/Toolbar"
+import Button from "material-ui/Button"
 import IconButton from "material-ui/IconButton"
-import { cyan500, pink400 } from "material-ui/styles/colors"
-import AccountsWrapper from "../accounts/accounts-wrapper.js"
+
+import { cyan, pink } from "material-ui/colors"
 import AccountPopover from "../accounts/AccountPopover"
 import CallToActionWeb from "../accounts/CallToActionWeb"
-import SocialPersonAdd from "material-ui/svg-icons/social/person-add"
-
+import SocialPersonAdd from "material-ui-icons/PersonAdd"
+import Typography from "material-ui/Typography"
 const styles = {
   toolbar: {
-    backgroundColor: cyan500.toString()
+    backgroundColor: cyan
   },
   title: {
     cursor: "pointer",
@@ -35,29 +31,29 @@ export default class Navigation extends React.Component {
   }
   render() {
     return (
-      <Toolbar style={styles.toolbar}>
-        <Link to="/" style={styles.title}>
-          <ToolbarTitle text="Handoff" />
-        </Link>
-        <ToolbarGroup lastChild={true}>
+      <AppBar position="static">
+        <Toolbar style={styles.toolbar}>
+          <Link to="/" style={styles.title}>
+            <Typography type="title" color="inherit">
+              Title
+            </Typography>
+          </Link>
+
           <Link to="/newpatient">
             <IconButton tooltip="Add Patient" style={styles.buttons}>
               <SocialPersonAdd
                 color={styles.buttons.color}
-                hoverColor={pink400}
+                hoverColor={pink[400]}
               />
             </IconButton>
           </Link>
-          <ToolbarSeparator />
+
           {Meteor.user()
             ? <AccountPopover history={this.props.history} />
-            : <FlatButton
-                label="Sign In"
-                labelStyle={styles.buttons}
-                containerElement={<CallToActionWeb />}
-              />}
-        </ToolbarGroup>
-      </Toolbar>
+            : <CallToActionWeb />}
+
+        </Toolbar>
+      </AppBar>
     )
   }
 }

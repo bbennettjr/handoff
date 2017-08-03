@@ -1,14 +1,10 @@
 import { Meteor } from "meteor/meteor"
 import React from "react"
-import FlatButton from "material-ui/FlatButton"
-import DropDownMenu from "material-ui/DropDownMenu"
-import MenuItem from "material-ui/MenuItem"
 import { createContainer } from "meteor/react-meteor-data"
 
 import { Patients } from "../../../../api/patients/patients.js"
 import NoPatientsList from "./no-patients.js"
 import PatientCard from "./patient-card.js"
-import DoctorsMenu from "../../doctors/doctors-menu.js"
 import AddNewPatientButton from "../patient/AddNewPatientButton"
 class PatientList extends React.Component {
 	renderPatientCards() {
@@ -46,7 +42,7 @@ export default createContainer(() => {
 	if (user && user.profile && user.profile.coveredPatients) {
 		coveredPatients = user.profile.coveredPatients
 	}
-	const subscription = Meteor.subscribe("patients")
+	Meteor.subscribe("patients")
 
 	const patients = Patients.find({
 		_id: { $in: coveredPatients }

@@ -2,7 +2,7 @@ import React from "react"
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card"
 import Checkbox from "material-ui/Checkbox"
 import { Link } from "react-router-dom"
-import FlatButton from "material-ui/FlatButton"
+import Button from "material-ui/Button"
 
 class PatientCard extends React.Component {
   onClick(e) {
@@ -22,11 +22,9 @@ class PatientCard extends React.Component {
             subtitle={`${patient.diagnosis}, condition: ${patient.condition}`}
             showExpandableButton={false}
             children={
-              <FlatButton
-                label="Remove"
-                primary={true}
-                onClick={e => this.onClick(e)}
-              />
+              <Button primary={true} onClick={e => this.onClick(e)}>
+                Remove
+              </Button>
             }
           />
           <CardText expandable={true}>

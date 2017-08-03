@@ -1,6 +1,6 @@
 import React from "react"
 import Snackbar from "material-ui/Snackbar"
-import RaisedButton from "material-ui/RaisedButton"
+import Button from "material-ui/Button"
 
 class SignOutButton extends React.Component {
   constructor(props) {
@@ -30,13 +30,15 @@ class SignOutButton extends React.Component {
       <div
         style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
       >
-        <RaisedButton
-          label="Sign out"
+        <Button
+          raised={true}
           onTouchTap={Meteor.isCordova ? undefined : this.handleTouchTap}
           onClick={Meteor.isCordova ? this.handleTouchTap : undefined}
           labelStyle={{ textTransform: "none" }}
           style={{ width: "80%", maxWidth: "256px" }}
-        />
+        >
+          Sign Out
+        </Button>
         <Snackbar
           open={this.state.open}
           message="Please sign in again to Handoff"

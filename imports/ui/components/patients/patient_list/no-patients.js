@@ -1,9 +1,5 @@
 import React from "react"
 import Paper from "material-ui/Paper"
-import Subheader from "material-ui/Subheader"
-import { Link } from "react-router-dom"
-import FloatingActionButton from "material-ui/FloatingActionButton"
-import ContentAdd from "material-ui/svg-icons/content/add"
 
 const style = {
   left: 0,

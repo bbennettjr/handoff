@@ -3,26 +3,31 @@ import { Meteor } from "meteor/meteor"
 import React from "react"
 import PropTypes from "prop-types"
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
-import {
-	BrowserRouter as Router,
-	Route,
-	Link,
-	Switch,
-	Redirect
-} from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import createHistory from "history/createBrowserHistory"
 
 // Components
-import Navigation from "../navigation/Navigation.js"
+import Navigation from "../navigation/navigation.js"
 import PatientList from "../patients/patient_list/patient-list.js"
 import PatientDisplay from "../patients/patient/patient-display.js"
 import PatientForm from "../patients/patient/patient-form.js"
 import { createContainer } from "meteor/react-meteor-data"
 
+import { blue, orange } from "material-ui/colors"
+import createMuiTheme from "material-ui/styles/theme"
+
+import createPalette from "material-ui/styles/palette"
+const handoffTheme = createMuiTheme({
+	palette: createPalette({
+		primary: blue,
+		accent: orange
+	})
+})
+
 // App Component
 const App = ({ history, users, ...appProps }) => {
 	return (
-		<MuiThemeProvider>
+		<MuiThemeProvider theme={handoffTheme}>
 			<Router history={history}>
 				<div className="App">
 					<Navigation history={history} />
@@ -53,4 +58,3 @@ export default createContainer(() => {
 const TempAccountPage = () => {
 	return <h1>Temp Account Page</h1>
 }
-

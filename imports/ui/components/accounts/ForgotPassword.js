@@ -1,6 +1,6 @@
 import React from "react"
 import TextField from "material-ui/TextField"
-import RaisedButton from "material-ui/RaisedButton"
+import Button from "material-ui/Button"
 import { Accounts } from "meteor/accounts-base"
 import Snackbar from "material-ui/Snackbar"
 import PropTypes from "prop-types"
@@ -68,14 +68,16 @@ class ForgotPassword extends React.Component {
         <div
           style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
         >
-          <RaisedButton
+          <Button
             secondary={true}
-            label={this.state.label}
+            raised={true}
             labelStyle={{ textTransform: "none" }}
             style={{ width: "80%" }}
             onTouchTap={Meteor.isCordova ? undefined : this.resetPassword}
             onClick={Meteor.isCordova ? this.resetPassword : undefined}
-          />
+          >
+            {this.state.label}
+          </Button>
         </div>
 
         <Snackbar

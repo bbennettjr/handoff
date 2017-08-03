@@ -1,10 +1,9 @@
 import { Meteor } from "meteor/meteor"
 import React from "react"
-import DropDownMenu from "material-ui/DropDownMenu"
-import MenuItem from "material-ui/MenuItem"
-import RaisedButton from "material-ui/RaisedButton"
+import Menu, { MenuItem } from "material-ui/Menu"
+import Button from "material-ui/Button"
 import IconButton from "material-ui/IconButton"
-import FileFileDownload from "material-ui/svg-icons/file/file-download"
+import FileFileDownload from "material-ui-icons/FileDownload"
 import IconMenu from "material-ui/IconMenu"
 
 export default class DoctorsMenu extends React.Component {
@@ -64,11 +63,13 @@ export default class DoctorsMenu extends React.Component {
           <MenuItem value="3" primaryText="Android App" />
           <MenuItem value="4" primaryText="iOS App" />
         </IconMenu>
-        <RaisedButton onTouchTap={this.handleOpenMenu} label="Downloads" />
+        <Button onTouchTap={this.handleOpenMenu}>
+          Downloads
+        </Button>
 
-        <DropDownMenu>
+        <Menu>
           {this.renderDoctors()}
-        </DropDownMenu>
+        </Menu>
       </div>
     )
   }

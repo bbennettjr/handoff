@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import React from "react"
-import { white, grey50, orange500, orange400 } from "material-ui/styles/colors"
-import FlatButton from "material-ui/FlatButton"
+import { white, grey, orange } from "material-ui/colors"
+import Button from "material-ui/Button"
 import LoginPopover from "./LoginPopover.js"
 import { createContainer } from "meteor/react-meteor-data"
 
@@ -13,7 +13,7 @@ class CallToActionWeb extends React.Component {
   state = {
     open: false,
     popoverAnchor: null,
-    loginColor: grey50
+    loginColor: grey[50]
   }
 
   openPopover = e => {
@@ -34,15 +34,16 @@ class CallToActionWeb extends React.Component {
           marginRight: "20px"
         }}
       >
-        <FlatButton
-          backgroundColor={orange500}
-          hoverColor={orange400}
+        <Button
+          backgroundColor={orange[500]}
+          hoverColor={orange[400]}
           style={{ color: white, display: "inline-block", height: "44px" }}
-          label={"Sign In"}
           labelStyle={{ textTransform: "none", fontSize: "1.2em" }}
           onTouchTap={Meteor.isCordova ? undefined : this.openPopover}
           onClick={Meteor.isCordova ? this.openPopover : undefined}
-        />
+        >
+          Sign In
+        </Button>
         <LoginPopover
           open={this.state.open}
           anchorEl={this.state.popoverAnchor}
