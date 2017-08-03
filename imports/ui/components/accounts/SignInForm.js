@@ -96,7 +96,6 @@ class SignInForm extends React.Component {
           style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
         >
           <Button
-            secondary={true}
             onTouchTap={Meteor.isCordova ? undefined : this.signIn}
             onClick={Meteor.isCordova ? this.signIn : undefined}
             labelStyle={{ textTransform: "none" }}

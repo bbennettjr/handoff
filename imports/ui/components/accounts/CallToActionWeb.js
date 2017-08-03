@@ -35,10 +35,7 @@ class CallToActionWeb extends React.Component {
         }}
       >
         <Button
-          backgroundColor={orange[500]}
-          hoverColor={orange[400]}
           style={{ color: white, display: "inline-block", height: "44px" }}
-          labelStyle={{ textTransform: "none", fontSize: "1.2em" }}
           onTouchTap={Meteor.isCordova ? undefined : this.openPopover}
           onClick={Meteor.isCordova ? this.openPopover : undefined}
         >

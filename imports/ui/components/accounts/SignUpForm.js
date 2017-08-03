@@ -119,8 +119,6 @@ class SignUpForm extends React.Component {
         >
           <Button
             raised={true}
-            secondary={true}
-            labelStyle={{ textTransform: "none" }}
             style={{ width: "80%", maxWidth: "256px" }}
             onTouchTap={Meteor.isCordova ? undefined : this.signUp}
             onClick={Meteor.isCordova ? this.signUp : undefined}

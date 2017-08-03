@@ -181,7 +181,6 @@ class PatientForm extends React.Component {
 							</Button>
 							<Button
 								raised={true}
-								secondary={true}
 								style={style}
 								onClick={e => this.onSubmit(e)}
 							>

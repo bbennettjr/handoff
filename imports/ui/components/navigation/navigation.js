@@ -40,11 +40,8 @@ export default class Navigation extends React.Component {
           </Link>
 
           <Link to="/newpatient">
-            <IconButton tooltip="Add Patient" style={styles.buttons}>
-              <SocialPersonAdd
-                color={styles.buttons.color}
-                hoverColor={pink[400]}
-              />
+            <IconButton style={styles.buttons}>
+              <SocialPersonAdd color={styles.buttons.color} />
             </IconButton>
           </Link>
 

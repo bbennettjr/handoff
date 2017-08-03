@@ -69,7 +69,6 @@ class ForgotPassword extends React.Component {
           style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
         >
           <Button
-            secondary={true}
             raised={true}
             labelStyle={{ textTransform: "none" }}
             style={{ width: "80%" }}

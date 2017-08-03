@@ -16,7 +16,6 @@ const PatientDisplay = patient => {
 				<Col xs={12}>
 					<Button
 						raised={true}
-						secondary={true}
 						style={style}
 						containerElement={<Link to={`/patient/${patient._id}/edit`} />}
 					>

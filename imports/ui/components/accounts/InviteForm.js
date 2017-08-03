@@ -127,7 +127,6 @@ class InviteForm extends React.Component {
           style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
         >
           <Button
-            secondary={true}
             onTouchTap={Meteor.isCordova ? undefined : this.signUp}
             onClick={Meteor.isCordova ? this.signUp : undefined}
           >
