@@ -13,6 +13,21 @@ const style = {
 }
 
 class PatientForm extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			first: props.patient ? props.patient.first : "",
+			last: props.patient ? props.patient.last : "",
+			diagnosis: props.patient ? props.patient.diagnosis : "",
+			condition: props.patient ? props.patient.condition : "",
+			vitals: props.patient ? props.patient.vitals : "",
+			hpi: props.patient ? props.patient.hpi : "",
+			medications: props.patient ? props.patient.medications : "",
+			pmh: props.patient ? props.patient.pmh : "",
+			todo: props.patient ? props.patient.todo : "",
+			cover: props.patient ? props.patient.cover : ""
+		}
+	}
 	onSubmit(e) {
 		e.preventDefault()
 		// debugger
@@ -31,8 +46,8 @@ class PatientForm extends React.Component {
 
 		// Build patient object. => ES6 style. for-of, destruc,
 		// Object class methods and dynamic prop names
-		for (const key in this.refs) {
-			patient[key] = this.refs[key].getValue()
+		for (const key in this.state) {
+			patient[key] = this.state[key]
 		}
 		// Meteor insert method
 		Meteor.call(meteorCall, patient, (error, result) => {
@@ -52,20 +67,16 @@ class PatientForm extends React.Component {
 					<Row>
 						<Col xs={6}>
 							<TextField
-								hintText="Enter first name"
-								floatingLabelText="First Name"
-								defaultValue={
-									this.props.patient ? this.props.patient.first : ""
-								}
-								ref="first"
+								value={this.state.first}
+								onChange={e => this.setState({ first: e.target.value })}
+								label="First Name"
 							/>
 						</Col>
 						<Col xs={6}>
 							<TextField
-								hintText="Enter last name"
-								floatingLabelText="Last Name"
-								defaultValue={this.props.patient ? this.props.patient.last : ""}
-								ref="last"
+								value={this.state.last}
+								onChange={e => this.setState({ last: e.target.value })}
+								label="Last Name"
 							/>
 						</Col>
 					</Row>
@@ -73,12 +84,9 @@ class PatientForm extends React.Component {
 						<Col xs={6}>
 							{" "}
 							<TextField
-								hintText="Enter diagnosis"
-								floatingLabelText="Diagnosis"
-								defaultValue={
-									this.props.patient ? this.props.patient.diagnosis : ""
-								}
-								ref="diagnosis"
+								value={this.state.diagnosis}
+								onChange={e => this.setState({ diagnosis: e.target.value })}
+								label="Diagnosis"
 							/>
 						</Col>
 						<Col xs={6} />
@@ -86,79 +94,58 @@ class PatientForm extends React.Component {
 					<Row>
 						<Col xs={6}>
 							<TextField
-								hintText="Enter condition"
-								floatingLabelText="Condition"
-								defaultValue={
-									this.props.patient ? this.props.patient.condition : ""
-								}
-								ref="condition"
+								value={this.state.condition}
+								onChange={e => this.setState({ condition: e.target.value })}
+								label="Condition"
 							/>
 						</Col>
 						<Col xs={6}>
 							<TextField
-								hintText="Enter vitals"
-								floatingLabelText="Vitals"
-								defaultValue={
-									this.props.patient ? this.props.patient.vitals : ""
-								}
-								ref="vitals"
+								value={this.state.vitals}
+								onChange={e => this.setState({ vitals: e.target.value })}
+								label="Vitals"
 							/>
 						</Col>
 					</Row>
 					<Row>
 						<Col xs={12}>
 							<TextField
-								hintText="Enter HPI"
-								floatingLabelText="History of Present Illness"
-								defaultValue={this.props.patient ? this.props.patient.hpi : ""}
-								multiLine={true}
-								ref="hpi"
+								value={this.state.hpi}
+								onChange={e => this.setState({ hpi: e.target.value })}
+								label="History of Present Illness"
 							/>
 						</Col>
 					</Row>
 					<Row>
 						<Col xs={12}>
 							<TextField
-								hintText="Enter PMH"
-								floatingLabelText="Past Medical History"
-								defaultValue={this.props.patient ? this.props.patient.pmh : ""}
-								multiLine={true}
-								ref="pmh"
+								value={this.state.pmh}
+								onChange={e => this.setState({ pmh: e.target.value })}
+								label="Past Medical History"
 							/>
 						</Col>
 					</Row>
 					<Row>
 						<Col xs={12}>
 							<TextField
-								hintText="Enter medications"
-								floatingLabelText="Medications"
-								defaultValue={
-									this.props.patient ? this.props.patient.medications : ""
-								}
-								multiLine={true}
-								ref="medications"
+								value={this.state.medications}
+								onChange={e => this.setState({ medications: e.target.value })}
+								label="Medications"
 							/>
 						</Col>
 					</Row>
 					<Row>
 						<Col xs={6}>
 							<TextField
-								hintText="Enter morning to do"
-								floatingLabelText="To Do"
-								defaultValue={this.props.patient ? this.props.patient.todo : ""}
-								multiLine={true}
-								ref="todo"
+								label="To Do"
+								onChange={e => this.setState({ todo: e.target.value })}
 							/>
 						</Col>
 						<Col xs={6}>
 							<TextField
-								hintText="Enter coverage to do"
-								floatingLabelText="Coverage To Do"
-								defaultValue={
-									this.props.patient ? this.props.patient.cover : ""
-								}
-								multiLine={true}
-								ref="cover"
+								value={this.state.cover}
+								onChange={e => this.setState({ cover: e.target.value })}
+								label="Coverage To Do"
 							/>
 						</Col>
 					</Row>

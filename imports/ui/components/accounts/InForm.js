@@ -36,7 +36,7 @@ class InForm extends React.Component {
         }}
       >
         <Link to={`/account/${this.props.user._id}`}>
-          <IconButton iconStyle={styles.largeIcon} style={styles.large}>
+          <IconButton style={styles.large}>
             <ActionAccountCircle />
           </IconButton>
         </Link>

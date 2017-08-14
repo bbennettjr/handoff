@@ -27,7 +27,7 @@ class PatientList extends React.Component {
 						Your Patients
 					</h3>
 				</div>
-				<div>
+				<div style={{ display: "flex", flexDirection: "column" }}>
 					{this.renderPatientCards()}
 				</div>
 				<div><AddNewPatientButton /></div>

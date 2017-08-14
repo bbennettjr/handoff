@@ -26,6 +26,7 @@ class SignOutButton extends React.Component {
   render() {
     // Snackbar doesnt work because its a branch in a tree no longer rendered
     // once signed out in Navigation
+    // Agreed
     return (
       <div
         style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
@@ -34,7 +35,6 @@ class SignOutButton extends React.Component {
           raised={true}
           onTouchTap={Meteor.isCordova ? undefined : this.handleTouchTap}
           onClick={Meteor.isCordova ? this.handleTouchTap : undefined}
-          labelStyle={{ textTransform: "none" }}
           style={{ width: "80%", maxWidth: "256px" }}
         >
           Sign Out

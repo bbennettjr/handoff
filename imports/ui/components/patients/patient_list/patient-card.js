@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, CardActions, CardHeader, CardText } from "material-ui/Card"
+import Card, { CardHeader, CardContent } from "material-ui/Card"
 import Checkbox from "material-ui/Checkbox"
 import { Link } from "react-router-dom"
 import Button from "material-ui/Button"
@@ -15,21 +15,26 @@ class PatientCard extends React.Component {
     let { patient, url, ...appProps } = this.props
     return (
       <Link to={url} key={patient._id}>
-        <Card style={{ display: "inline-flex", alginItems: "center" }}>
+        <Card
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            width: "100%"
+          }}
+        >
           <Checkbox />
           <CardHeader
             title={`${patient.first} ${patient.last}`}
-            subtitle={`${patient.diagnosis}, condition: ${patient.condition}`}
-            showExpandableButton={false}
+            subheader={`${patient.diagnosis}, condition: ${patient.condition}`}
             children={
               <Button primary={true} onClick={e => this.onClick(e)}>
                 Remove
               </Button>
             }
           />
-          <CardText expandable={true}>
+          <CardContent>
             {patient.todo}
-          </CardText>
+          </CardContent>
         </Card>
       </Link>
     )
