@@ -11,7 +11,8 @@ class ForgotPassword extends React.Component {
   state = {
     snackOpen: false,
     message: "",
-    label: "Send Email"
+    label: "Send Email",
+    email: ""
   }
 
   isValidEmail = email => {
@@ -59,9 +60,9 @@ class ForgotPassword extends React.Component {
       >
         <TextField
           autoFocus={true}
-          ref="email"
+          value={this.state.email}
+          onChange={e => this.setState({ email: e.target.value })}
           type="email"
-          errorText={this.state.emailError}
           label="Your Email"
         />
         <br />
@@ -70,7 +71,6 @@ class ForgotPassword extends React.Component {
         >
           <Button
             raised={true}
-            labelStyle={{ textTransform: "none" }}
             style={{ width: "80%" }}
             onTouchTap={Meteor.isCordova ? undefined : this.resetPassword}
             onClick={Meteor.isCordova ? this.resetPassword : undefined}

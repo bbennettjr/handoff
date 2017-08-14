@@ -92,7 +92,7 @@ class AtForm extends React.Component {
               onTouchTap={
                 Meteor.isCordova
                   ? undefined
-                  : () => this.setState({ form: "signIn" })
+                  : () => this.setState({ form: "signUp" })
               }
               onClick={
                 Meteor.isCordova

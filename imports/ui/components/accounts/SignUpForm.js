@@ -14,7 +14,10 @@ class SignUpForm extends React.Component {
   state = {
     snackOpen: false,
     message: "",
-    label: "Continue"
+    label: "Continue",
+    email: "",
+    password1: "",
+    password2: ""
   }
 
   isValidEmail = email => {
@@ -35,7 +38,7 @@ class SignUpForm extends React.Component {
     e.preventDefault()
     // Check email
     this.reset()
-    let email = this.refs.email.getValue()
+    let email = this.state.email
     let allGood = true
     if (!this.isValidEmail(email)) {
       allGood = false
@@ -43,7 +46,7 @@ class SignUpForm extends React.Component {
     }
 
     // Check passsword
-    let password1 = this.refs.password1.getValue()
+    let password1 = this.state.password1
     if (password1.length < 6) {
       allGood = false
       this.setState({
@@ -52,7 +55,7 @@ class SignUpForm extends React.Component {
     }
 
     // Check password2
-    let password2 = this.refs.password2.getValue()
+    let password2 = this.state.password2
     if (password2 !== password1) {
       allGood = false
       this.setState({ password2Error: "Passwords don't match" })
@@ -91,23 +94,23 @@ class SignUpForm extends React.Component {
       >
 
         <TextField
-          ref="email"
+          value={this.state.email}
+          onChange={e => this.setState({ email: e.target.value })}
           autoFocus={true}
           type="email"
-          errorText={this.state.emailError}
           label="Email"
         />
         <br />
         <TextField
-          ref="password1"
-          errorText={this.state.password1Error}
+          value={this.state.password1}
+          onChange={e => this.setState({ password1: e.target.value })}
           label="Password"
           type="password"
         />
         <br />
         <TextField
-          ref="password2"
-          errorText={this.state.password2Error}
+          value={this.state.password2}
+          onChange={e => this.setState({ password2: e.target.value })}
           label="Password (again)"
           type="password"
         />

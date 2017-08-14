@@ -20,7 +20,9 @@ class SignInForm extends React.Component {
   state = {
     snackOpen: false,
     message: "",
-    label: "Log In"
+    label: "Log In",
+    email: "",
+    password: ""
   }
 
   isValidEmail = email => {
@@ -44,8 +46,8 @@ class SignInForm extends React.Component {
 
   signIn = e => {
     e.preventDefault()
-    let email = this.refs.email.getValue()
-    let password = this.refs.password.getValue()
+    let email = this.state.email
+    let password = this.state.password
 
     this.setState({ label: "Logging In..." })
     Meteor.loginWithPassword({ email: email }, password, err => {
@@ -73,18 +75,16 @@ class SignInForm extends React.Component {
       >
 
         <TextField
-          ref="email"
-          errorText={this.state.emailError}
+          value={this.state.email}
+          onChange={e => this.setState({ email: e.target.value })}
           autoFocus={true}
-          hintText="Email"
           type="email"
           label="Email"
         />
         <br />
         <TextField
-          ref="password"
-          errorText={this.state.password1Error}
-          hintText="Password"
+          value={this.state.password}
+          onChange={e => this.setState({ password: e.target.value })}
           label="Password"
           type="password"
         />
