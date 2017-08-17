@@ -1,7 +1,7 @@
 Things to do:
 1. Rewrite with Material-ui
 2. Build mobile app
-3. Look up HIPAA compliance AWS situation (try to setup)
+3. Contact Hopkins' TIC for legal/business/startup resources http://www.hopkinsmedicine.org/technology_innovation/index.html
 4. Better "no-patient" view (description of app, "lift" to yourself)
 5. Edit button on patient view (reuse 'new patient view')
 6. Search feature for patient (another url search parameters)

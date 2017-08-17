@@ -11,6 +11,7 @@ import AccountPopover from "../accounts/AccountPopover"
 import CallToActionWeb from "../accounts/CallToActionWeb"
 import SocialPersonAdd from "material-ui-icons/PersonAdd"
 import Typography from "material-ui/Typography"
+
 const styles = {
   toolbar: {
     backgroundColor: cyan
@@ -35,7 +36,7 @@ export default class Navigation extends React.Component {
         <Toolbar style={styles.toolbar}>
           <Link to="/" style={styles.title}>
             <Typography type="title" color="inherit">
-              Title
+              Handoff
             </Typography>
           </Link>
 
