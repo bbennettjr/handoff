@@ -17,7 +17,8 @@ const PatientDisplay = patient => {
 					<Button
 						raised={true}
 						style={style}
-						containerElement={<Link to={`/patient/${patient._id}/edit`} />}
+						component={Link}
+						to={`/patient/${patient._id}/edit`}
 					>
 						Edit
 					</Button>
