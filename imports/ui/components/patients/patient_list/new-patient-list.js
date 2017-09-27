@@ -1,20 +1,25 @@
 import { Table } from "antd"
 import React from "react"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
+
 const columns = [
   {
-    title: "First Name",
-    dataIndex: "firstName",
-    render: text => <span style={{ color: "#49a9ee" }}>{text}</span>
-  },
-  {
-    title: "Last Name",
-    dataIndex: "lastName",
-    render: text => <span style={{ color: "#49a9ee" }}>{text}</span>
+    title: "Name",
+    dataIndex: "name",
+    render: (text, record) => (
+      <Link to={`/patient/${record._id}`} style={{ color: "#49a9ee" }}>
+        {text}
+      </Link>
+    )
   },
   {
     title: "Diagnosis",
     dataIndex: "diagnosis"
+  },
+  {
+    title: "History",
+    dataIndex: "hpi"
   },
   {
     title: "Condition",
@@ -31,6 +36,7 @@ export default class NewPatientList extends React.Component {
 
   render() {
     let patientsList = this.props.patients
+    console.log(patientsList)
     patientsList.forEach(el => (el.key = el._id))
     return (
       <div style={{ backgroundColor: "white" }}>

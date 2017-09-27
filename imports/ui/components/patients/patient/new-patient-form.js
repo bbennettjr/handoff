@@ -6,21 +6,29 @@ class NewPatientForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log("Received values of form: ", values)
-
-        let patient = Object.assign({ doctors: [Meteor.userId()] }, values)
-        Meteor.call("patient.insert", patient, (error, result) => {
-          if (error) {
-            notification.error({
-              message: "Can't add patient",
-              description: "Something went wrong"
-            })
-          } else {
-            this.props.history.push("/")
-          }
-        })
+      if (err) {
+        throw new Meteor.Error(
+          "Cannot validate new patient",
+          "All input fields must meet the validation requirement"
+        )
       }
+
+      console.log("Received values of form: ", values)
+      // destructure out the names to combine them
+      let { firstName, lastName } = values
+      values.name = `${firstName} ${lastName}`
+
+      let patient = Object.assign({ doctors: [Meteor.userId()] }, values)
+      Meteor.call("patient.insert", patient, (error, result) => {
+        if (error) {
+          notification.error({
+            message: "Can't add patient",
+            description: "Something went wrong"
+          })
+        } else {
+          this.props.history.push("/")
+        }
+      })
     })
   }
 

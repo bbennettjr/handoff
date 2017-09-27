@@ -33,7 +33,7 @@ export default class Navigation extends React.Component {
       userId,
       (err, res) => {
         if (err) {
-          console.log(err)
+          console.log(err.reason)
         }
       }
     )
