@@ -35,7 +35,9 @@ export default class Navigation extends React.Component {
       this.props.selectedRowKeys,
       userId,
       (err, res) => {
-        console.log("HEY")
+        if (err) {
+          console.log(err)
+        }
       }
     )
     Meteor.call(
@@ -43,7 +45,9 @@ export default class Navigation extends React.Component {
       this.props.selectedRowKeys,
       myUserId,
       (err, res) => {
-        console.log("HEY")
+        if (err) {
+          console.log("HEY")
+        }
       }
     )
     this.props.setSelectedRowKeys([])
