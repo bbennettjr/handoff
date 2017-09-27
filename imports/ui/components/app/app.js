@@ -15,11 +15,11 @@ import NewPatientForm from "../patients/patient/new-patient-form"
 // App Component
 
 import { Layout } from "antd"
-let { Header, Content } = Layout
+let { Header, Content, Footer } = Layout
 const App = ({ history, users, ...appProps }) => {
 	return (
 		<Router history={history}>
-			<Layout className="layout" style={{ height: "100%" }}>
+			<Layout className="layout">
 				<Header>
 					<Navigation history={history} />
 				</Header>

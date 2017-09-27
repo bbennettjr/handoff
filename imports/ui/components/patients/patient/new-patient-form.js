@@ -50,7 +50,7 @@ class NewPatientForm extends React.Component {
       }
     }
     return (
-      <Form onSubmit={this.handleSubmit} style={{ marginTop: "30px" }}>
+      <Form onSubmit={this.handleSubmit}>
         <FormItem {...formItemLayout} label="First Name" hasFeedback>
           {getFieldDecorator("firstName", {
             rules: [
