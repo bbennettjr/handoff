@@ -57,11 +57,13 @@ export default class Navigation extends React.Component {
     console.log(this.props.users)
     let menu = (
       <Menu>
-        {this.props.users.map(el => (
+        {this.props.users.map(el =>
           <Menu.Item key={el._id}>
-            <a onClick={() => this.onClickDoctor(el._id)}>{el.profile.name}</a>
+            <a onClick={() => this.onClickDoctor(el._id)}>
+              {el.profile.name}
+            </a>
           </Menu.Item>
-        ))}
+        )}
       </Menu>
     )
     return (
@@ -71,27 +73,23 @@ export default class Navigation extends React.Component {
             <Link to="/" style={styles.title}>
               Handoff
             </Link>
-            {Meteor.user() && (
+            {Meteor.user() &&
               <Link to="/newpatient">
                 <Button icon="plus-circle-o" type="primary">
                   New Patient
                 </Button>
-              </Link>
-            )}
-            {this.props.selectedRowKeys.length > 0 && (
+              </Link>}
+            {this.props.selectedRowKeys.length > 0 &&
               <Dropdown overlay={menu} trigger={["click"]}>
-                <a className="ant-dropdown-link" href="#">
-                  Click me <Icon type="down" />
-                </a>
-              </Dropdown>
-            )}
+                <Button icon="share-alt" type="primary">
+                  Handoff
+                </Button>
+              </Dropdown>}
           </div>
           <div>
-            {Meteor.user() ? (
-              <AccountPopover history={this.props.history} />
-            ) : (
-              <CallToActionWeb />
-            )}
+            {Meteor.user()
+              ? <AccountPopover history={this.props.history} />
+              : <CallToActionWeb />}
           </div>
         </div>
       </Header>
