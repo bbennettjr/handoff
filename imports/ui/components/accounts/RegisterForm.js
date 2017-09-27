@@ -13,7 +13,13 @@ class NormalLoginForm extends React.Component {
       Accounts.createUser(
         {
           email: values.email,
-          password: values.password
+          password: values.password,
+          profile: {
+            name: `${values.first} ${values.last}`,
+            degree: values.degree,
+            company: values.company,
+            npi: values.npi
+          }
         },
         err => {
           if (err) {
@@ -33,6 +39,56 @@ class NormalLoginForm extends React.Component {
     const { getFieldDecorator } = this.props.form
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
+        <FormItem>
+          {getFieldDecorator("first", {
+            rules: [{ required: true, message: "Put in first name" }]
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ fontSize: 13 }} />}
+              placeholder="First name"
+            />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator("last", {
+            rules: [{ required: true, message: "Put in valid last name" }]
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ fontSize: 13 }} />}
+              placeholder="Last name"
+            />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator("degree", {
+            rules: [{ required: true, message: "Put in valid degree" }]
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ fontSize: 13 }} />}
+              placeholder="Degree"
+            />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator("company", {
+            rules: [{ required: true, message: "Put in valid company" }]
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ fontSize: 13 }} />}
+              placeholder="Company"
+            />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator("npi", {
+            rules: [{ required: true, message: "Put in valid npi" }]
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ fontSize: 13 }} />}
+              placeholder="NPI Number"
+            />
+          )}
+        </FormItem>
         <FormItem>
           {getFieldDecorator("email", {
             rules: [
