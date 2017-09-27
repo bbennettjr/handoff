@@ -51,16 +51,20 @@ export default class Navigation extends React.Component {
   }
 
   render() {
-    console.log(this.props.users)
+    const userId = Meteor.userId()
     let menu = (
       <Menu>
-        {this.props.users.map(el =>
-          <Menu.Item key={el._id}>
-            <a onClick={() => this.onClickDoctor(el._id)}>
-              {el.profile.name}
-            </a>
-          </Menu.Item>
-        )}
+        {this.props.users.map(el => {
+          if (userId !== el._id) {
+            return (
+              <Menu.Item key={el._id}>
+                <a onClick={() => this.onClickDoctor(el._id)}>
+                  {el.profile.name}
+                </a>
+              </Menu.Item>
+            )
+          }
+        })}
       </Menu>
     )
     return (
@@ -72,12 +76,16 @@ export default class Navigation extends React.Component {
             </Link>
             {Meteor.user() &&
               <Link to="/newpatient">
-                <Button icon="plus-circle-o" type="primary">
+                <Button
+                  icon="plus-circle-o"
+                  type="primary"
+                  style={{ marginRight: "20px" }}
+                >
                   New Patient
                 </Button>
               </Link>}
             {this.props.selectedRowKeys.length > 0 &&
-              <Dropdown overlay={menu} trigger={["click"]}>
+              <Dropdown overlay={menu}>
                 <Button icon="share-alt" type="primary">
                   Handoff
                 </Button>
