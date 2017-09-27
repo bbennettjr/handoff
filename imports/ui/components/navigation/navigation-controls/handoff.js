@@ -1,9 +1,8 @@
-import React from 'react';
-import ShareIcon from 'material-ui-icons/Share';
-import IconButton from 'material-ui/IconButton';
+import React from "react"
+import { Button } from "antd"
 
-const ShareButton = (props) => {
-  return(
-    <IconButton dense color='accent'
-    )
+const ShareButton = props => {
+  return <Button icon="search" />
 }
+
+export default ShareButton

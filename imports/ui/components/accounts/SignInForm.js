@@ -1,8 +1,6 @@
 import PropTypes from "prop-types"
 import React from "react"
-import TextField from "material-ui/TextField"
-import Snackbar from "material-ui/Snackbar"
-import Button from "material-ui/Button"
+import { Button, Input } from "antd"
 
 const isIOSApp = function() {
   return (
@@ -73,8 +71,7 @@ class SignInForm extends React.Component {
         onKeyPress={this.handleKeyPress}
         style={{ padding: "0px 10px", textAlign: "center" }}
       >
-
-        <TextField
+        <Input
           value={this.state.email}
           onChange={e => this.setState({ email: e.target.value })}
           autoFocus={true}
@@ -82,7 +79,7 @@ class SignInForm extends React.Component {
           label="Email"
         />
         <br />
-        <TextField
+        <Input
           value={this.state.password}
           onChange={e => this.setState({ password: e.target.value })}
           label="Password"
@@ -93,21 +90,12 @@ class SignInForm extends React.Component {
           style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
         >
           <Button
-            onTouchTap={Meteor.isCordova ? undefined : this.signIn}
             onClick={Meteor.isCordova ? this.signIn : undefined}
             style={{ width: "80%", maxWidth: "256px" }}
           >
             {this.state.label}
           </Button>
         </div>
-
-        <Snackbar
-          open={this.state.snackOpen}
-          message={this.state.message}
-          autoHideDuration={6000}
-          bodyStyle={{ textAlign: "center" }}
-          onRequestClose={() => this.setState({ snackOpen: false })}
-        />
       </div>
     )
   }

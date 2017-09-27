@@ -2,9 +2,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import SignOutButton from "./SignOutButton"
 
-import IconButton from "material-ui/IconButton"
-import ActionAccountCircle from "material-ui-icons/AccountCircle"
-import Divider from "material-ui/Divider"
+import { Button, Avatar } from "antd"
 import { createContainer } from "meteor/react-meteor-data"
 import { Link } from "react-router-dom"
 
@@ -36,11 +34,9 @@ class InForm extends React.Component {
         }}
       >
         <Link to={`/account/${this.props.user._id}`}>
-          <IconButton style={styles.large}>
-            <ActionAccountCircle />
-          </IconButton>
+          <Button icon="search" style={styles.large} />
         </Link>
-        <Divider />
+
         <SignOutButton />
       </div>
     )

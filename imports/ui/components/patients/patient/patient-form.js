@@ -1,9 +1,7 @@
 // Atmosphere and NPM
 import { Meteor } from "meteor/meteor"
 import React from "react"
-import { Grid, Row, Col } from "react-bootstrap"
-import TextField from "material-ui/TextField"
-import Button from "material-ui/Button"
+import { Row, Col, Input, Button } from "antd"
 import { Link } from "react-router-dom"
 import { Patients } from "../../../../api/patients/patients.js"
 import { createContainer } from "meteor/react-meteor-data"
@@ -62,121 +60,116 @@ class PatientForm extends React.Component {
 	render() {
 		// console.log(this.props.history)
 		return (
-			<Grid>
-				<form>
-					<Row>
-						<Col xs={6}>
-							<TextField
-								value={this.state.first}
-								onChange={e => this.setState({ first: e.target.value })}
-								label="First Name"
-							/>
-						</Col>
-						<Col xs={6}>
-							<TextField
-								value={this.state.last}
-								onChange={e => this.setState({ last: e.target.value })}
-								label="Last Name"
-							/>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={6}>
-							{" "}
-							<TextField
-								value={this.state.diagnosis}
-								onChange={e => this.setState({ diagnosis: e.target.value })}
-								label="Diagnosis"
-							/>
-						</Col>
-						<Col xs={6} />
-					</Row>
-					<Row>
-						<Col xs={6}>
-							<TextField
-								value={this.state.condition}
-								onChange={e => this.setState({ condition: e.target.value })}
-								label="Condition"
-							/>
-						</Col>
-						<Col xs={6}>
-							<TextField
-								value={this.state.vitals}
-								onChange={e => this.setState({ vitals: e.target.value })}
-								label="Vitals"
-							/>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={12}>
-							<TextField
-								value={this.state.hpi}
-								onChange={e => this.setState({ hpi: e.target.value })}
-								label="History of Present Illness"
-							/>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={12}>
-							<TextField
-								value={this.state.pmh}
-								onChange={e => this.setState({ pmh: e.target.value })}
-								label="Past Medical History"
-							/>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={12}>
-							<TextField
-								value={this.state.medications}
-								onChange={e => this.setState({ medications: e.target.value })}
-								label="Medications"
-							/>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={6}>
-							<TextField
-								label="To Do"
-								onChange={e => this.setState({ todo: e.target.value })}
-							/>
-						</Col>
-						<Col xs={6}>
-							<TextField
-								value={this.state.cover}
-								onChange={e => this.setState({ cover: e.target.value })}
-								label="Coverage To Do"
-							/>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={6} xsOffset={6}>
-							<Button
-								raised={true}
-								style={style}
-								containerElement={
-									<Link
-										to={
-											this.props.patient
-												? `/patient/${this.props.patient._id}`
-												: "/"
-										}
-									/>
-								}
-							>
-								Cancel
-							</Button>
-							<Button
-								raised={true}
-								style={style}
-								onClick={e => this.onSubmit(e)}
-							>
-								Save
-							</Button>
-						</Col>
-					</Row>
-				</form>
-			</Grid>
+			<form>
+				<Row>
+					<Col xs={6}>
+						<Input
+							value={this.state.first}
+							onChange={e => this.setState({ first: e.target.value })}
+							label="First Name"
+						/>
+					</Col>
+					<Col xs={6}>
+						<Input
+							value={this.state.last}
+							onChange={e => this.setState({ last: e.target.value })}
+							label="Last Name"
+						/>
+					</Col>
+				</Row>
+				<Row>
+					<Col xs={6}>
+						{" "}
+						<Input
+							value={this.state.diagnosis}
+							onChange={e => this.setState({ diagnosis: e.target.value })}
+							label="Diagnosis"
+						/>
+					</Col>
+					<Col xs={6} />
+				</Row>
+				<Row>
+					<Col xs={6}>
+						<Input
+							value={this.state.condition}
+							onChange={e => this.setState({ condition: e.target.value })}
+							label="Condition"
+						/>
+					</Col>
+					<Col xs={6}>
+						<Input
+							value={this.state.vitals}
+							onChange={e => this.setState({ vitals: e.target.value })}
+							label="Vitals"
+						/>
+					</Col>
+				</Row>
+				<Row>
+					<Col xs={12}>
+						<Input
+							value={this.state.hpi}
+							onChange={e => this.setState({ hpi: e.target.value })}
+							label="History of Present Illness"
+						/>
+					</Col>
+				</Row>
+				<Row>
+					<Col xs={12}>
+						<Input
+							value={this.state.pmh}
+							onChange={e => this.setState({ pmh: e.target.value })}
+							label="Past Medical History"
+						/>
+					</Col>
+				</Row>
+				<Row>
+					<Col xs={12}>
+						<Input
+							value={this.state.medications}
+							onChange={e => this.setState({ medications: e.target.value })}
+							label="Medications"
+						/>
+					</Col>
+				</Row>
+				<Row>
+					<Col xs={6}>
+						<Input
+							label="To Do"
+							onChange={e => this.setState({ todo: e.target.value })}
+						/>
+					</Col>
+					<Col xs={6}>
+						<Input
+							value={this.state.cover}
+							onChange={e => this.setState({ cover: e.target.value })}
+							label="Coverage To Do"
+						/>
+					</Col>
+				</Row>
+				<Row>
+					<Col xs={6} xsOffset={6}>
+						<Button
+							style={style}
+							containerElement={
+								<Link
+									to={
+										this.props.patient ? (
+											`/patient/${this.props.patient._id}`
+										) : (
+											"/"
+										)
+									}
+								/>
+							}
+						>
+							Cancel
+						</Button>
+						<Button style={style} onClick={e => this.onSubmit(e)}>
+							Save
+						</Button>
+					</Col>
+				</Row>
+			</form>
 		)
 	}
 }

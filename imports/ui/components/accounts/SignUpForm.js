@@ -1,9 +1,7 @@
 import PropTypes from "prop-types"
 import React from "react"
-import TextField from "material-ui/TextField"
-import Button from "material-ui/Button"
+import { Input, Button } from "antd"
 import { Accounts } from "meteor/accounts-base"
-import Snackbar from "material-ui/Snackbar"
 
 class SignUpForm extends React.Component {
   static propTypes = {
@@ -92,8 +90,7 @@ class SignUpForm extends React.Component {
         onKeyPress={this.handleKeyPress}
         style={{ padding: "0px 10px", textAlign: "center" }}
       >
-
-        <TextField
+        <Input
           value={this.state.email}
           onChange={e => this.setState({ email: e.target.value })}
           autoFocus={true}
@@ -101,14 +98,14 @@ class SignUpForm extends React.Component {
           label="Email"
         />
         <br />
-        <TextField
+        <Input
           value={this.state.password1}
           onChange={e => this.setState({ password1: e.target.value })}
           label="Password"
           type="password"
         />
         <br />
-        <TextField
+        <Input
           value={this.state.password2}
           onChange={e => this.setState({ password2: e.target.value })}
           label="Password (again)"
@@ -121,22 +118,12 @@ class SignUpForm extends React.Component {
           style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
         >
           <Button
-            raised={true}
             style={{ width: "80%", maxWidth: "256px" }}
-            onTouchTap={Meteor.isCordova ? undefined : this.signUp}
             onClick={Meteor.isCordova ? this.signUp : undefined}
           >
             {this.state.label}
           </Button>
         </div>
-
-        <Snackbar
-          open={this.state.snackOpen}
-          message={this.state.message}
-          autoHideDuration={6000}
-          bodyStyle={{ textAlign: "center" }}
-          onRequestClose={() => this.setState({ snackOpen: false })}
-        />
       </div>
     )
   }

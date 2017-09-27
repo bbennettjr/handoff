@@ -1,9 +1,9 @@
 import React from "react"
 import { Patients } from "../../../../api/patients/patients.js"
 import { compose } from "react-komposer"
-import { Grid, Row, Col } from "react-bootstrap"
+import { Row, Col } from "antd"
 import { Link } from "react-router-dom"
-import Button from "material-ui/Button"
+import { Button } from "antd"
 
 const style = {
 	margin: 12
@@ -11,7 +11,7 @@ const style = {
 
 const PatientDisplay = patient => {
 	return (
-		<Grid>
+		<div>
 			<Row>
 				<Col xs={12}>
 					<Button
@@ -61,7 +61,7 @@ const PatientDisplay = patient => {
 				${patient.cover}`}
 				</Col>
 			</Row>
-		</Grid>
+		</div>
 	)
 }
 

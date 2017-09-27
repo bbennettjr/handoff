@@ -1,22 +1,16 @@
 import PropTypes from "prop-types"
 import React from "react"
-import TextField from "material-ui/TextField"
-import Button from "material-ui/Button"
+import { Input, Button } from "antd"
 import { Accounts } from "meteor/accounts-base"
-import Snackbar from "material-ui/Snackbar"
 
 class InviteForm extends React.Component {
   constructor(props) {
     super(props)
-    let userType = "athlete"
-    if (props.notification && props.notification.type === "InviteCoach")
-      userType = "coach"
 
     this.state = {
       snackOpen: false,
       message: "",
-      label: "Create Account",
-      userType
+      label: "Create Account"
     }
   }
   static propTypes = {
@@ -101,7 +95,7 @@ class InviteForm extends React.Component {
           textAlign: "center"
         }}
       >
-        <TextField
+        <Input
           disabled={true}
           defaultValue={this.getEmail()}
           errorText={this.state.emailError}
@@ -109,14 +103,14 @@ class InviteForm extends React.Component {
           floatingLabelText="Email"
         />
         <br />
-        <TextField
+        <Input
           ref="password1"
           errorText={this.state.password1Error}
           floatingLabelText="Password"
           type="password"
         />
         <br />
-        <TextField
+        <Input
           ref="password2"
           errorText={this.state.password2Error}
           floatingLabelText="Password (again)"
@@ -133,13 +127,6 @@ class InviteForm extends React.Component {
             {this.state.label}
           </Button>
         </div>
-        <Snackbar
-          open={this.state.snackOpen}
-          message={this.state.message}
-          autoHideDuration={6000}
-          bodyStyle={{ textAlign: "center", minWidth: "10px", width: "100%" }}
-          onRequestClose={() => this.setState({ snackOpen: false })}
-        />
       </div>
     )
   }

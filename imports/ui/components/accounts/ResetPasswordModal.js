@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import React from "react"
 import { Accounts } from "meteor/accounts-base"
-import TextField from "material-ui/TextField"
+import {Input} from "antd"
 
 class ResetPasswordModal extends React.Component {
   static propTypes = {
@@ -86,19 +86,13 @@ class ResetPasswordModal extends React.Component {
           WebkitFlexFlow: "row wrap"
         }}
       >
-        <TextField
+        <Input
           type="password"
-          fullWidth={this.props.mobileStyle}
-          errorText={this.state.password1Error}
           ref="password1"
-          floatingLabelText="New Password"
         />
-        <TextField
+        <Input
           type="password"
-          fullWidth={this.props.mobileStyle}
-          errorText={this.state.password2Error}
           ref="password2"
-          floatingLabelText="Confirm New Password"
         />
       </div>
     )

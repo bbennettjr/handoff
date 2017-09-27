@@ -1,8 +1,8 @@
 import React from "react"
-import TextField from "material-ui/TextField"
-import Button from "material-ui/Button"
+
+import { Button, Input } from "antd"
 import { Accounts } from "meteor/accounts-base"
-import Snackbar from "material-ui/Snackbar"
+
 import PropTypes from "prop-types"
 class ForgotPassword extends React.Component {
   static propTypes = {
@@ -58,7 +58,7 @@ class ForgotPassword extends React.Component {
         onKeyPress={this.handleKeyPress}
         style={{ padding: "0px 10px", textAlign: "center" }}
       >
-        <TextField
+        <Input
           autoFocus={true}
           value={this.state.email}
           onChange={e => this.setState({ email: e.target.value })}
@@ -78,14 +78,6 @@ class ForgotPassword extends React.Component {
             {this.state.label}
           </Button>
         </div>
-
-        <Snackbar
-          open={this.state.snackOpen}
-          message={this.state.message}
-          autoHideDuration={12000}
-          bodyStyle={{ textAlign: "center", minWidth: "10px", width: "100%" }}
-          onRequestClose={() => this.setState({ snackOpen: false })}
-        />
       </div>
     )
   }

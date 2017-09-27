@@ -1,5 +1,4 @@
 import React from "react"
-import Paper from "material-ui/Paper"
 
 const style = {
   left: 0,
@@ -12,12 +11,10 @@ const style = {
 
 const NoPatientsList = () => {
   return (
-    <Paper style={style}>
-      <div style={{ padding: "30px", fontSize: "20px" }}>
-        You have no patients. You can add a new patient by clicking the circular
-        button below. You can also pull active patients up above
-      </div>
-    </Paper>
+    <div style={{ padding: "30px", fontSize: "20px" }}>
+      You have no patients. You can add a new patient by clicking the circular
+      button below. You can also pull active patients up above
+    </div>
   )
 }
 

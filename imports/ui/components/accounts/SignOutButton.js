@@ -1,6 +1,5 @@
 import React from "react"
-import Snackbar from "material-ui/Snackbar"
-import Button from "material-ui/Button"
+import { Button } from "antd"
 
 class SignOutButton extends React.Component {
   constructor(props) {
@@ -32,19 +31,12 @@ class SignOutButton extends React.Component {
         style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
       >
         <Button
-          raised={true}
           onTouchTap={Meteor.isCordova ? undefined : this.handleTouchTap}
           onClick={Meteor.isCordova ? this.handleTouchTap : undefined}
           style={{ width: "80%", maxWidth: "256px" }}
         >
           Sign Out
         </Button>
-        <Snackbar
-          open={this.state.open}
-          message="Please sign in again to Handoff"
-          autoHideDuration={4000}
-          onRequestClose={this.handleRequestClose}
-        />
       </div>
     )
   }

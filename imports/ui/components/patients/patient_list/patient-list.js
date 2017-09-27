@@ -8,8 +8,6 @@ import NoPatientsList from "./no-patients.js"
 import PatientCard from "./patient-card.js"
 import AddNewPatientButton from "../patient/AddNewPatientButton"
 
-import Grid from "material-ui/Grid"
-
 class PatientList extends React.Component {
 	renderPatientCards() {
 		const patients = this.props.patients
@@ -19,36 +17,20 @@ class PatientList extends React.Component {
 
 		return patients.map(patient => {
 			const url = `/patient/${patient._id}`
-			return (
-				<Grid item xs={12} key={patient._id}>
-					<PatientCard key={patient._id} url={url} patient={patient} />
-				</Grid>
-			)
+			return <PatientCard key={patient._id} url={url} patient={patient} />
 		})
 	}
 
 	render() {
 		const classes = this.props.classes
-		console.log(classes)
 		return (
-			<Grid
-				container
-				style={{
-					flexGrow: 1,
-					padding: "20px 24px",
-					backgroundColor: "#EEEEEE"
-				}}
-				direction="column"
-				justify="flex-start"
-				align="stretch"
-				spacing={0}
-			>
-				<h3 style={{ marginLeft: "20px" }}>
-					Your Patients
-				</h3>
+			<div>
+				<h3 style={{ marginLeft: "20px" }}>Your Patients</h3>
 				{this.renderPatientCards()}
-				<div><AddNewPatientButton /></div>
-			</Grid>
+				<div>
+					<AddNewPatientButton />
+				</div>
+			</div>
 		)
 	}
 }

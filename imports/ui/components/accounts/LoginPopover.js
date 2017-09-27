@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 import React from "react"
-import Popover from "material-ui/internal/Popover"
+import { Popover } from "antd"
 import AtForm from "./AtForm.js"
 
 class LoginPopover extends React.Component {
@@ -14,10 +14,8 @@ class LoginPopover extends React.Component {
   render() {
     return (
       <Popover
-        open={this.props.open}
-        anchorEl={this.props.anchorEl}
-        anchorOrigin={{ horizontal: "left", vertical: "top" }}
-        onRequestClose={this.props.closeFunc}
+        visible={this.props.open}
+        onVisibleChange={this.props.closeFunc}
         style={{ backgroundColor: "#fff" }}
       >
         <AtForm
