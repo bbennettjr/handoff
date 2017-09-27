@@ -28,7 +28,7 @@ export default class DoctorsMenu extends React.Component {
           label="Doctors"
           value={index++}
           primaryText={user.emails[0].address}
-          onTouchTap={() => this.signOffToThisUser(user._id)}
+          onClick={() => this.signOffToThisUser(user._id)}
           key={user._id}
         />
       )
@@ -63,13 +63,9 @@ export default class DoctorsMenu extends React.Component {
           <MenuItem value="3" primaryText="Android App" />
           <MenuItem value="4" primaryText="iOS App" />
         </IconMenu>
-        <Button onTouchTap={this.handleOpenMenu}>
-          Downloads
-        </Button>
+        <Button onClick={this.handleOpenMenu}>Downloads</Button>
 
-        <Menu>
-          {this.renderDoctors()}
-        </Menu>
+        <Menu>{this.renderDoctors()}</Menu>
       </div>
     )
   }

@@ -1,10 +1,9 @@
 import PropTypes from "prop-types"
 import React from "react"
 
-import SignUpForm from "./SignUpForm"
-import SignInForm from "./SignInForm"
-import ForgotPassword from "./ForgotPassword"
 import LoginForm from "./LoginForm"
+import ForgotPassword from "./ForgotPassword"
+import RegisterForm from "./RegisterForm"
 import { createContainer } from "meteor/react-meteor-data"
 class AtForm extends React.Component {
   static propTypes = {
@@ -13,7 +12,7 @@ class AtForm extends React.Component {
     closePopover: PropTypes.func.isRequired
   }
 
-  state = { form: this.props.formState || "signUp" }
+  state = { form: this.props.formState || "signIn" }
 
   render() {
     if (this.state.form === "signUp")
@@ -25,14 +24,7 @@ class AtForm extends React.Component {
             padding: "0px 0px 16px 0px"
           }}
         >
-          <LoginForm />
-          {/*
-          <SignUpForm
-            isMobile={this.props.isMobile}
-            user={this.props.user}
-            closePopover={this.props.closePopover}
-          />
-        */}
+          <RegisterForm />
           <div style={{ textAlign: "center", padding: " 5px 10px" }}>
             <span>
               Already use Handoff? &nbsp;
@@ -49,10 +41,7 @@ class AtForm extends React.Component {
     if (this.state.form === "signIn")
       return (
         <div style={{ maxWidth: "300px", margin: "auto", padding: "16px 0px" }}>
-          <SignInForm
-            user={this.props.user}
-            closePopover={this.props.closePopover}
-          />
+          <LoginForm />
 
           <div
             style={{

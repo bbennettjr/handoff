@@ -64,7 +64,7 @@
 // }
 
 // export default withStyles(styles)(PatientCard)
-
+import React from "react"
 export default () => {
   return <div>Patient card / Table element here </div>
 }

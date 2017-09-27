@@ -72,8 +72,7 @@ class ForgotPassword extends React.Component {
           <Button
             raised={true}
             style={{ width: "80%" }}
-            onTouchTap={Meteor.isCordova ? undefined : this.resetPassword}
-            onClick={Meteor.isCordova ? this.resetPassword : undefined}
+            onClick={this.resetPassword}
           >
             {this.state.label}
           </Button>

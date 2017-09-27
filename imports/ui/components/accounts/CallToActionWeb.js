@@ -26,12 +26,15 @@ class CallToActionWeb extends React.Component {
           content={
             <AtForm
               isMobile={false} //kvothe: should be this.props.isMobile?
-              formState={this.props.formState}
+              formState={"signIn"}
+              closePopover={() => {
+                alert("Close Popover")
+              }}
             />
           }
         >
           <Button style={{ display: "inline-block", height: "44px" }}>
-            Sign Up
+            Login
           </Button>
         </Popover>
       </div>

@@ -120,12 +120,7 @@ class InviteForm extends React.Component {
         <div
           style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
         >
-          <Button
-            onTouchTap={Meteor.isCordova ? undefined : this.signUp}
-            onClick={Meteor.isCordova ? this.signUp : undefined}
-          >
-            {this.state.label}
-          </Button>
+          <Button onClick={this.signUp}>{this.state.label}</Button>
         </div>
       </div>
     )

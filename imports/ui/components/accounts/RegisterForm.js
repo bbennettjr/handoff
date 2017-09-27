@@ -10,15 +10,20 @@ class NormalLoginForm extends React.Component {
       if (!err) {
         console.log("Received values of form: ", values)
       }
-      Meteor.loginWithPassword(
-        { email: values.email },
-        values.password,
+      Accounts.createUser(
+        {
+          email: values.email,
+          password: values.password
+        },
         err => {
           if (err) {
             notification.error({
-              message: "Can't log in",
-              description: "There was an error logging you in!"
+              description: "There was an error creating your account",
+              message: "Error in Create"
             })
+            console.log("Create Account error: " + err.reason)
+          } else {
+            // this.context.router.push("/app")
           }
         }
       )
@@ -59,7 +64,7 @@ class NormalLoginForm extends React.Component {
             className="login-form-button"
             style={{ width: "100%" }}
           >
-            Login
+            Create Account
           </Button>
         </FormItem>
       </Form>

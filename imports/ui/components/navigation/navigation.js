@@ -10,7 +10,8 @@ const styles = {
   title: {
     cursor: "pointer",
     color: "white",
-    textDecoration: "none"
+    textDecoration: "none",
+    marginRight: "30px"
   },
   buttons: {
     color: "white"

@@ -8,36 +8,28 @@ class AccountPopover extends React.Component {
     history: PropTypes.object.isRequired
   }
 
-  state = {
-    open: false
-  }
-
-  openPopover = e => {
-    e.preventDefault()
-    this.setState({
-      open: true
-    })
-  }
-
   render() {
     // console.log("We are here")
     return (
       <div>
-        <Button
-          style={{ display: "inline-block" }}
-          onClick={this.openPopover}
-          icon="search"
-        />
         <Popover
-          visible={this.state.open}
-          onVisibleChange={() => this.setState({ open: false })}
           style={{ backgroundColor: "#fff", display: "flex" }}
+          trigger="click"
+          content={
+            <InForm
+              isMobile={false}
+              closePopover={() => this.setState({ open: false })}
+              history={this.props.history}
+            />
+          }
         >
-          <InForm
-            isMobile={false}
-            closePopover={() => this.setState({ open: false })}
-            history={this.props.history}
-          />
+          <Button
+            style={{ display: "inline-block" }}
+            onClick={this.openPopover}
+            icon="search"
+          >
+            Logout
+          </Button>
         </Popover>
       </div>
     )
