@@ -4,6 +4,7 @@ import { Layout, Button } from "antd"
 import AccountPopover from "../accounts/AccountPopover"
 import CallToActionWeb from "../accounts/CallToActionWeb"
 import "antd/dist/antd.css"
+import PropTypes from "prop-types"
 let { Header } = Layout
 
 const styles = {
@@ -19,6 +20,9 @@ const styles = {
 }
 
 export default class Navigation extends React.Component {
+  static propTypes = {
+    selectedRowKeys: PropTypes.array.isRequired
+  }
   render() {
     return (
       <Header className="header" style={{ color: "red" }}>
@@ -33,6 +37,11 @@ export default class Navigation extends React.Component {
                   New Patient
                 </Button>
               </Link>
+            )}
+            {this.props.selectedRowKeys.length > 0 && (
+              <Button icon="plus-circle-o" type="primary">
+                Move to doctor
+              </Button>
             )}
           </div>
           <div>
