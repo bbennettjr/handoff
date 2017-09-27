@@ -8,7 +8,9 @@ const AddPatientButton = () => {
       to="/newpatient"
       style={{ position: "absolute", bottom: "40px", right: "40px" }}
     >
-      <Button icon="plus-circle-o">New Patient </Button>
+      <Button icon="plus-circle-o" type="primary">
+        New Patient
+      </Button>
     </Link>
   )
 }

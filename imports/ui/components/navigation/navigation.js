@@ -21,29 +21,29 @@ const styles = {
 export default class Navigation extends React.Component {
   render() {
     return (
-      <Layout className="layout">
-        <Header className="header" style={{ color: "red" }}>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div>
-              <Link to="/" style={styles.title}>
-                Handoff
+      <Header className="header" style={{ color: "red" }}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div>
+            <Link to="/" style={styles.title}>
+              Handoff
+            </Link>
+            {Meteor.user() && (
+              <Link to="/newpatient">
+                <Button icon="plus-circle-o" type="primary">
+                  New Patient
+                </Button>
               </Link>
-              {Meteor.user() && (
-                <Link to="/newpatient">
-                  <Button icon="plus-circle-o">New Patient</Button>
-                </Link>
-              )}
-            </div>
-            <div>
-              {Meteor.user() ? (
-                <AccountPopover history={this.props.history} />
-              ) : (
-                <CallToActionWeb />
-              )}
-            </div>
+            )}
           </div>
-        </Header>
-      </Layout>
+          <div>
+            {Meteor.user() ? (
+              <AccountPopover history={this.props.history} />
+            ) : (
+              <CallToActionWeb />
+            )}
+          </div>
+        </div>
+      </Header>
     )
   }
 }

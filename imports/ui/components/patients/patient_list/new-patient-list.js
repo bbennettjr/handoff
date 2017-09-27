@@ -43,12 +43,14 @@ export default class NewPatientList extends React.Component {
 
   render() {
     return (
-      <Table
-        rowSelection={rowSelection}
-        columns={columns}
-        dataSource={this.props.patients}
-        pagination={false}
-      />
+      <div style={{ backgroundColor: "white" }}>
+        <Table
+          rowSelection={rowSelection}
+          columns={columns}
+          dataSource={this.props.patients}
+          pagination={false}
+        />
+      </div>
     )
   }
 }
