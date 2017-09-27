@@ -15,9 +15,6 @@ const styles = {
     color: "white",
     textDecoration: "none",
     marginRight: "30px"
-  },
-  buttons: {
-    color: "white"
   }
 }
 
