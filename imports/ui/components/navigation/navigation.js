@@ -30,7 +30,7 @@ export default class Navigation extends React.Component {
               </Link>
               {Meteor.user() && (
                 <Link to="/newpatient">
-                  <Button icon="search">New Patient</Button>
+                  <Button icon="plus-circle-o">New Patient</Button>
                 </Link>
               )}
             </div>
