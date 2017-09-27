@@ -20,6 +20,9 @@ if (Meteor.isServer) {
 
 Meteor.methods({
 	addPatientsToUser(patientIdList, userId) {
+		if (userId === Meteor.userId()) {
+			throw new Meteor.Error("Handoff error", "Cannot add patients to yourself")
+		}
 		Meteor.users.update(
 			{ _id: userId },
 			{

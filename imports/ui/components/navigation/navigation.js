@@ -51,16 +51,20 @@ export default class Navigation extends React.Component {
   }
 
   render() {
-    console.log(this.props.users)
+    const userId = Meteor.userId()
     let menu = (
       <Menu>
-        {this.props.users.map(el =>
-          <Menu.Item key={el._id}>
-            <a onClick={() => this.onClickDoctor(el._id)}>
-              {el.profile.name}
-            </a>
-          </Menu.Item>
-        )}
+        {this.props.users.map(el => {
+          if (userId !== el._id) {
+            return (
+              <Menu.Item key={el._id}>
+                <a onClick={() => this.onClickDoctor(el._id)}>
+                  {el.profile.name}
+                </a>
+              </Menu.Item>
+            )
+          }
+        })}
       </Menu>
     )
     return (
