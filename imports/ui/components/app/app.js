@@ -11,7 +11,7 @@ import PatientList from "../patients/patient_list/patient-list.js"
 import PatientDisplay from "../patients/patient/patient-display.js"
 import PatientForm from "../patients/patient/patient-form.js"
 import { createContainer } from "meteor/react-meteor-data"
-
+import NewPatientForm from "../patients/patient/new-patient-form"
 // App Component
 const App = ({ history, users, ...appProps }) => {
 	return (
@@ -21,7 +21,7 @@ const App = ({ history, users, ...appProps }) => {
 				<Switch>
 					<Route exact path="/patient/:_id/edit" component={PatientForm} />
 					<Route exact path="/patient/:_id" component={PatientDisplay} />
-					<Route exact path="/newpatient" component={PatientForm} />
+					<Route exact path="/newpatient" component={NewPatientForm} />
 					<Route exact path="/account/:_id" component={TempAccountPage} />
 					<Route
 						path="/"
