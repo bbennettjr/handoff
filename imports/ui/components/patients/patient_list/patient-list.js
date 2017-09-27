@@ -6,18 +6,27 @@ import { createContainer } from "meteor/react-meteor-data"
 import { Patients } from "../../../../api/patients/patients.js"
 import NoPatientsList from "./no-patients.js"
 import AddNewPatientButton from "../patient/AddNewPatientButton"
-import NewPatientForm from "./new-patient-list"
+import NewPatientList from "./new-patient-list"
 class PatientList extends React.Component {
 	static propTypes = {
-		patients: PropTypes.array.isRequired
+		patients: PropTypes.array.isRequired,
+		selectedRowKeys: PropTypes.array.isRequired,
+		setSelectedRowKeys: PropTypes.func.isRequired
 	}
+
 	renderPatientCards() {
 		const patients = this.props.patients
 		if (patients.length === 0) {
 			return <NoPatientsList />
 		}
 
-		return <NewPatientForm patients={patients} />
+		return (
+			<NewPatientList
+				patients={patients}
+				selectedRowKeys={this.props.selectedRowKeys}
+				setSelectedRowKeys={this.props.setSelectedRowKeys}
+			/>
+		)
 	}
 
 	render() {

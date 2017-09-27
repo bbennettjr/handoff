@@ -17,28 +17,49 @@ import NewPatientForm from "../patients/patient/new-patient-form"
 
 import { Layout } from "antd"
 let { Header, Content, Footer } = Layout
-const App = ({ history, users, ...appProps }) => {
-	return (
-		<Router history={history}>
-			<Layout className="layout">
-				<Header>
-					<Navigation history={history} />
-				</Header>
-				<Content style={{ padding: "30px 50px" }}>
-					<Switch>
-						<Route exact path="/patient/:_id/edit" component={PatientForm} />
-						<Route exact path="/patient/:_id" component={PatientDisplay} />
-						<Route exact path="/newpatient" component={NewPatientForm} />
-						<Route exact path="/account/:_id" component={AccountPage} />
-						<Route
-							path="/"
-							component={() => <PatientList users={users} {...appProps} />}
+class App extends React.Component {
+	state = {
+		selectedRowKeys: []
+	}
+
+	setSelectedRowKeys = selectedRowKeys => {
+		this.setState({ selectedRowKeys })
+	}
+
+	render() {
+		let { history, users, ...appProps } = this.props
+		return (
+			<Router history={history}>
+				<Layout className="layout">
+					<Header>
+						<Navigation
+							history={history}
+							selectedRowKeys={this.state.selectedRowKeys}
 						/>
-					</Switch>
-				</Content>
-			</Layout>
-		</Router>
-	)
+					</Header>
+					<Content style={{ padding: "30px 50px" }}>
+						<Switch>
+							<Route exact path="/patient/:_id/edit" component={PatientForm} />
+							<Route exact path="/patient/:_id" component={PatientDisplay} />
+							<Route exact path="/newpatient" component={NewPatientForm} />
+							<Route exact path="/account/:_id" component={AccountPage} />
+							<Route
+								path="/"
+								component={() => (
+									<PatientList
+										users={users}
+										{...appProps}
+										selectedRowKeys={this.state.selectedRowKeys}
+										setSelectedRowKeys={this.setSelectedRowKeys}
+									/>
+								)}
+							/>
+						</Switch>
+					</Content>
+				</Layout>
+			</Router>
+		)
+	}
 }
 
 const history = createHistory()

@@ -24,30 +24,44 @@ const columns = [
 
 // rowSelection object indicates the need for row selection
 const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
+  onChange(selectedRowKeys, selectedRows) {
     console.log(
       `selectedRowKeys: ${selectedRowKeys}`,
       "selectedRows: ",
       selectedRows
     )
   },
-  getCheckboxProps: record => ({
-    disabled: record.name === "Disabled User" // Column configuration not to be checked
-  })
+  onSelect(record, selected, selectedRows) {
+    console.log("record", record)
+    console.log("selected", selected)
+    console.log("selectedRows", selectedRows)
+    // selectedRows.push(record._id)
+  }
 }
 
 export default class NewPatientList extends React.Component {
   static propTypes = {
-    patients: PropTypes.array.isRequired
+    patients: PropTypes.array.isRequired,
+    selectedRowKeys: PropTypes.array.isRequired,
+    setSelectedRowKeys: PropTypes.func.isRequired
   }
 
   render() {
+    let patientsList = this.props.patients
+    patientsList.forEach(el => (el.key = el._id))
     return (
       <div style={{ backgroundColor: "white" }}>
         <Table
-          rowSelection={rowSelection}
+          rowSelection={{
+            selectedRowKeys: this.props.selectedRowKeys,
+            onChange: (selectedRowKeys, selectedRows) => {
+              // console.log("In here")
+              // this.setState({ selectedRows: selectedRowKeys })
+              this.props.setSelectedRowKeys(selectedRowKeys)
+            }
+          }}
           columns={columns}
-          dataSource={this.props.patients}
+          dataSource={patientsList}
           pagination={false}
         />
       </div>
