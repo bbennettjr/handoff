@@ -35,6 +35,8 @@ class App extends React.Component {
 						<Navigation
 							history={history}
 							selectedRowKeys={this.state.selectedRowKeys}
+							setSelectedRowKeys={this.setSelectedRowKeys}
+							users={users}
 						/>
 					</Header>
 					<Content style={{ padding: "30px 50px" }}>

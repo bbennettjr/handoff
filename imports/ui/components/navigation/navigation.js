@@ -5,6 +5,8 @@ import AccountPopover from "../accounts/AccountPopover"
 import CallToActionWeb from "../accounts/CallToActionWeb"
 import "antd/dist/antd.css"
 import PropTypes from "prop-types"
+import { Menu, Dropdown, Icon } from "antd"
+
 let { Header } = Layout
 
 const styles = {
@@ -21,9 +23,43 @@ const styles = {
 
 export default class Navigation extends React.Component {
   static propTypes = {
-    selectedRowKeys: PropTypes.array.isRequired
+    selectedRowKeys: PropTypes.array.isRequired,
+    setSelectedRowKeys: PropTypes.func.isRequired,
+    users: PropTypes.array.isRequired
   }
+
+  onClickDoctor = userId => {
+    let myUserId = Meteor.userId()
+    Meteor.call(
+      "addPatientsToUser",
+      this.props.selectedRowKeys,
+      userId,
+      (err, res) => {
+        console.log("HEY")
+      }
+    )
+    Meteor.call(
+      "removePatientsFromUser",
+      this.props.selectedRowKeys,
+      myUserId,
+      (err, res) => {
+        console.log("HEY")
+      }
+    )
+    this.props.setSelectedRowKeys([])
+  }
+
   render() {
+    console.log(this.props.users)
+    let menu = (
+      <Menu>
+        {this.props.users.map(el => (
+          <Menu.Item key={el._id}>
+            <a onClick={() => this.onClickDoctor(el._id)}>{el.profile.name}</a>
+          </Menu.Item>
+        ))}
+      </Menu>
+    )
     return (
       <Header className="header" style={{ color: "red" }}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -39,9 +75,11 @@ export default class Navigation extends React.Component {
               </Link>
             )}
             {this.props.selectedRowKeys.length > 0 && (
-              <Button icon="plus-circle-o" type="primary">
-                Move to doctor
-              </Button>
+              <Dropdown overlay={menu} trigger={["click"]}>
+                <a className="ant-dropdown-link" href="#">
+                  Click me <Icon type="down" />
+                </a>
+              </Dropdown>
             )}
           </div>
           <div>

@@ -22,23 +22,6 @@ const columns = [
   }
 ]
 
-// rowSelection object indicates the need for row selection
-const rowSelection = {
-  onChange(selectedRowKeys, selectedRows) {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      "selectedRows: ",
-      selectedRows
-    )
-  },
-  onSelect(record, selected, selectedRows) {
-    console.log("record", record)
-    console.log("selected", selected)
-    console.log("selectedRows", selectedRows)
-    // selectedRows.push(record._id)
-  }
-}
-
 export default class NewPatientList extends React.Component {
   static propTypes = {
     patients: PropTypes.array.isRequired,
@@ -55,8 +38,6 @@ export default class NewPatientList extends React.Component {
           rowSelection={{
             selectedRowKeys: this.props.selectedRowKeys,
             onChange: (selectedRowKeys, selectedRows) => {
-              // console.log("In here")
-              // this.setState({ selectedRows: selectedRowKeys })
               this.props.setSelectedRowKeys(selectedRowKeys)
             }
           }}

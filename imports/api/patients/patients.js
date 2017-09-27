@@ -19,6 +19,28 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
+	addPatientsToUser(patientIdList, userId) {
+		Meteor.users.update(
+			{ _id: userId },
+			{
+				$addToSet: {
+					"profile.coveredPatients": { $each: patientIdList }
+				}
+			}
+		)
+	},
+
+	removePatientsFromUser(patientIdList, userId) {
+		Meteor.users.update(
+			{ _id: userId },
+			{
+				$pullAll: {
+					"profile.coveredPatients": patientIdList
+				}
+			}
+		)
+	},
+
 	addPatientToUser(patientId, userId) {
 		Meteor.users.update(
 			{ _id: userId },
