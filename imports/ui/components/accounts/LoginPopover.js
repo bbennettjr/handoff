@@ -6,7 +6,6 @@ import AtForm from "./AtForm.js"
 class LoginPopover extends React.Component {
   static propTypes = {
     open: PropTypes.bool.isRequired,
-    anchorEl: PropTypes.object,
     closeFunc: PropTypes.func.isRequired,
     formState: PropTypes.string
   }
@@ -17,6 +16,7 @@ class LoginPopover extends React.Component {
         visible={this.props.open}
         onVisibleChange={this.props.closeFunc}
         style={{ backgroundColor: "#fff" }}
+        trigger="click"
       >
         <AtForm
           isMobile={false} //kvothe: should be this.props.isMobile?

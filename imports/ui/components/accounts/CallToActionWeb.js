@@ -1,25 +1,13 @@
 import PropTypes from "prop-types"
 import React from "react"
-import { Button } from "antd"
+import { Button, Popover } from "antd"
 import LoginPopover from "./LoginPopover.js"
 import { createContainer } from "meteor/react-meteor-data"
-
+import AtForm from "./AtForm.js"
 class CallToActionWeb extends React.Component {
   static propTypes = {
-    user: PropTypes.object
-  }
-
-  state = {
-    open: false,
-    popoverAnchor: null
-  }
-
-  openPopover = e => {
-    e.preventDefault()
-    this.setState({
-      open: true,
-      popoverAnchor: e.currentTarget
-    })
+    user: PropTypes.object,
+    formState: PropTypes.string
   }
 
   render() {
@@ -32,19 +20,20 @@ class CallToActionWeb extends React.Component {
           marginRight: "20px"
         }}
       >
-        <Button
-          style={{ display: "inline-block", height: "44px" }}
-          onClick={Meteor.isCordova ? this.openPopover : undefined}
+        <Popover
+          style={{ backgroundColor: "#fff" }}
+          trigger="click"
+          content={
+            <AtForm
+              isMobile={false} //kvothe: should be this.props.isMobile?
+              formState={this.props.formState}
+            />
+          }
         >
-          Sign In
-        </Button>
-        <LoginPopover
-          open={this.state.open}
-          anchorEl={this.state.popoverAnchor}
-          closeFunc={() => this.setState({ open: false })}
-          formState={this.props.formState}
-          isMobile={this.props.isMobile}
-        />
+          <Button style={{ display: "inline-block", height: "44px" }}>
+            Sign Up
+          </Button>
+        </Popover>
       </div>
     )
   }

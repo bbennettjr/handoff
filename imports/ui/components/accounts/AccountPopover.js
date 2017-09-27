@@ -9,25 +9,23 @@ class AccountPopover extends React.Component {
   }
 
   state = {
-    open: false,
-    popoverAnchor: null
+    open: false
   }
 
   openPopover = e => {
     e.preventDefault()
     this.setState({
-      open: true,
-      popoverAnchor: e.currentTarget
+      open: true
     })
   }
 
   render() {
+    // console.log("We are here")
     return (
       <div>
         <Button
           style={{ display: "inline-block" }}
-          onTouchTap={Meteor.isCordova ? undefined : this.openPopover}
-          onClick={Meteor.isCordova ? this.openPopover : undefined}
+          onClick={this.openPopover}
           icon="search"
         />
         <Popover

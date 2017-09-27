@@ -4,7 +4,7 @@ import React from "react"
 import SignUpForm from "./SignUpForm"
 import SignInForm from "./SignInForm"
 import ForgotPassword from "./ForgotPassword"
-
+import LoginForm from "./LoginForm"
 import { createContainer } from "meteor/react-meteor-data"
 class AtForm extends React.Component {
   static propTypes = {
@@ -25,11 +25,14 @@ class AtForm extends React.Component {
             padding: "0px 0px 16px 0px"
           }}
         >
+          <LoginForm />
+          {/*
           <SignUpForm
             isMobile={this.props.isMobile}
             user={this.props.user}
             closePopover={this.props.closePopover}
           />
+        */}
           <div style={{ textAlign: "center", padding: " 5px 10px" }}>
             <span>
               Already use Handoff? &nbsp;
@@ -61,20 +64,7 @@ class AtForm extends React.Component {
           >
             <a
               style={{ cursor: "pointer", textDecoration: "underline" }}
-              onTouchTap={
-                Meteor.isCordova ? (
-                  undefined
-                ) : (
-                  () => this.setState({ form: "forgotPassword" })
-                )
-              }
-              onClick={
-                Meteor.isCordova ? (
-                  () => this.setState({ form: "forgotPassword" })
-                ) : (
-                  undefined
-                )
-              }
+              onClick={() => this.setState({ form: "forgotPassword" })}
             >
               Forgot password?
             </a>
@@ -84,20 +74,7 @@ class AtForm extends React.Component {
                 textDecoration: "underline",
                 paddingLeft: "10px"
               }}
-              onTouchTap={
-                Meteor.isCordova ? (
-                  undefined
-                ) : (
-                  () => this.setState({ form: "signUp" })
-                )
-              }
-              onClick={
-                Meteor.isCordova ? (
-                  () => this.setState({ form: "signUp" })
-                ) : (
-                  undefined
-                )
-              }
+              onClick={() => this.setState({ form: "signUp" })}
             >
               Sign up now
             </a>
@@ -122,20 +99,7 @@ class AtForm extends React.Component {
           >
             <a
               style={{ cursor: "pointer", textDecoration: "underline" }}
-              onTouchTap={
-                Meteor.isCordova ? (
-                  undefined
-                ) : (
-                  () => this.setState({ form: "signIn" })
-                )
-              }
-              onClick={
-                Meteor.isCordova ? (
-                  () => this.setState({ form: "signIn" })
-                ) : (
-                  undefined
-                )
-              }
+              onClick={() => this.setState({ form: "signIn" })}
             >
               Back to log in
             </a>
