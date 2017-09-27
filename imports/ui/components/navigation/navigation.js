@@ -74,27 +74,31 @@ export default class Navigation extends React.Component {
             <Link to="/" style={styles.title}>
               Handoff
             </Link>
-            {Meteor.user() &&
+            {Meteor.user() && (
               <Link to="/newpatient">
                 <Button
-                  icon="plus-circle-o"
+                  icon="user-add"
                   type="primary"
                   style={{ marginRight: "20px" }}
                 >
                   New Patient
                 </Button>
-              </Link>}
-            {this.props.selectedRowKeys.length > 0 &&
+              </Link>
+            )}
+            {this.props.selectedRowKeys.length > 0 && (
               <Dropdown overlay={menu}>
                 <Button icon="share-alt" type="primary">
                   Handoff
                 </Button>
-              </Dropdown>}
+              </Dropdown>
+            )}
           </div>
           <div>
-            {Meteor.user()
-              ? <AccountPopover history={this.props.history} />
-              : <CallToActionWeb />}
+            {Meteor.user() ? (
+              <AccountPopover history={this.props.history} />
+            ) : (
+              <CallToActionWeb />
+            )}
           </div>
         </div>
       </Header>
