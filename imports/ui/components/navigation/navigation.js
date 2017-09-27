@@ -72,12 +72,16 @@ export default class Navigation extends React.Component {
             </Link>
             {Meteor.user() &&
               <Link to="/newpatient">
-                <Button icon="plus-circle-o" type="primary">
+                <Button
+                  icon="plus-circle-o"
+                  type="primary"
+                  style={{ marginRight: "20px" }}
+                >
                   New Patient
                 </Button>
               </Link>}
             {this.props.selectedRowKeys.length > 0 &&
-              <Dropdown overlay={menu} trigger={["click"]}>
+              <Dropdown overlay={menu}>
                 <Button icon="share-alt" type="primary">
                   Handoff
                 </Button>
