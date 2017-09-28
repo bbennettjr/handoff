@@ -14,6 +14,10 @@ const columns = [
     )
   },
   {
+    title: "Condition",
+    dataIndex: "condition"
+  },
+  {
     title: "Diagnosis",
     dataIndex: "diagnosis"
   },
@@ -22,8 +26,8 @@ const columns = [
     dataIndex: "hpi"
   },
   {
-    title: "Condition",
-    dataIndex: "condition"
+    title: "Todo",
+    dataIndex: "todo"
   }
 ]
 
@@ -34,6 +38,23 @@ export default class NewPatientList extends React.Component {
     setSelectedRowKeys: PropTypes.func.isRequired
   }
 
+  state = {
+    expandedRowKeys: []
+  }
+
+  handleRowClick = (record, index) => {
+    let rows = this.state.expandedRowKeys.slice()
+    if (rows.includes(record._id)) {
+      rows.splice(rows.indexOf(record._id), 1)
+    } else {
+      rows.push(record._id)
+    }
+    this.setState({
+      expandedRowKeys: rows
+    })
+    console.log(rows)
+  }
+
   render() {
     let patientsList = this.props.patients
     console.log(patientsList)
@@ -41,6 +62,7 @@ export default class NewPatientList extends React.Component {
     return (
       <div style={{ backgroundColor: "white" }}>
         <Table
+          {...this.state}
           rowSelection={{
             selectedRowKeys: this.props.selectedRowKeys,
             onChange: (selectedRowKeys, selectedRows) => {
@@ -49,6 +71,8 @@ export default class NewPatientList extends React.Component {
           }}
           columns={columns}
           dataSource={patientsList}
+          onRowClick={this.handleRowClick.bind(this)}
+          expandedRowRender={() => console.log("rendering expansion")}
           pagination={false}
         />
       </div>
