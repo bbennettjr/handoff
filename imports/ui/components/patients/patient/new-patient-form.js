@@ -131,15 +131,6 @@ class NewPatientForm extends React.Component {
           })(<Input />)}
         </FormItem>
 
-        <FormItem {...tailFormItemLayout} style={{ marginBottom: 8 }}>
-          {getFieldDecorator("agreement", {
-            valuePropName: "checked"
-          })(
-            <Checkbox>
-              I have read the <a href="">agreement</a>
-            </Checkbox>
-          )}
-        </FormItem>
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Add Patient

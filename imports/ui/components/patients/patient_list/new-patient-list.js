@@ -2,16 +2,13 @@ import { Table, Row, Col } from "antd"
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import PatientModal from "./PatientModal.js"
 
 const columns = [
   {
     title: "Name",
     dataIndex: "name",
-    render: (text, record) => (
-      <Link to={`/patient/${record._id}`} style={{ color: "#49a9ee" }}>
-        {text}
-      </Link>
-    )
+    render: (text, record) => <PatientModal patient={record} />
   },
   {
     title: "Condition",
