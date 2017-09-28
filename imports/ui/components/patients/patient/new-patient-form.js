@@ -126,7 +126,7 @@ class NewPatientForm extends React.Component {
         </FormItem>
 
         <FormItem {...formItemLayout} label="Coverage to do" hasFeedback>
-          {getFieldDecorator("coverageToDo", {
+          {getFieldDecorator("coverageTodo", {
             rules: []
           })(<Input />)}
         </FormItem>

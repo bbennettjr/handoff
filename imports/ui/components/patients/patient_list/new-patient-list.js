@@ -1,4 +1,4 @@
-import { Table } from "antd"
+import { Table, Row, Col } from "antd"
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
@@ -52,12 +52,30 @@ export default class NewPatientList extends React.Component {
     this.setState({
       expandedRowKeys: rows
     })
-    console.log(rows)
+  }
+
+  handleContent = (record, ...rest) => {
+    const { pmh, medications, coverageTodo } = record
+    return (
+      <Row type="flex" justify="space-around" align="middle">
+        <Col span={5}>
+          <p>{`PMH:
+            ${pmh}.`}</p>
+        </Col>
+        <Col span={5}>
+          <p>{`Medications:
+            ${medications}.`}</p>
+        </Col>
+        <Col span={5}>
+          <p>{`Covering todo:
+            ${coverageTodo}.`}</p>
+        </Col>
+      </Row>
+    )
   }
 
   render() {
     let patientsList = this.props.patients
-    console.log(patientsList)
     patientsList.forEach(el => (el.key = el._id))
     return (
       <div style={{ backgroundColor: "white" }}>
@@ -72,7 +90,7 @@ export default class NewPatientList extends React.Component {
           columns={columns}
           dataSource={patientsList}
           onRowClick={this.handleRowClick.bind(this)}
-          expandedRowRender={() => console.log("rendering expansion")}
+          expandedRowRender={this.handleContent.bind(this)}
           pagination={false}
         />
       </div>
