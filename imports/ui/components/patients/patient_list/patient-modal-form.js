@@ -27,6 +27,7 @@ class PatientModalForm extends React.Component {
             description: error.reason
           })
         } else {
+          this.props.closeModal()
         }
       })
     })

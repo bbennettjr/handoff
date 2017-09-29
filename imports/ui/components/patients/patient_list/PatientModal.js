@@ -35,7 +35,10 @@ class PatientModal extends React.Component {
           onCancel={this.handleCancel}
           footer={null}
         >
-          <PatientModalForm patient={this.props.patient} />
+          <PatientModalForm
+            patient={this.props.patient}
+            closeModal={this.handleOk.bind(this)}
+          />
         </Modal>
       </div>
     )

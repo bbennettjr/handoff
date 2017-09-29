@@ -25,7 +25,7 @@ const styles = {
   left: {
     display: "flex",
     justifyContent: "flex-start",
-    alignItems: "baseline",
+    alignItems: "center",
     flex: 1
   },
   right: {
