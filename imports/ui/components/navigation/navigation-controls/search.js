@@ -1,92 +1,125 @@
+import { Meteor } from "meteor/meteor"
 import React from "react"
 import { Icon, Input, AutoComplete } from "antd"
+import { Patients } from "../../../../api/patients/patients.js"
+import { createContainer } from "meteor/react-meteor-data"
+
 const Option = AutoComplete.Option
 const OptGroup = AutoComplete.OptGroup
 
-const dataSource = [
-  {
-    title: "Patients",
-    children: [
-      {
-        title: "Fred",
-        count: 52
-      },
-      {
-        title: "Judy",
-        count: 24
-      }
-    ]
-  },
-  {
-    title: "Doctors",
-    children: [
-      {
-        title: "Meera",
-        count: 26
-      },
-      {
-        title: "Ryan",
-        count: 26
-      }
-    ]
+class Search extends React.Component {
+  // dataSource = [
+  //   {
+  //     title: "Patients",
+  //     children: this.props.patients
+  //   },
+  //   {
+  //     title: "Doctors",
+  //     children: [
+  //       {
+  //         title: "Meera",
+  //         count: 26
+  //       },
+  //       {
+  //         title: "Ryan",
+  //         count: 26
+  //       }
+  //     ]
+  //   }
+  // ]
+
+  // renderTitle = title => {
+  //   return <span>{title}</span>
+  // }
+
+  // options = this.dataSource
+  //   .map(group => {
+  //     console.log(group)
+  //     debugger
+  //     return (
+  //       <OptGroup key={group.title} label={this.renderTitle(group.title)}>
+  //         {group.children.map(opt => (
+  //           <Option key={opt._id} value={opt.name}>
+  //             {opt.name}
+  //             <span className="certain-search-item-count">
+  //               {" "}
+  //               Diagnosis: {opt.diagnosis}
+  //             </span>
+  //           </Option>
+  //         ))}
+  //       </OptGroup>
+  //     )
+  //   })
+  //   .concat([
+  //     <Option key="all" className="show-all">
+  //       <a
+  //         href="https://www.google.com/search?q=antd"
+  //         target="_blank"
+  //         rel="noopener noreferrer"
+  //       >
+  //         Expand
+  //       </a>
+  //     </Option>
+  //   ])
+
+  handleSearch = (value, label) => {
+    //maybe use
+    console.log("searching...")
   }
-]
 
-const renderTitle = title => {
-  return <span>{title}</span>
-}
+  filterOption = (inputValue, option) => {
+    return (
+      option.props.children[0]
+        .toUpperCase()
+        .indexOf(inputValue.toUpperCase()) !== -1
+    )
+  }
 
-const options = dataSource
-  .map(group => (
-    <OptGroup key={group.title} label={renderTitle(group.title)}>
-      {group.children.map(opt => (
-        <Option key={opt.title} value={opt.title}>
-          {opt.title}
-          <span className="certain-search-item-count"> Age: {opt.count}</span>
+  render() {
+    let patients = this.props.patients
+    console.log(patients)
+    patients.map(pt => {
+      pt.title = pt.name
+      pt.value = pt.diagnosis
+      pt.key = pt._id
+      console.log(pt._id)
+      return (
+        <Option key={pt._id} value={pt.name}>
+          {pt.name}
+          <span className="certain-search-item-count">
+            {" "}
+            Diagnosis: {pt.diagnosis}
+          </span>
         </Option>
-      ))}
-    </OptGroup>
-  ))
-  .concat([
-    <Option disabled key="all" className="show-all">
-      <a
-        href="https://www.google.com/search?q=antd"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Expand
-      </a>
-    </Option>
-  ])
+      )
+    })
 
-const filterOption = (inputValue, option) => {
-  return (
-    option.props.children[0].toUpperCase().indexOf(inputValue.toUpperCase()) !==
-    -1
-  )
+    return (
+      <div className="certain-category-search-wrapper" style={this.props.style}>
+        <AutoComplete
+          className="certain-category-search"
+          dropdownClassName="certain-category-search-dropdown"
+          dropdownMatchSelectWidth={false}
+          dropdownStyle={{ width: 300 }}
+          size="large"
+          style={{ width: "100%" }}
+          dataSource={patients}
+          placeholder="Search"
+          optionLabelProp="value"
+          onChange={this.handleSearch.bind(this)}
+          filterOption={this.filterOption.bind(this)}
+        >
+          <Input
+            suffix={<Icon type="search" className="certain-category-icon" />}
+          />
+        </AutoComplete>
+      </div>
+    )
+  }
 }
 
-const Search = props => {
-  return (
-    <div className="certain-category-search-wrapper" style={props.style}>
-      <AutoComplete
-        className="certain-category-search"
-        dropdownClassName="certain-category-search-dropdown"
-        dropdownMatchSelectWidth={false}
-        dropdownStyle={{ width: 300 }}
-        size="large"
-        style={{ width: "100%" }}
-        dataSource={options}
-        placeholder="Search"
-        optionLabelProp="value"
-        filterOption={filterOption}
-      >
-        <Input
-          suffix={<Icon type="search" className="certain-category-icon" />}
-        />
-      </AutoComplete>
-    </div>
-  )
-}
-
-export default Search
+export default createContainer(() => {
+  Meteor.subscribe("patients")
+  const patients = Patients.find().fetch()
+  return { patients }
+}, Search)
