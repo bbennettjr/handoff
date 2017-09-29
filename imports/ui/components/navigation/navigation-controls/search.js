@@ -32,7 +32,7 @@ const dataSource = [
   }
 ]
 
-function renderTitle(title) {
+const renderTitle = title => {
   return <span>{title}</span>
 }
 
@@ -59,7 +59,14 @@ const options = dataSource
     </Option>
   ])
 
-function Search(props) {
+const filterOption = (inputValue, option) => {
+  return (
+    option.props.children[0].toUpperCase().indexOf(inputValue.toUpperCase()) !==
+    -1
+  )
+}
+
+const Search = props => {
   return (
     <div className="certain-category-search-wrapper" style={props.style}>
       <AutoComplete
@@ -72,6 +79,7 @@ function Search(props) {
         dataSource={options}
         placeholder="Search"
         optionLabelProp="value"
+        filterOption={filterOption}
       >
         <Input
           suffix={<Icon type="search" className="certain-category-icon" />}
