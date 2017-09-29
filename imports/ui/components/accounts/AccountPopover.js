@@ -24,7 +24,7 @@ class AccountPopover extends React.Component {
           }
         >
           <Button
-            style={{ display: "inline-block" }}
+            style={this.props.buttonStyle}
             onClick={this.openPopover}
             icon="logout"
           >
