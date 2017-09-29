@@ -8,91 +8,39 @@ const Option = AutoComplete.Option
 const OptGroup = AutoComplete.OptGroup
 
 class Search extends React.Component {
-  // dataSource = [
-  //   {
-  //     title: "Patients",
-  //     children: this.props.patients
-  //   },
-  //   {
-  //     title: "Doctors",
-  //     children: [
-  //       {
-  //         title: "Meera",
-  //         count: 26
-  //       },
-  //       {
-  //         title: "Ryan",
-  //         count: 26
-  //       }
-  //     ]
-  //   }
-  // ]
-
-  // renderTitle = title => {
-  //   return <span>{title}</span>
-  // }
-
-  // options = this.dataSource
-  //   .map(group => {
-  //     console.log(group)
-  //     debugger
-  //     return (
-  //       <OptGroup key={group.title} label={this.renderTitle(group.title)}>
-  //         {group.children.map(opt => (
-  //           <Option key={opt._id} value={opt.name}>
-  //             {opt.name}
-  //             <span className="certain-search-item-count">
-  //               {" "}
-  //               Diagnosis: {opt.diagnosis}
-  //             </span>
-  //           </Option>
-  //         ))}
-  //       </OptGroup>
-  //     )
-  //   })
-  //   .concat([
-  //     <Option key="all" className="show-all">
-  //       <a
-  //         href="https://www.google.com/search?q=antd"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Expand
-  //       </a>
-  //     </Option>
-  //   ])
-
-  handleSearch = (value, label) => {
-    //maybe use
-    console.log("searching...")
+  handleSelect = (value, options) => {
+    Meteor.call("addPatientToUser", value, Meteor.userId(), (err, result) => {
+      if (err) console.error(err)
+      console.log(`Patient added! Result: ${result}`)
+    })
   }
 
   filterOption = (inputValue, option) => {
-    return (
-      option.props.children[0]
-        .toUpperCase()
-        .indexOf(inputValue.toUpperCase()) !== -1
-    )
+    return option.props.name
+      ? option.props.name.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+      : option.props.diagnosis
+          .toUpperCase()
+          .indexOf(inputValue.toUpperCase()) !== -1
   }
 
   render() {
     let patients = this.props.patients
-    console.log(patients)
-    patients.map(pt => {
-      pt.title = pt.name
-      pt.value = pt.diagnosis
-      pt.key = pt._id
-      console.log(pt._id)
-      return (
-        <Option key={pt._id} value={pt.name}>
-          {pt.name}
-          <span className="certain-search-item-count">
-            {" "}
-            Diagnosis: {pt.diagnosis}
-          </span>
-        </Option>
-      )
-    })
+    let data = [
+      <OptGroup key={"patients"} label={"Patients"}>
+        {patients.map(pt => {
+          return (
+            <Option
+              key={pt._id}
+              value={pt._id}
+              name={pt.name}
+              diagnosis={pt.diagnosis}
+            >
+              {pt.name}
+            </Option>
+          )
+        })}
+      </OptGroup>
+    ]
 
     return (
       <div className="certain-category-search-wrapper" style={this.props.style}>
@@ -103,10 +51,10 @@ class Search extends React.Component {
           dropdownStyle={{ width: 300 }}
           size="large"
           style={{ width: "100%" }}
-          dataSource={patients}
+          dataSource={data}
           placeholder="Search"
-          optionLabelProp="value"
-          onChange={this.handleSearch.bind(this)}
+          optionLabelProp="name"
+          onSelect={this.handleSelect.bind(this)}
           filterOption={this.filterOption.bind(this)}
         >
           <Input
