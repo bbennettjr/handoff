@@ -35,6 +35,18 @@ export default class NewPatientList extends React.Component {
     setSelectedRowKeys: PropTypes.func.isRequired
   }
 
+  onRowClick = record => {
+    console.log(record)
+    console.log(this.props.selectedRowKeys)
+    let keys = this.props.selectedRowKeys.slice()
+    if (keys.includes(record._id)) {
+      keys.splice(keys.indexOf(record._id), 1)
+    } else {
+      keys.push(record._id)
+    }
+    this.props.setSelectedRowKeys(keys)
+  }
+
   render() {
     let patientsList = this.props.patients
     patientsList.forEach(el => (el.key = el._id))
@@ -48,6 +60,7 @@ export default class NewPatientList extends React.Component {
               this.props.setSelectedRowKeys(selectedRowKeys)
             }
           }}
+          onRowClick={this.onRowClick}
           columns={columns}
           dataSource={patientsList}
           pagination={false}

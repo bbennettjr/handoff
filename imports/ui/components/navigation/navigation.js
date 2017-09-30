@@ -32,7 +32,7 @@ const styles = {
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "baseline",
-    flex: 2
+    flex: 1
   },
   leftButtons: {
     marginRight: "16px"
@@ -56,7 +56,6 @@ export default class Navigation extends React.Component {
   }
 
   onClickDoctor = userId => {
-    let myUserId = Meteor.userId()
     Meteor.call(
       "addPatientsToUser",
       this.props.selectedRowKeys,
@@ -67,13 +66,19 @@ export default class Navigation extends React.Component {
         }
       }
     )
+    // Remove patients from current user to complete 'handoff'
+    this.onRemoveClick()
+  }
+
+  onRemoveClick = () => {
+    let myUserId = Meteor.userId()
     Meteor.call(
       "removePatientsFromUser",
       this.props.selectedRowKeys,
       myUserId,
       (err, res) => {
         if (err) {
-          console.log("HEY")
+          console.log("Problem removing patients from user")
         }
       }
     )
@@ -120,6 +125,16 @@ export default class Navigation extends React.Component {
                 Handoff
               </Button>
             </Dropdown>
+          )}
+          {this.props.selectedRowKeys.length > 0 && (
+            <Button
+              icon="close"
+              type="danger"
+              style={styles.leftButtons}
+              onClick={this.onRemoveClick.bind(this)}
+            >
+              Remove
+            </Button>
           )}
         </div>
         <div style={styles.right}>
