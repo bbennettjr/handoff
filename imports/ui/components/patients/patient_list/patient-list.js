@@ -6,6 +6,7 @@ import { createContainer } from "meteor/react-meteor-data"
 import { Patients } from "../../../../api/patients/patients.js"
 import NoPatientsList from "./no-patients.js"
 import AddNewPatientButton from "../patient/AddNewPatientButton"
+import Chat from "../patient/Chat"
 import NewPatientList from "./new-patient-list"
 class PatientList extends React.Component {
 	static propTypes = {
@@ -34,6 +35,7 @@ class PatientList extends React.Component {
 			<div style={{ height: "100%" }}>
 				{this.renderPatientCards()}
 				<div>
+					<Chat />
 					<AddNewPatientButton />
 				</div>
 			</div>
