@@ -1,42 +1,50 @@
-import { Form, Input, Checkbox, Button, notification } from "antd";
-import React from "react";
-const FormItem = Form.Item;
+import { Form, Input, Checkbox, Button, notification } from "antd"
+import React from "react"
+const FormItem = Form.Item
 
 class NewPatientForm extends React.Component {
   handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (err) {
         throw new Meteor.Error(
           "Cannot validate new patient",
           "All input fields must meet the validation requirement"
-        );
+        )
       }
 
-      console.log("Received values of form: ", values);
+      console.log("Received values of form: ", values)
       // destructure out the names to combine them
-      let { firstName, lastName } = values;
-      values.name = `${firstName} ${lastName}`;
+      let { firstName, lastName } = values
+      values.name = `${firstName} ${lastName}`
 
       let patient = Object.assign(
-        { doctors: [Meteor.userId()], createdAt: new Date(), updatedAt: new Date() },
+        {
+          doctors: [Meteor.userId()],
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
         values
-      );
+      )
       Meteor.call("patient.insert", patient, (error, result) => {
         if (error) {
           notification.error({
             message: "Can't add patient",
             description: "Something went wrong"
-          });
+          })
         } else {
-          this.props.history.push("/");
+          this.props.history.push("/")
+          notification.success({
+            message: "Success",
+            description: "Patient added to your covered list."
+          })
         }
-      });
-    });
-  };
+      })
+    })
+  }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = this.props.form
 
     const formItemLayout = {
       labelCol: {
@@ -47,7 +55,7 @@ class NewPatientForm extends React.Component {
         xs: { span: 24 },
         sm: { span: 14 }
       }
-    };
+    }
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
@@ -59,7 +67,7 @@ class NewPatientForm extends React.Component {
           offset: 6
         }
       }
-    };
+    }
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem {...formItemLayout} label="First Name" hasFeedback>
@@ -146,7 +154,7 @@ class NewPatientForm extends React.Component {
             rules: []
           })(<Input />)}
         </FormItem>
-        
+
         <FormItem {...formItemLayout} label="Labs" hasFeedback>
           {getFieldDecorator("labs", {
             rules: []
@@ -189,8 +197,8 @@ class NewPatientForm extends React.Component {
           </Button>
         </FormItem>
       </Form>
-    );
+    )
   }
 }
 
-export default Form.create()(NewPatientForm);
+export default Form.create()(NewPatientForm)

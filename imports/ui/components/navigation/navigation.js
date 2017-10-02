@@ -76,6 +76,7 @@ export default class Navigation extends React.Component {
 
   onRemoveClick = () => {
     let myUserId = Meteor.userId()
+    const plural = this.props.selectedRowKeys.length
     Meteor.call(
       "removePatientsFromUser",
       this.props.selectedRowKeys,
@@ -84,6 +85,12 @@ export default class Navigation extends React.Component {
         if (err) {
           console.log("Problem removing patients from user")
         }
+        notification.info({
+          message: "Removed",
+          description: `Patient${plural > 1
+            ? "s"
+            : ""} removed from covered list.`
+        })
       }
     )
     this.props.setSelectedRowKeys([])

@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor"
 import React from "react"
-import { Icon, Input, AutoComplete } from "antd"
+import { Icon, Input, AutoComplete, notification } from "antd"
 import { Patients } from "../../../../api/patients/patients.js"
 import { createContainer } from "meteor/react-meteor-data"
 
@@ -11,7 +11,10 @@ class Search extends React.Component {
   handleSelect = (value, options) => {
     Meteor.call("addPatientToUser", value, Meteor.userId(), (err, result) => {
       if (err) console.error(err)
-      console.log(`Patient added! Result: ${result}`)
+      notification.success({
+        message: "Success",
+        description: "Patient added to your covered list."
+      })
     })
   }
 
@@ -52,6 +55,7 @@ class Search extends React.Component {
           size="large"
           style={{ width: "100%" }}
           dataSource={data}
+          allowClear={true}
           placeholder="Search"
           optionLabelProp="name"
           onSelect={this.handleSelect.bind(this)}
