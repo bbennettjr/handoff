@@ -58,6 +58,9 @@ class App extends React.Component {
 							/>
 						</Switch>
 					</Content>
+					<Footer style={{ textAlign: "center" }}>
+						{"Handoff, LLC © 2017 All Rights Reserved"}
+					</Footer>
 				</Layout>
 			</Router>
 		)
