@@ -5,8 +5,7 @@ import { createContainer } from "meteor/react-meteor-data"
 
 import { Patients } from "../../../../api/patients/patients.js"
 import NoPatientsList from "./no-patients.js"
-import LoggedOutBanner from './LoggedOutBanner.js'
-import AddNewPatientButton from "../patient/AddNewPatientButton"
+import LoggedOutBanner from "./LoggedOutBanner.js"
 import NewPatientList from "./new-patient-list"
 class PatientList extends React.Component {
 	static propTypes = {
@@ -16,7 +15,7 @@ class PatientList extends React.Component {
 	}
 
 	renderPatientCards() {
-		if (!Meteor.user()) return (<LoggedOutBanner/>)
+		if (!Meteor.user()) return <LoggedOutBanner />
 
 		const patients = this.props.patients
 		if (patients.length === 0) {
@@ -36,8 +35,7 @@ class PatientList extends React.Component {
 		return (
 			<div style={{ height: "100%" }}>
 				{this.renderPatientCards()}
-				<div>
-				</div>
+				<div />
 			</div>
 		)
 	}
