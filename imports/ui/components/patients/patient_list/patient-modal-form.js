@@ -19,6 +19,7 @@ class PatientModalForm extends React.Component {
 
       // stick values into patients
       let patient = this.props.patient
+      patient.updatedAt = new Date()
       patient = Object.assign(patient, values)
       Meteor.call("patient.update", patient, (error, result) => {
         if (error) {
@@ -86,6 +87,22 @@ class PatientModalForm extends React.Component {
 
         <FormItem
           {...formItemLayout}
+          label={<span>Room&nbsp;</span>}
+          hasFeedback
+        >
+          {getFieldDecorator("room", {
+            rules: [
+              {
+                required: true,
+                message: "Please input room number"
+              }
+            ],
+            initialValue: patient.room
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem
+          {...formItemLayout}
           label={<span>Diagnosis&nbsp;</span>}
           hasFeedback
         >
@@ -100,24 +117,10 @@ class PatientModalForm extends React.Component {
           })(<Input />)}
         </FormItem>
 
-        <FormItem {...formItemLayout} label="Condition" hasFeedback>
-          {getFieldDecorator("condition", {
-            rules: [],
-            initialValue: patient.condition
-          })(<Input />)}
-        </FormItem>
-
         <FormItem {...formItemLayout} label="HPI" hasFeedback>
           {getFieldDecorator("hpi", {
             rules: [],
             initialValue: patient.hpi
-          })(<Input />)}
-        </FormItem>
-
-        <FormItem {...formItemLayout} label="Medications" hasFeedback>
-          {getFieldDecorator("medications", {
-            rules: [],
-            initialValue: patient.medications
           })(<Input />)}
         </FormItem>
 
@@ -128,6 +131,48 @@ class PatientModalForm extends React.Component {
           })(<Input />)}
         </FormItem>
 
+        <FormItem {...formItemLayout} label="Medications" hasFeedback>
+          {getFieldDecorator("medications", {
+            rules: [],
+            initialValue: patient.medications
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Allergies" hasFeedback>
+          {getFieldDecorator("allergies", {
+            rules: [],
+            initialValue: patient.allergies
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Vitals" hasFeedback>
+          {getFieldDecorator("vitals", {
+            rules: [],
+            initialValue: patient.vitals
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Labs" hasFeedback>
+          {getFieldDecorator("labs", {
+            rules: [],
+            initialValue: patient.labs
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Radiology" hasFeedback>
+          {getFieldDecorator("radiology", {
+            rules: [],
+            initialValue: patient.radiology
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Care Plan" hasFeedback>
+          {getFieldDecorator("plan", {
+            rules: [],
+            initialValue: patient.plan
+          })(<Input />)}
+        </FormItem>
+
         <FormItem {...formItemLayout} label="To Do" hasFeedback>
           {getFieldDecorator("todo", {
             rules: [],
@@ -135,10 +180,17 @@ class PatientModalForm extends React.Component {
           })(<Input />)}
         </FormItem>
 
-        <FormItem {...formItemLayout} label="Coverage to do" hasFeedback>
-          {getFieldDecorator("coverageTodo", {
+        <FormItem {...formItemLayout} label="Coverage Instructions" hasFeedback>
+          {getFieldDecorator("coverage", {
             rules: [],
-            initialValue: patient.coverageTodo
+            initialValue: patient.coverage
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Condition" hasFeedback>
+          {getFieldDecorator("condition", {
+            rules: [],
+            initialValue: patient.condition
           })(<Input />)}
         </FormItem>
 

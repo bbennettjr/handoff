@@ -6,7 +6,7 @@ import CallToActionWeb from "../accounts/CallToActionWeb"
 import Search from "./navigation-controls/search.js"
 import "antd/dist/antd.css"
 import PropTypes from "prop-types"
-import { Menu, Dropdown, Icon } from "antd"
+import { Menu, Dropdown, Icon, notification } from "antd"
 
 let { Header } = Layout
 
@@ -55,15 +55,19 @@ export default class Navigation extends React.Component {
     users: PropTypes.array.isRequired
   }
 
-  onClickDoctor = userId => {
+  onClickDoctor = (otherUserId, name) => {
     Meteor.call(
       "addPatientsToUser",
       this.props.selectedRowKeys,
-      userId,
+      otherUserId,
       (err, res) => {
         if (err) {
           console.log(err.reason)
         }
+        notification.success({
+          message: "Success",
+          description: `${name} received your handoff.`
+        })
       }
     )
     // Remove patients from current user to complete 'handoff'
@@ -93,7 +97,7 @@ export default class Navigation extends React.Component {
           if (userId !== el._id) {
             return (
               <Menu.Item key={el._id}>
-                <a onClick={() => this.onClickDoctor(el._id)}>
+                <a onClick={() => this.onClickDoctor(el._id, el.profile.name)}>
                   {el.profile.name}
                 </a>
               </Menu.Item>
@@ -138,7 +142,7 @@ export default class Navigation extends React.Component {
           )}
         </div>
         <div style={styles.right}>
-          {Meteor.user() ? (<Search style={styles.rightSearch} />) : <div/>}
+          {Meteor.user() ? <Search style={styles.rightSearch} /> : <div />}
           {Meteor.user() ? (
             <AccountPopover
               history={this.props.history}
