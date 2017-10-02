@@ -1,60 +1,86 @@
 import React from "react"
+import PropTypes from "prop-types"
+import { createContainer } from "meteor/react-meteor-data"
 import { Link } from "react-router-dom"
-import { Input } from "antd"
+import { Input, Card } from "antd"
+import { ChatFeed, Message } from "react-chat-ui"
 
-// Create WebSocket connection.
-const socket = new WebSocket("ws://localhost:3000/chat")
+class Chat extends React.Component {
+  static propTypes = {
+    messages: PropTypes.array
+  }
+  state = {
+    is_typing: false,
+    value: ""
+  }
 
-socket.onopen = event => {
-  socket.send("Here is text on our open event")
+  sendMessage() {
+    Streamy.emit("message", { data: this.state.value })
+    this.setState({ value: "", is_typing: false })
+  }
+  onChange(e) {
+    if (this.state.value) this.setState({ is_typing: true })
+    if (!this.state.value) this.setState({ is_typing: false })
+
+    this.setState({ value: e.target.value })
+  }
+  render() {
+    return (
+      <Card
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-end",
+          width: 300,
+          height: 200
+        }}
+      >
+        <ChatFeed
+          messages={this.props.messages} // Boolean: list of message objects
+          isTyping={this.state.is_typing} // Boolean: is the recipient typing
+          hasInputField={false} // Boolean: use our input, or use your own
+          showSenderName // show the name of the user who sent the message
+          bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
+          // JSON: Custom bubble styles
+          bubbleStyles={{
+            text: {
+              fontSize: 11
+            },
+            chatbubble: {
+              borderRadius: 3,
+              padding: 4
+            }
+          }}
+        />
+        <Input
+          placeholder="..."
+          value={this.state.value}
+          onChange={this.onChange.bind(this)}
+          onPressEnter={this.sendMessage.bind(this)}
+        />
+      </Card>
+    )
+  }
 }
 
-// Connection opened
-socket.addEventListener("open", function(event) {
-  console.log(`open: 'event' object from callback: ${event}`)
-  socket.send("Hello Server!")
-})
+export default createContainer(() => {
+  let messages = []
+  Streamy.on("echo", data => {
+    console.log(data.message)
+    messages.push(new Message(data))
+  })
+  return { messages }
+}, Chat)
 
-// Listen for messages
-socket.addEventListener("message", function(event) {
-  console.log("Message from server ", event.data)
-  writeMessage(event.data)
-})
-
-// Message appending
-const messagesElement = document.getElementById("messages")
-let lastMessageElement = null
-
-function writeMessage(content) {
-  let newMessageElement = document.createElement("div")
-  let newMessageText = document.createTextNode(content)
-
-  newMessageElement.appendChild(newMessageText)
-  messagesElement.insertBefore(newMessageElement, lastMessageElement)
-  lastMessageElement = newMessageElement
-}
-
-function sendMessage(e) {
-  console.log(`Send message function.  e obj:`)
-  console.log(e)
-  socket.send(e)
-}
-
-const Chat = () => {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: "40px",
-        left: "40px",
-        width: "200px",
-        height: "200px"
-      }}
-    >
-      <div id="messages" />
-      <Input placeholder="text here" onPressEnter={sendMessage} />
-    </div>
-  )
-}
-
-export default Chat
+// <div
+//     style={{
+//       position: "absolute",
+//       bottom: "40px",
+//       left: "40px",
+//       width: "200px",
+//       height: "200px"
+//     }}
+//   >
+//     <div id="messages" />
+//     <Input placeholder="text here" onPressEnter={sendMessage} />
+//   </div>

@@ -1,16 +1,7 @@
-// const WebSocket = require("ws")
-// const wss = new WebSocket.Server({ port: 3000 })
-
-// console.log(wss)
-
-// wss.on("connection", function connection(ws) {
-//   console.log(`server connection established. ws obj: ${ws}`)
-//   ws.on("message", function incoming(message) {
-//     console.log("received: %s", message)
-//   })
-
-//   ws.send("something")
-// })
+Streamy.on("message", (data, fromSocket) => {
+  console.log(data)
+  Streamy.emit("echo", { id: 0, message: data.data }, fromSocket)
+})
 
 // // -----------Subscription service-------------- \\
 // const subscriptions = new Map()
