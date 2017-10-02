@@ -11,6 +11,10 @@ const columns = [
     render: (text, record) => <PatientModal patient={record} />
   },
   {
+    title: "Room",
+    dataIndex: "room"
+  },
+  {
     title: "Condition",
     dataIndex: "condition"
   },
@@ -21,6 +25,10 @@ const columns = [
   {
     title: "History",
     dataIndex: "hpi"
+  },
+  {
+    title: "Vitals",
+    dataIndex: "vitals"
   },
   {
     title: "Todo",
