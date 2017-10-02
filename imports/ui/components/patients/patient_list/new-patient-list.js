@@ -44,8 +44,6 @@ export default class NewPatientList extends React.Component {
   }
 
   onRowClick = record => {
-    console.log(record)
-    console.log(this.props.selectedRowKeys)
     let keys = this.props.selectedRowKeys.slice()
     if (keys.includes(record._id)) {
       keys.splice(keys.indexOf(record._id), 1)
