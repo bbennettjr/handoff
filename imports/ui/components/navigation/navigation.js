@@ -138,7 +138,7 @@ export default class Navigation extends React.Component {
           )}
         </div>
         <div style={styles.right}>
-          <Search style={styles.rightSearch} />
+          {Meteor.user() ? (<Search style={styles.rightSearch} />) : <div/>}
           {Meteor.user() ? (
             <AccountPopover
               history={this.props.history}

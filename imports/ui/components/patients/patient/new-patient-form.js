@@ -1,39 +1,42 @@
-import { Form, Input, Checkbox, Button, notification } from "antd"
-import React from "react"
-const FormItem = Form.Item
+import { Form, Input, Checkbox, Button, notification } from "antd";
+import React from "react";
+const FormItem = Form.Item;
 
 class NewPatientForm extends React.Component {
   handleSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (err) {
         throw new Meteor.Error(
           "Cannot validate new patient",
           "All input fields must meet the validation requirement"
-        )
+        );
       }
 
-      console.log("Received values of form: ", values)
+      console.log("Received values of form: ", values);
       // destructure out the names to combine them
-      let { firstName, lastName } = values
-      values.name = `${firstName} ${lastName}`
+      let { firstName, lastName } = values;
+      values.name = `${firstName} ${lastName}`;
 
-      let patient = Object.assign({ doctors: [Meteor.userId()] }, values)
+      let patient = Object.assign(
+        { doctors: [Meteor.userId()], createdAt: new Date(), updatedAt: new Date() },
+        values
+      );
       Meteor.call("patient.insert", patient, (error, result) => {
         if (error) {
           notification.error({
             message: "Can't add patient",
             description: "Something went wrong"
-          })
+          });
         } else {
-          this.props.history.push("/")
+          this.props.history.push("/");
         }
-      })
-    })
-  }
+      });
+    });
+  };
 
   render() {
-    const { getFieldDecorator } = this.props.form
+    const { getFieldDecorator } = this.props.form;
 
     const formItemLayout = {
       labelCol: {
@@ -44,7 +47,7 @@ class NewPatientForm extends React.Component {
         xs: { span: 24 },
         sm: { span: 14 }
       }
-    }
+    };
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
@@ -56,7 +59,7 @@ class NewPatientForm extends React.Component {
           offset: 6
         }
       }
-    }
+    };
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem {...formItemLayout} label="First Name" hasFeedback>
@@ -82,6 +85,21 @@ class NewPatientForm extends React.Component {
 
         <FormItem
           {...formItemLayout}
+          label={<span>Room&nbsp;</span>}
+          hasFeedback
+        >
+          {getFieldDecorator("room", {
+            rules: [
+              {
+                required: true,
+                message: "Please input room number"
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem
+          {...formItemLayout}
           label={<span>Diagnosis&nbsp;</span>}
           hasFeedback
         >
@@ -95,20 +113,8 @@ class NewPatientForm extends React.Component {
           })(<Input />)}
         </FormItem>
 
-        <FormItem {...formItemLayout} label="Condition" hasFeedback>
-          {getFieldDecorator("condition", {
-            rules: []
-          })(<Input />)}
-        </FormItem>
-
         <FormItem {...formItemLayout} label="HPI" hasFeedback>
           {getFieldDecorator("hpi", {
-            rules: []
-          })(<Input />)}
-        </FormItem>
-
-        <FormItem {...formItemLayout} label="Medications" hasFeedback>
-          {getFieldDecorator("medications", {
             rules: []
           })(<Input />)}
         </FormItem>
@@ -119,14 +125,60 @@ class NewPatientForm extends React.Component {
           })(<Input />)}
         </FormItem>
 
+        <FormItem
+          {...formItemLayout}
+          label="Applicable Medications"
+          hasFeedback
+        >
+          {getFieldDecorator("medications", {
+            rules: []
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Allergies" hasFeedback>
+          {getFieldDecorator("allergies", {
+            rules: []
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Vitals" hasFeedback>
+          {getFieldDecorator("vitals", {
+            rules: []
+          })(<Input />)}
+        </FormItem>
+        
+        <FormItem {...formItemLayout} label="Labs" hasFeedback>
+          {getFieldDecorator("labs", {
+            rules: []
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Radiology" hasFeedback>
+          {getFieldDecorator("radiology", {
+            rules: []
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Care Plan" hasFeedback>
+          {getFieldDecorator("plan", {
+            rules: []
+          })(<Input />)}
+        </FormItem>
+
         <FormItem {...formItemLayout} label="To Do" hasFeedback>
           {getFieldDecorator("todo", {
             rules: []
           })(<Input />)}
         </FormItem>
 
-        <FormItem {...formItemLayout} label="Coverage to do" hasFeedback>
-          {getFieldDecorator("coverageTodo", {
+        <FormItem {...formItemLayout} label="Coverage Instructions" hasFeedback>
+          {getFieldDecorator("coverage", {
+            rules: []
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem {...formItemLayout} label="Condition" hasFeedback>
+          {getFieldDecorator("condition", {
             rules: []
           })(<Input />)}
         </FormItem>
@@ -137,8 +189,8 @@ class NewPatientForm extends React.Component {
           </Button>
         </FormItem>
       </Form>
-    )
+    );
   }
 }
 
-export default Form.create()(NewPatientForm)
+export default Form.create()(NewPatientForm);
