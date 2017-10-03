@@ -25,8 +25,14 @@ class App extends React.Component {
 		this.setState({ selectedRowKeys })
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (!nextProps.user) {
+			this.setState({ selectedRowKeys: [] })
+		}
+	}
+
 	render() {
-		let { history, users, ...appProps } = this.props
+		let { history, users, user, ...appProps } = this.props
 		return (
 			<Router history={history}>
 				<Layout className="layout">
@@ -69,5 +75,6 @@ const history = createHistory()
 export default createContainer(() => {
 	Meteor.subscribe("allUsers")
 	let users = Meteor.users.find().fetch()
-	return { history, users }
+	let user = Meteor.user()
+	return { history, users, user }
 }, App)

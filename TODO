@@ -1,6 +1,5 @@
 Things to do:
 1. Fix flashing condition bug when list item is checked
-2. Fix navigation issue on logout with app state
 3. Somehow indicate who you are when you are logged in.
 4. Add doctor chat
 2. Build mobile app
