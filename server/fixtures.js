@@ -350,7 +350,7 @@ LOC 1
 ]
 
 if (Patients.find().count() === 0) {
-	for (pt of fixtures) {
+	for (let pt of fixtures) {
 		Patients.insert(pt)
 	}
 }

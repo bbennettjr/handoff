@@ -9,8 +9,6 @@ import "../notifications/notification-config.js"
 // Components
 import Navigation from "../navigation/navigation.js"
 import PatientList from "../patients/patient_list/patient-list.js"
-import PatientDisplay from "../patients/patient/patient-display.js"
-import PatientForm from "../patients/patient/patient-form.js"
 import AccountPage from "../accounts/AccountPage.js"
 import { createContainer } from "meteor/react-meteor-data"
 import NewPatientForm from "../patients/patient/new-patient-form"
@@ -42,8 +40,6 @@ class App extends React.Component {
 					</Header>
 					<Content style={{ padding: "30px 50px" }}>
 						<Switch>
-							<Route exact path="/patient/:_id/edit" component={PatientForm} />
-							<Route exact path="/patient/:_id" component={PatientDisplay} />
 							<Route exact path="/newpatient" component={NewPatientForm} />
 							<Route exact path="/account/:_id" component={AccountPage} />
 							<Route

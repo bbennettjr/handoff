@@ -1,7 +1,6 @@
 import { Table, Row, Col, Tag } from "antd"
 import React from "react"
 import PropTypes from "prop-types"
-import { Link } from "react-router-dom"
 import PatientModal from "./PatientModal.js"
 
 const columns = [
@@ -50,12 +49,6 @@ const columns = [
     width: "150px"
   }
 ]
-
-const renderCondition = condition => {
-  let color =
-    text === "Unstable" ? "red" : text === "Watcher" ? "orange" : "blue"
-  return <Tag color={color}>{text}</Tag>
-}
 
 export default class NewPatientList extends React.Component {
   static propTypes = {
