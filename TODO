@@ -1,20 +1,10 @@
 Things to do:
-1. Rewrite with Material-ui version 1.0
+1. Fix flashing condition bug when list item is checked
+2. Fix navigation issue on logout with app state
+3. Somehow indicate who you are when you are logged in.
+4. Add doctor chat
 2. Build mobile app
-3. Contact Hopkins' TIC for legal/business/startup resources http://www.hopkinsmedicine.org/technology_innovation/index.html
-4. Better "no-patient" view (description of app, "lift" to yourself)
-5. Edit button on patient view (reuse 'new patient view')
-6. Search feature for patient (another url search parameters)
 7. Either manually add users or do email verification somehow.
 8. Make a user put in their medical number and create an account. Two step verification
 9. Adding users and verification: Referal system each user gets 3-5 invites.  Promotes verified doctor invites and exclusivity
-
-(TOP BUTTONS - add all of these on select to the top navigation bar)
-Single patient buttons
-2. "Handoff" patient with single/multiple doctors
-3. "Individual remove" patient removed from me
-3. "Transfer" / "Discharge (mass remove)" patient (automatically removed from all doctors)
-
-List buttons
-1. "Handoff" or "handoff all" on selected patients
-2. "Sort" with dropdown menu for sort options (status, location, diagnosis, etc)
+10. "Sort" with dropdown menu for sort options (status, location, diagnosis, etc)
