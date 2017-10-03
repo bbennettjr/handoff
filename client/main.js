@@ -8,6 +8,7 @@ import "../imports/startup/client/accounts-config.js"
 import App from "../imports/ui/components/app/app.js"
 // Main
 import "./main.html"
+import "./main.css"
 
 Meteor.startup(() => {
   // render to the root div

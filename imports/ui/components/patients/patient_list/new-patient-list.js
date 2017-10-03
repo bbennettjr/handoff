@@ -8,33 +8,51 @@ const columns = [
   {
     title: "Name",
     dataIndex: "name",
-    render: (text, record) => <PatientModal patient={record} />
+    render: (text, record) => <PatientModal patient={record} />,
+    width: "150px"
   },
   {
     title: "Room",
-    dataIndex: "room"
+    dataIndex: "room",
+    width: "50px"
   },
   {
     title: "Condition",
-    dataIndex: "condition"
+    dataIndex: "condition",
+    width: "75px"
   },
   {
     title: "Diagnosis",
-    dataIndex: "diagnosis"
+    dataIndex: "diagnosis",
+    width: "150px",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    maxWidth: "200px"
   },
   {
     title: "History",
-    dataIndex: "hpi"
+    dataIndex: "hpi",
+    width: "250px"
   },
   {
     title: "Vitals",
-    dataIndex: "vitals"
+    dataIndex: "vitals",
+    width: "150px"
   },
   {
     title: "Todo",
-    dataIndex: "todo"
+    dataIndex: "todo",
+    width: "150px"
   }
 ]
+
+const styles = {
+  table: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    maxWidth: "200px"
+  }
+}
 
 export default class NewPatientList extends React.Component {
   static propTypes = {

@@ -1,0 +1,7 @@
+td {
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 250px;
+  min-width: 50px;
+  word-break: break-word;
+}
