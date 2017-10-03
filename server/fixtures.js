@@ -200,6 +200,8 @@ mrsa`,
 		pmh: "HTN, HLD, Chronic pain",
 		medications: "Insulin SS, Pantoprazole 40mg QD",
 		allergies: "NKDA",
+		vitals: "",
+		labs: "Hgb: 12",
 		radiology:
 			"CTHead – ICH 2x1cm deep thalamic, 0.5cm midline shift, surround vasogenic edema",
 		plan: `#AMS – Acute thalamic ICH, likely hypertensive related per radiology
@@ -239,6 +241,8 @@ CKD`,
 		medications:
 			"Albuterol-Ipratropium 1INH Q4, Insulin SS Lispro, SubQ Heparin",
 		allergies: "Latex",
+		vitals: "Pox 89%, RR 35, BP 102/34",
+		labs: "K: 3.9, Na: 135, Cr: 1.7",
 		radiology: `CXR - Worsening CHF b/l 
 Increased infiltrate vs atelecatacsis on R
 Echo – EF 35-40%, wall motion abnormality in LAD distro, decreased RV fx, restrictive diastolic filling
@@ -301,6 +305,8 @@ No NSAIDs
 		medications:
 			"Insulin Critical Care Drip, KCL 40meq repletion, Ondansetron 4mg IV Q6 PRN",
 		allergies: "NKDA",
+		vitals: "Stable",
+		labs: "AG 25, LA 3.5, pH 7.1",
 		radiology: "",
 		plan: `#DKA – BG 883, inc ketones, inc anion gap
 2/2 noncompliance? 
