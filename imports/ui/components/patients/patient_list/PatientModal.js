@@ -29,7 +29,7 @@ class PatientModal extends React.Component {
           {this.props.patient.name}
         </Button>
         <Modal
-          title="Basic Modal"
+          title={this.props.patient.name}
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
