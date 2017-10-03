@@ -9,7 +9,7 @@ class AccountPopover extends React.Component {
   }
 
   render() {
-    // console.log("We are here")
+    const profile = Meteor.user().profile
     return (
       <div>
         <Popover
@@ -28,7 +28,7 @@ class AccountPopover extends React.Component {
             onClick={this.openPopover}
             icon="logout"
           >
-            Logout
+            {`${profile.name}, ${profile.degree}`}
           </Button>
         </Popover>
       </div>
