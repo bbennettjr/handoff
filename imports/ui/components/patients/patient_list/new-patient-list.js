@@ -1,4 +1,4 @@
-import { Table, Row, Col } from "antd"
+import { Table, Row, Col, Tag } from "antd"
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
@@ -19,7 +19,12 @@ const columns = [
   {
     title: "Condition",
     dataIndex: "condition",
-    width: "75px"
+    render: text => {
+      let color =
+        text === "Unstable" ? "red" : text === "Watcher" ? "orange" : "blue"
+      return <Tag color={color}>{text}</Tag>
+    },
+    width: "70px"
   },
   {
     title: "Diagnosis",
@@ -46,12 +51,10 @@ const columns = [
   }
 ]
 
-const styles = {
-  table: {
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    maxWidth: "200px"
-  }
+const renderCondition = condition => {
+  let color =
+    text === "Unstable" ? "red" : text === "Watcher" ? "orange" : "blue"
+  return <Tag color={color}>{text}</Tag>
 }
 
 export default class NewPatientList extends React.Component {

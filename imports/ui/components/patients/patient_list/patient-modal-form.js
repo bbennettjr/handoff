@@ -1,6 +1,17 @@
-import { Modal, Form, Input, Checkbox, Button, notification } from "antd"
+import {
+  Modal,
+  Form,
+  Input,
+  Checkbox,
+  Button,
+  Tag,
+  Select,
+  notification
+} from "antd"
 import React from "react"
 const FormItem = Form.Item
+const { TextArea } = Input
+const Option = Select.Option
 
 class PatientModalForm extends React.Component {
   handleSubmit = e => {
@@ -114,84 +125,96 @@ class PatientModalForm extends React.Component {
               }
             ],
             initialValue: patient.diagnosis
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="HPI" hasFeedback>
           {getFieldDecorator("hpi", {
             rules: [],
             initialValue: patient.hpi
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="PMH" hasFeedback>
           {getFieldDecorator("pmh", {
             rules: [],
             initialValue: patient.pmh
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Medications" hasFeedback>
           {getFieldDecorator("medications", {
             rules: [],
             initialValue: patient.medications
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Allergies" hasFeedback>
           {getFieldDecorator("allergies", {
             rules: [],
             initialValue: patient.allergies
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Vitals" hasFeedback>
           {getFieldDecorator("vitals", {
             rules: [],
             initialValue: patient.vitals
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Labs" hasFeedback>
           {getFieldDecorator("labs", {
             rules: [],
             initialValue: patient.labs
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Radiology" hasFeedback>
           {getFieldDecorator("radiology", {
             rules: [],
             initialValue: patient.radiology
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Care Plan" hasFeedback>
           {getFieldDecorator("plan", {
             rules: [],
             initialValue: patient.plan
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="To Do" hasFeedback>
           {getFieldDecorator("todo", {
             rules: [],
             initialValue: patient.todo
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Coverage Instructions" hasFeedback>
           {getFieldDecorator("coverage", {
             rules: [],
             initialValue: patient.coverage
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Condition" hasFeedback>
           {getFieldDecorator("condition", {
             rules: [],
             initialValue: patient.condition
-          })(<Input />)}
+          })(
+            <Select>
+              <Option value="Unstable">
+                <Tag color="red">Unstable</Tag>
+              </Option>
+              <Option value="Watcher">
+                <Tag color="orange">Watcher</Tag>
+              </Option>
+              <Option value="Stable">
+                <Tag color="blue">Stable</Tag>
+              </Option>
+            </Select>
+          )}
         </FormItem>
 
         <FormItem {...tailFormItemLayout}>

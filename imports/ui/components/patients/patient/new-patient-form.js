@@ -1,6 +1,8 @@
-import { Form, Input, Checkbox, Button, notification } from "antd"
+import { Form, Input, Checkbox, Button, Tag, Select, notification } from "antd"
 import React from "react"
 const FormItem = Form.Item
+const { TextArea } = Input
+const Option = Select.Option
 
 class NewPatientForm extends React.Component {
   handleSubmit = e => {
@@ -13,7 +15,6 @@ class NewPatientForm extends React.Component {
         )
       }
 
-      console.log("Received values of form: ", values)
       // destructure out the names to combine them
       let { firstName, lastName } = values
       values.name = `${firstName} ${lastName}`
@@ -118,19 +119,19 @@ class NewPatientForm extends React.Component {
                 message: "Please input diagnosis"
               }
             ]
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="HPI" hasFeedback>
           {getFieldDecorator("hpi", {
             rules: []
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="PMH" hasFeedback>
           {getFieldDecorator("pmh", {
             rules: []
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem
@@ -140,55 +141,67 @@ class NewPatientForm extends React.Component {
         >
           {getFieldDecorator("medications", {
             rules: []
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Allergies" hasFeedback>
           {getFieldDecorator("allergies", {
             rules: []
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Vitals" hasFeedback>
           {getFieldDecorator("vitals", {
             rules: []
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Labs" hasFeedback>
           {getFieldDecorator("labs", {
             rules: []
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Radiology" hasFeedback>
           {getFieldDecorator("radiology", {
             rules: []
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Care Plan" hasFeedback>
           {getFieldDecorator("plan", {
             rules: []
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="To Do" hasFeedback>
           {getFieldDecorator("todo", {
             rules: []
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Coverage Instructions" hasFeedback>
           {getFieldDecorator("coverage", {
             rules: []
-          })(<Input />)}
+          })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Condition" hasFeedback>
           {getFieldDecorator("condition", {
             rules: []
-          })(<Input />)}
+          })(
+            <Select>
+              <Option value="Unstable">
+                <Tag color="red">Unstable</Tag>
+              </Option>
+              <Option value="Watcher">
+                <Tag color="orange">Watcher</Tag>
+              </Option>
+              <Option value="Stable">
+                <Tag color="blue">Stable</Tag>
+              </Option>
+            </Select>
+          )}
         </FormItem>
 
         <FormItem {...tailFormItemLayout}>
