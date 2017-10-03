@@ -4,6 +4,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import createHistory from "history/createBrowserHistory"
+import "../notifications/notification-config.js"
 
 // Components
 import Navigation from "../navigation/navigation.js"
@@ -13,8 +14,8 @@ import PatientForm from "../patients/patient/patient-form.js"
 import AccountPage from "../accounts/AccountPage.js"
 import { createContainer } from "meteor/react-meteor-data"
 import NewPatientForm from "../patients/patient/new-patient-form"
-// App Component
 
+// App Component
 import { Layout } from "antd"
 let { Header, Content, Footer } = Layout
 class App extends React.Component {
