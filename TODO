@@ -8,3 +8,13 @@ Things to do:
 8. Make a user put in their medical number and create an account. Two step verification
 9. Adding users and verification: Referal system each user gets 3-5 invites.  Promotes verified doctor invites and exclusivity
 10. "Sort" with dropdown menu for sort options (status, location, diagnosis, etc)
+11. create Handoff, LLC -> evaluate our own paperwork vs company creation service (sprite?)
+12. Add medication mongo collection with search-like drop down to add meds to pt easily
+13. Same as medications but for vitals -> create easier way to input vitals
+14. Improve patient search UI to distinguish multiple similar patients 
+15. Follow up with Dr. Karen Scoles (Chief Medical Information Officer) and Cheryl Ralph (IT Director) about details of local install, next steps for us and contract negotiation ($$$$$)
+16. Add a print function.  This adds backwards compatability to print patients if residents need at any time (especially night float w/ 40-60 pts and no working mobile app)
+17a. Build in user feedback UI.  I imagine this two ways: (1) thumbs up and down buttons next to UI elements to gather real time feedback.  (2) A feedback route where they can write more detailed feedback and report bugs.
+17b. Could we use Quality improvement metrics (outcome, process and balancing measures) to iprove the app objectively
+18. Elise's idea about adding a use timer upon login to track time spent interacting with the application
+19. Me to track time of use for the current crozer signout system as cmoparison to 19.
