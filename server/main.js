@@ -2,7 +2,7 @@ import { Meteor } from "meteor/meteor"
 import { Accounts } from "meteor/accounts-base"
 
 // Fixtures
-import "./fixtures.js"
+import "./fixtures/patients.js"
 
 // Collections and Methods
 import "../imports/api/patients/patients.js"

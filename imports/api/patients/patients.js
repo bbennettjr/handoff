@@ -12,10 +12,6 @@ if (Meteor.isServer) {
 	Meteor.publish("patient", ({ match }) => {
 		return Patients.find({ _id: match.params._id })
 	})
-
-	Meteor.publish("allUsers", () => {
-		return Meteor.users.find()
-	})
 }
 
 Meteor.methods({
