@@ -1,9 +1,11 @@
 Things we need to do:
 1. Create a landing page (which might be the real app)
 2. Add medications
-4. Set up account on compose
-5. Push to galaxy
 
+Bugs:
+1. If I change a patient, it pushes to Brad, but it doesn't update Modal
+2. If I remove a patient, then it refreshes everybody
+3. Create our own handoff tag 
 
 
 
