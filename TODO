@@ -6,7 +6,14 @@ Bugs:
 1. If I change a patient, it pushes to Brad, but it doesn't update Modal
 2. If I remove a patient, then it refreshes everybody
 3. Create our own handoff tag 
-
+4. Layout change (move navbar to sidebar drawer thing)
+5. Modals flash when anybody does anything (removes a patient)
+6. Can't handoff patient to multiple doctors. (this one's pretty easy)
+7. Condition div needs to change
+8. Sort features on table
+9. Figure out way to not wrap text in table (put more dividers in )
+10. Create idea of groups, and think about logging in.
+11. Do validated methods, and user checking for meteor methods
 
 
 
