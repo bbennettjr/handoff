@@ -1,16 +1,21 @@
 import { Meteor } from "meteor/meteor"
 import React from "react"
 import { Icon, Input, AutoComplete, notification } from "antd"
-import { Patients } from "../../../../api/patients/patients.js"
+import { Patients } from "/imports/api/patients/patients.js"
 import { createContainer } from "meteor/react-meteor-data"
 
 const Option = AutoComplete.Option
 const OptGroup = AutoComplete.OptGroup
 
 class Search extends React.Component {
-  handleSelect = (value, options) => {
-    Meteor.call("addPatientToUser", value, Meteor.userId(), (err, result) => {
-      if (err) console.error(err)
+  handleSelect = value => {
+    Meteor.call("addPatientToUser", value, Meteor.userId(), err => {
+      if (err) {
+        notification.error({
+          message: "Error",
+          description: "Can't add this patient to user"
+        })
+      }
       notification.success({
         message: "Success",
         description: "Patient added to your covered list."
@@ -58,8 +63,8 @@ class Search extends React.Component {
           allowClear={true}
           placeholder="Search"
           optionLabelProp="name"
-          onSelect={this.handleSelect.bind(this)}
-          filterOption={this.filterOption.bind(this)}
+          onSelect={this.handleSelect}
+          filterOption={this.filterOption}
         >
           <Input
             suffix={<Icon type="search" className="certain-category-icon" />}

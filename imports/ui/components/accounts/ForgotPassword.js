@@ -1,9 +1,8 @@
 import React from "react"
-
 import { Button, Input } from "antd"
 import { Accounts } from "meteor/accounts-base"
-
 import PropTypes from "prop-types"
+
 class ForgotPassword extends React.Component {
   static propTypes = {
     user: PropTypes.object

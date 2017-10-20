@@ -1,14 +1,11 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { Layout, Button } from "antd"
 import AccountPopover from "../accounts/AccountPopover"
 import CallToActionWeb from "../accounts/CallToActionWeb"
 import Search from "./navigation-controls/search.js"
 import "antd/dist/antd.css"
 import PropTypes from "prop-types"
-import { Menu, Dropdown, Icon, notification } from "antd"
-
-let { Header } = Layout
+import { Menu, Dropdown, notification, Button } from "antd"
 
 const styles = {
   title: {
@@ -60,9 +57,12 @@ export default class Navigation extends React.Component {
       "addPatientsToUser",
       this.props.selectedRowKeys,
       otherUserId,
-      (err, res) => {
+      err => {
         if (err) {
-          console.log(err.reason)
+          notification.error({
+            message: "Error",
+            description: `Error moving patient to ${name}`
+          })
         }
         notification.success({
           message: "Success",
@@ -81,9 +81,12 @@ export default class Navigation extends React.Component {
       "removePatientsFromUser",
       this.props.selectedRowKeys,
       myUserId,
-      (err, res) => {
+      err => {
         if (err) {
-          console.log("Problem removing patients from user")
+          notification.error({
+            message: "Error",
+            description: `Problem removing patients from user`
+          })
         }
         notification.info({
           message: "Removed",
@@ -142,14 +145,14 @@ export default class Navigation extends React.Component {
               icon="close"
               type="danger"
               style={styles.leftButtons}
-              onClick={this.onRemoveClick.bind(this)}
+              onClick={this.onRemoveClick}
             >
               Remove
             </Button>
           )}
         </div>
         <div style={styles.right}>
-          {Meteor.user() ? <Search style={styles.rightSearch} /> : <div />}
+          {Meteor.user() ? <Search style={styles.rightSearch} /> : null}
           {Meteor.user() ? (
             <AccountPopover
               history={this.props.history}

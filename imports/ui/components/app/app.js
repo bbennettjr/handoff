@@ -13,6 +13,8 @@ import AccountPage from "../accounts/AccountPage.js"
 import { createContainer } from "meteor/react-meteor-data"
 import NewPatientForm from "../patients/patient/new-patient-form"
 
+import PrivacyPolicy from "../navigation/privacy-policy"
+import TermsOfUse from "../navigation/terms-of-use"
 // App Component
 import { Layout } from "antd"
 let { Header, Content, Footer } = Layout
@@ -48,6 +50,8 @@ class App extends React.Component {
 						<Switch>
 							<Route exact path="/newpatient" component={NewPatientForm} />
 							<Route exact path="/account/:_id" component={AccountPage} />
+							<Route exact path="/privacy-policy" component={PrivacyPolicy} />
+							<Route exact path="/terms-of-use" component={TermsOfUse} />
 							<Route
 								path="/"
 								component={() => (

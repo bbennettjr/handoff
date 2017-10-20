@@ -11,13 +11,11 @@ class PatientModal extends React.Component {
     })
   }
   handleOk = e => {
-    console.log(e)
     this.setState({
       visible: false
     })
   }
   handleCancel = e => {
-    console.log(e)
     this.setState({
       visible: false
     })
@@ -37,7 +35,7 @@ class PatientModal extends React.Component {
         >
           <PatientModalForm
             patient={this.props.patient}
-            closeModal={this.handleOk.bind(this)}
+            closeModal={this.handleOk}
           />
         </Modal>
       </div>

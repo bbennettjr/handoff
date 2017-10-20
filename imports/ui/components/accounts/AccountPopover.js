@@ -5,7 +5,8 @@ import InForm from "./InForm.js"
 
 class AccountPopover extends React.Component {
   static propTypes = {
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    buttonStyle: PropTypes.object.isRequired
   }
 
   render() {
@@ -23,11 +24,7 @@ class AccountPopover extends React.Component {
             />
           }
         >
-          <Button
-            style={this.props.buttonStyle}
-            onClick={this.openPopover}
-            icon="logout"
-          >
+          <Button style={this.props.buttonStyle} icon="logout">
             {`${profile.name}, ${profile.degree}`}
           </Button>
         </Popover>

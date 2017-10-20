@@ -1,3 +1,15 @@
+Things we need to do:
+1. Create a landing page (which might be the real app)
+2. Add medications
+3. Add terms of use, and privacy policy
+4. Set up account on compose
+5. Push to galaxy
+
+
+
+
+
+
 Things to do:
 1. Fix flashing condition bug when list item is checked.
 2. Fix empty condition blue rectangle bug
@@ -18,3 +30,5 @@ Things to do:
 17b. Could we use Quality improvement metrics (outcome, process and balancing measures) to iprove the app objectively
 18. Elise's idea about adding a use timer upon login to track time spent interacting with the application
 19. Me to track time of use for the current crozer signout system as cmoparison to 19.
+
+

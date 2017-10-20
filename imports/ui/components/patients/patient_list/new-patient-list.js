@@ -1,4 +1,4 @@
-import { Table, Row, Col, Tag } from "antd"
+import { Table, Tag } from "antd"
 import React from "react"
 import PropTypes from "prop-types"
 import PatientModal from "./PatientModal.js"

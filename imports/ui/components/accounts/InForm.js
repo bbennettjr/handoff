@@ -1,8 +1,7 @@
 import PropTypes from "prop-types"
 import React from "react"
 import SignOutButton from "./SignOutButton"
-
-import { Button, Avatar } from "antd"
+import { Button } from "antd"
 import { createContainer } from "meteor/react-meteor-data"
 import { Link } from "react-router-dom"
 

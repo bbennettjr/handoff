@@ -1,7 +1,6 @@
 import PropTypes from "prop-types"
 import React from "react"
 import { Button, Popover } from "antd"
-import LoginPopover from "./LoginPopover.js"
 import { createContainer } from "meteor/react-meteor-data"
 import AtForm from "./AtForm.js"
 class CallToActionWeb extends React.Component {

@@ -1,13 +1,4 @@
-import {
-  Modal,
-  Form,
-  Input,
-  Checkbox,
-  Button,
-  Tag,
-  Select,
-  notification
-} from "antd"
+import { Form, Input, Button, Tag, Select, notification } from "antd"
 import React from "react"
 const FormItem = Form.Item
 const { TextArea } = Input
