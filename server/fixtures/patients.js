@@ -1,4 +1,4 @@
-import { Patients } from "../imports/api/patients/patients.js"
+import { Patients } from "../../imports/api/patients/patients.js"
 
 const fixtures = [
 	{

@@ -3,6 +3,7 @@ import { Accounts } from "meteor/accounts-base"
 
 // Fixtures
 import "./fixtures/patients.js"
+import "./fixtures/medications.js"
 
 // Collections and Methods
 import "../imports/api/patients/patients.js"

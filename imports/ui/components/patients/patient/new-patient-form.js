@@ -1,5 +1,6 @@
 import { Form, Input, Button, Tag, Select, notification } from "antd"
 import React from "react"
+import MedicationSelect from "../../medications/MedicationSelect.js"
 const FormItem = Form.Item
 const { TextArea } = Input
 const Option = Select.Option
@@ -134,14 +135,10 @@ class NewPatientForm extends React.Component {
           })(<TextArea autosize />)}
         </FormItem>
 
-        <FormItem
-          {...formItemLayout}
-          label="Applicable Medications"
-          hasFeedback
-        >
+        <FormItem {...formItemLayout} label="Applicable Medications">
           {getFieldDecorator("medications", {
             rules: []
-          })(<TextArea autosize />)}
+          })(<MedicationSelect autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Allergies" hasFeedback>
