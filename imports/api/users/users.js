@@ -7,15 +7,3 @@ if (Meteor.isServer) {
   })
 }
 
-Meteor.methods({
-  updateUser(profile, userId) {
-    Meteor.users.update(
-      { _id: userId },
-      {
-        $set: {
-          profile: profile
-        }
-      }
-    )
-  }
-})

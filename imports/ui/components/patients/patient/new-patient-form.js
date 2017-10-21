@@ -1,6 +1,6 @@
 import { Form, Input, Button, Tag, Select, notification } from "antd"
 import React from "react"
-import MedicationSelect from "../../medications/MedicationSelect.js"
+import MedicationSelect from "/imports/ui/components/medications/MedicationSelect.js"
 import { insertPatient } from "/imports/api/patients/patient-methods.js"
 import HandoffTag from "/imports/ui/components/patients/patient/HandoffTag"
 import { withRouter } from "react-router"

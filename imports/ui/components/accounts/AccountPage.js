@@ -10,6 +10,7 @@ import {
   Input,
   notification
 } from "antd"
+import { updateUser } from "/imports/api/users/user-methods.js"
 const FormItem = Form.Item
 
 class AccountPage extends React.Component {
@@ -28,13 +29,12 @@ class AccountPage extends React.Component {
         company: values.company
       }
 
-      Meteor.call("updateUser", profile, userId, err => {
+      updateUser.call({ profile, userId }, err => {
         if (err) {
           notification.error({
             description: "There was an error creating your account",
             message: "Error in Create"
           })
-          console.log("Create Account error: " + err.reason)
         } else {
           // this.context.router.push("/app")
         }

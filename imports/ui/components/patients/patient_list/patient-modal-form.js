@@ -4,6 +4,7 @@ import { updatePatient } from "/imports/api/patients/patient-methods.js"
 const FormItem = Form.Item
 const { TextArea } = Input
 const Option = Select.Option
+import MedicationSelect from "/imports/ui/components/medications/MedicationSelect.js"
 import HandoffTag from "/imports/ui/components/patients/patient/HandoffTag"
 
 class PatientModalForm extends React.Component {
@@ -139,7 +140,7 @@ class PatientModalForm extends React.Component {
           {getFieldDecorator("medications", {
             rules: [],
             initialValue: patient.medications
-          })(<TextArea autosize />)}
+          })(<MedicationSelect autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Allergies" hasFeedback>
