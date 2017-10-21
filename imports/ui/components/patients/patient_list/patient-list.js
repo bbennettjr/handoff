@@ -32,12 +32,7 @@ class PatientList extends React.Component {
 	}
 
 	render() {
-		return (
-			<div style={{ height: "100%" }}>
-				{this.renderPatientCards()}
-				<div />
-			</div>
-		)
+		return <div style={{ height: "100%" }}>{this.renderPatientCards()}</div>
 	}
 }
 
@@ -51,11 +46,13 @@ export default createContainer(() => {
 	if (user && user.profile && user.profile.coveredPatients) {
 		coveredPatients = user.profile.coveredPatients
 	}
-	Meteor.subscribe("patients")
+	Meteor.subscribe("myPatients")
 
 	const patients = Patients.find({
 		_id: { $in: coveredPatients }
 	}).fetch()
-
+	if (user) {
+		console.log(user.profile.coveredPatients)
+	}
 	return { patients }
 }, PatientList)
