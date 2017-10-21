@@ -9,23 +9,6 @@ class PatientModal extends React.Component {
     setVisible: PropTypes.func.isRequired
   }
 
-  // state = { visible: false }
-  // showModal = e => {
-  //   e.stopPropagation()
-  //   this.setState({
-  //     visible: true
-  //   })
-  // }
-  // handleOk = e => {
-  //   this.setState({
-  //     visible: false
-  //   })
-  // }
-  // handleCancel = e => {
-  //   this.setState({
-  //     visible: false
-  //   })
-  // }
   render() {
     if (!this.props.patient) {
       return null

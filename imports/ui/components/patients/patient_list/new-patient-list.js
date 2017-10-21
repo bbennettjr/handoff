@@ -1,4 +1,4 @@
-import { Table, Tag, Button } from "antd"
+import { Table, Button } from "antd"
 import React from "react"
 import PropTypes from "prop-types"
 import PatientModal from "./PatientModal.js"
@@ -9,26 +9,6 @@ export default class NewPatientList extends React.Component {
     patients: PropTypes.array.isRequired,
     selectedRowKeys: PropTypes.array.isRequired,
     setSelectedRowKeys: PropTypes.func.isRequired
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    return true
-    // console.log("props", this.props)
-    // console.log("state", this.state)
-    // console.log("nextProps", nextProps)
-    // console.log("nextState", nextState)
-    // // return true
-    // let patientsDiff =
-    //   nextProps.patients.sort().join(",") !==
-    //   this.props.patients.sort().join(",")
-
-    // let rowsDiff =
-    //   nextProps.selectedRowKeys.sort().join(",") !==
-    //   this.props.selectedRowKeys.sort().join(",")
-
-    // if (patientsDiff || rowsDiff || nextState.visible !== this.state.visible) {
-    //   return true
-    // }
-    // return false
   }
 
   state = {
