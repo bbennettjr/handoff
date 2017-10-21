@@ -67,7 +67,7 @@ class App extends React.Component {
 					</Content>
 					<Footer style={{ textAlign: "center" }}>
 						<h3 style={{ color: "red" }}>Online Demo</h3>
-						{"Handoff © 2017 All Rights Reserved"}
+						{"Handoff © 2017. All Rights Reserved."}
 					</Footer>
 				</Layout>
 			</Router>

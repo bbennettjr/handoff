@@ -14,130 +14,132 @@ if (Meteor.isServer) {
 	})
 }
 
-Meteor.methods({
-	addPatientsToUser(patientIdList, userId) {
-		if (userId === Meteor.userId()) {
-			throw new Meteor.Error("Handoff error", "Cannot add patients to yourself")
-		}
-		Meteor.users.update(
-			{ _id: userId },
-			{
-				$addToSet: {
-					"profile.coveredPatients": { $each: patientIdList }
-				}
-			}
-		)
-	},
+// testing validated methods
 
-	removePatientsFromUser(patientIdList, userId) {
-		Meteor.users.update(
-			{ _id: userId },
-			{
-				$pullAll: {
-					"profile.coveredPatients": patientIdList
-				}
-			}
-		)
-	},
+// Meteor.methods({
+// 	xxxaddPatientsToUser(patientIdList, userId) {
+// 		if (userId === Meteor.userId()) {
+// 			throw new Meteor.Error("Handoff error", "Cannot add patients to yourself")
+// 		}
+// 		Meteor.users.update(
+// 			{ _id: userId },
+// 			{
+// 				$addToSet: {
+// 					"profile.coveredPatients": { $each: patientIdList }
+// 				}
+// 			}
+// 		)
+// 	},
 
-	addPatientToUser(patientId, userId) {
-		Meteor.users.update(
-			{ _id: userId },
-			{
-				$addToSet: {
-					"profile.coveredPatients": patientId
-				}
-			}
-		)
-	},
-	removePatientFromUser(patientId, userId) {
-		Meteor.users.update(
-			{ _id: userId },
-			{
-				$pull: {
-					"profile.coveredPatients": patientId
-				}
-			}
-		)
-	},
-	addAllPatientsToOtherUserId(otherUserId) {
-		let me = Meteor.user()
-		let coveredPatients = me.profile.coveredPatients
-		Meteor.users.update(
-			{
-				_id: otherUserId
-			},
-			{
-				$addToSet: {
-					"profile.coveredPatients": { $each: coveredPatients }
-				}
-			}
-		)
-	},
+// 	removePatientsFromUser(patientIdList, userId) {
+// 		Meteor.users.update(
+// 			{ _id: userId },
+// 			{
+// 				$pullAll: {
+// 					"profile.coveredPatients": patientIdList
+// 				}
+// 			}
+// 		)
+// 	},
 
-	// insert a patient
-	"patient.insert"(patient) {
-		let userId = Meteor.userId()
-		if (!userId) {
-			throw new Meteor.Error(
-				"Not authorized",
-				"You must sign in to create a patient"
-			)
-		}
+// 	addPatientToUser(patientId, userId) {
+// 		Meteor.users.update(
+// 			{ _id: userId },
+// 			{
+// 				$addToSet: {
+// 					"profile.coveredPatients": patientId
+// 				}
+// 			}
+// 		)
+// 	},
+// 	removePatientFromUser(patientId, userId) {
+// 		Meteor.users.update(
+// 			{ _id: userId },
+// 			{
+// 				$pull: {
+// 					"profile.coveredPatients": patientId
+// 				}
+// 			}
+// 		)
+// 	},
+// 	addAllPatientsToOtherUserId(otherUserId) {
+// 		let me = Meteor.user()
+// 		let coveredPatients = me.profile.coveredPatients
+// 		Meteor.users.update(
+// 			{
+// 				_id: otherUserId
+// 			},
+// 			{
+// 				$addToSet: {
+// 					"profile.coveredPatients": { $each: coveredPatients }
+// 				}
+// 			}
+// 		)
+// 	},
 
-		let insertedId = Patients.insert(patient)
-		Meteor.users.update(
-			{ _id: userId },
-			{ $addToSet: { "profile.coveredPatients": insertedId } }
-		)
-		return { _id: insertedId }
-	},
+// 	// insert a patient
+// 	"patient.insert"(patient) {
+// 		let userId = Meteor.userId()
+// 		if (!userId) {
+// 			throw new Meteor.Error(
+// 				"Not authorized",
+// 				"You must sign in to create a patient"
+// 			)
+// 		}
 
-	// update a patient
-	"patient.update"(patient) {
-		// check that a user is signed in
-		let userId = Meteor.userId()
-		if (!userId) {
-			throw new Meteor.Error(
-				"Not authorized",
-				"You must sign in to create a patient"
-			)
-		}
+// 		let insertedId = Patients.insert(patient)
+// 		Meteor.users.update(
+// 			{ _id: userId },
+// 			{ $addToSet: { "profile.coveredPatients": insertedId } }
+// 		)
+// 		return { _id: insertedId }
+// 	},
 
-		if (!patient._id) {
-			throw new Meteor.Error(
-				"Patient has no _id!",
-				"You must give patient an _id"
-			)
-		}
+// 	// update a patient
+// 	"patient.update"(patient) {
+// 		// check that a user is signed in
+// 		let userId = Meteor.userId()
+// 		if (!userId) {
+// 			throw new Meteor.Error(
+// 				"Not authorized",
+// 				"You must sign in to create a patient"
+// 			)
+// 		}
 
-		// update the patient
-		// kvothe: throwing Meteor.Error reason: "MinimongoError: Mod on _id not allowed"
-		// IDK what this is.
-		Patients.update(patient._id, { $set: patient })
+// 		if (!patient._id) {
+// 			throw new Meteor.Error(
+// 				"Patient has no _id!",
+// 				"You must give patient an _id"
+// 			)
+// 		}
 
-		Meteor.users.update(userId, {
-			$addToSet: { "profile.coveredPatients": patient._id }
-		})
-		return { _id: patient._id }
-	},
+// 		// update the patient
+// 		// kvothe: throwing Meteor.Error reason: "MinimongoError: Mod on _id not allowed"
+// 		// IDK what this is.
+// 		Patients.update(patient._id, { $set: patient })
 
-	// delete a patient
-	"patient.delete"(patientId) {
-		// does the patient exist
-		let patient = Patients.findOne(patientId)
-		if (!patient)
-			throw new Meteor.Error("Does Not Exist", "patient could not be found")
+// 		Meteor.users.update(userId, {
+// 			$addToSet: { "profile.coveredPatients": patient._id }
+// 		})
+// 		return { _id: patient._id }
+// 	},
 
-		// check that user exists and owns patient
-		let user = Meteor.user()
-		if (patient.userId !== user._id)
-			throw new Meteor.Error(
-				"Not Authorized",
-				"You are not the owner of this patient"
-			)
+// 	// delete a patient
+// 	"patient.delete"(patientId) {
+// 		// does the patient exist
+// 		let patient = Patients.findOne(patientId)
+// 		if (!patient)
+// 			throw new Meteor.Error("Does Not Exist", "patient could not be found")
 
-		// delete the patient
-		Patients.remove(patientId)
-	}
-})
+// 		// check that user exists and owns patient
+// 		let user = Meteor.user()
+// 		if (patient.userId !== user._id)
+// 			throw new Meteor.Error(
+// 				"Not Authorized",
+// 				"You are not the owner of this patient"
+// 			)
+
+// 		// delete the patient
+// 		Patients.remove(patientId)
+// 	}
+// })
