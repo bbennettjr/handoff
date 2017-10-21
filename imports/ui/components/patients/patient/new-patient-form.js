@@ -2,6 +2,7 @@ import { Form, Input, Button, Tag, Select, notification } from "antd"
 import React from "react"
 import MedicationSelect from "../../medications/MedicationSelect.js"
 import { insertPatient } from "/imports/api/patients/patient-methods.js"
+import HandoffTag from "/imports/ui/components/patients/patient/HandoffTag"
 const FormItem = Form.Item
 const { TextArea } = Input
 const Option = Select.Option
@@ -190,13 +191,13 @@ class NewPatientForm extends React.Component {
           })(
             <Select>
               <Option value="Unstable">
-                <Tag color="red">Unstable</Tag>
+                <HandoffTag color="red">Unstable</HandoffTag>
               </Option>
               <Option value="Watcher">
-                <Tag color="orange">Watcher</Tag>
+                <HandoffTag color="orange">Watcher</HandoffTag>
               </Option>
               <Option value="Stable">
-                <Tag color="blue">Stable</Tag>
+                <HandoffTag color="blue">Stable</HandoffTag>
               </Option>
             </Select>
           )}

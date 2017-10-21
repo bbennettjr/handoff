@@ -1,60 +1,19 @@
-import { Table, Tag } from "antd"
+import { Table, Tag, Button } from "antd"
 import React from "react"
 import PropTypes from "prop-types"
 import PatientModal from "./PatientModal.js"
-
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    render: (text, record) => <PatientModal patient={record} />,
-    width: "150px"
-  },
-  {
-    title: "Room",
-    dataIndex: "room",
-    width: "50px"
-  },
-  {
-    title: "Condition",
-    dataIndex: "condition",
-    render: text => {
-      let color =
-        text === "Unstable" ? "red" : text === "Watcher" ? "orange" : "blue"
-      return <Tag color={color}>{text}</Tag>
-    },
-    width: "70px"
-  },
-  {
-    title: "Diagnosis",
-    dataIndex: "diagnosis",
-    width: "150px",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    maxWidth: "200px"
-  },
-  {
-    title: "History",
-    dataIndex: "hpi",
-    width: "250px"
-  },
-  {
-    title: "Vitals",
-    dataIndex: "vitals",
-    width: "150px"
-  },
-  {
-    title: "Todo",
-    dataIndex: "todo",
-    width: "150px"
-  }
-]
+import HandoffTag from "/imports/ui/components/patients/patient/HandoffTag"
 
 export default class NewPatientList extends React.Component {
   static propTypes = {
     patients: PropTypes.array.isRequired,
     selectedRowKeys: PropTypes.array.isRequired,
     setSelectedRowKeys: PropTypes.func.isRequired
+  }
+
+  state = {
+    visible: false,
+    patient: null
   }
 
   onRowClick = record => {
@@ -68,6 +27,57 @@ export default class NewPatientList extends React.Component {
   }
 
   render() {
+    const columns = [
+      {
+        title: "Name",
+        dataIndex: "name",
+        render: (text, record) => <Button type="dashed">{record.name}</Button>,
+        width: "150px",
+        onCellClick: (record, event) => {
+          this.setState({ visible: true, patient: record })
+          event.stopPropagation()
+          event.preventDefault()
+        }
+      },
+      {
+        title: "Room",
+        dataIndex: "room",
+        width: "50px"
+      },
+      {
+        title: "Condition",
+        dataIndex: "condition",
+        render: text => {
+          let color =
+            text === "Unstable" ? "red" : text === "Watcher" ? "orange" : "blue"
+          return <HandoffTag color={color}>{text}</HandoffTag>
+        },
+        width: "70px"
+      },
+      {
+        title: "Diagnosis",
+        dataIndex: "diagnosis",
+        width: "150px",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        maxWidth: "200px"
+      },
+      {
+        title: "History",
+        dataIndex: "hpi",
+        width: "250px"
+      },
+      {
+        title: "Vitals",
+        dataIndex: "vitals",
+        width: "150px"
+      },
+      {
+        title: "Todo",
+        dataIndex: "todo",
+        width: "150px"
+      }
+    ]
     let patientsList = this.props.patients
     patientsList.forEach(el => (el.key = el._id))
     return (
@@ -76,7 +86,7 @@ export default class NewPatientList extends React.Component {
           {...this.state}
           rowSelection={{
             selectedRowKeys: this.props.selectedRowKeys,
-            onChange: (selectedRowKeys, selectedRows) => {
+            onChange: selectedRowKeys => {
               this.props.setSelectedRowKeys(selectedRowKeys)
             }
           }}
@@ -84,6 +94,11 @@ export default class NewPatientList extends React.Component {
           columns={columns}
           dataSource={patientsList}
           pagination={false}
+        />
+        <PatientModal
+          visible={this.state.visible}
+          patient={this.state.patient}
+          setVisible={visible => this.setState({ visible })}
         />
       </div>
     )

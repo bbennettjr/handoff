@@ -4,6 +4,7 @@ import { updatePatient } from "/imports/api/patients/patient-methods.js"
 const FormItem = Form.Item
 const { TextArea } = Input
 const Option = Select.Option
+import HandoffTag from "/imports/ui/components/patients/patient/HandoffTag"
 
 class PatientModalForm extends React.Component {
   handleSubmit = e => {
@@ -197,13 +198,13 @@ class PatientModalForm extends React.Component {
           })(
             <Select>
               <Option value="Unstable">
-                <Tag color="red">Unstable</Tag>
+                <HandoffTag color="red">Unstable</HandoffTag>
               </Option>
               <Option value="Watcher">
-                <Tag color="orange">Watcher</Tag>
+                <HandoffTag color="orange">Watcher</HandoffTag>
               </Option>
               <Option value="Stable">
-                <Tag color="blue">Stable</Tag>
+                <HandoffTag color="blue">Stable</HandoffTag>
               </Option>
             </Select>
           )}
