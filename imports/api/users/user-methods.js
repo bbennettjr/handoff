@@ -1,4 +1,3 @@
-import { Patients } from "./patients.js"
 import { ValidatedMethod } from "meteor/mdg:validated-method"
 import { Validator } from "jsonschema"
 const v = new Validator()
