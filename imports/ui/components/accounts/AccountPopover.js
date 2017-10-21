@@ -2,27 +2,19 @@ import PropTypes from "prop-types"
 import React from "react"
 import { Button, Popover } from "antd"
 import InForm from "./InForm.js"
-
 class AccountPopover extends React.Component {
   static propTypes = {
-    history: PropTypes.object.isRequired,
     buttonStyle: PropTypes.object.isRequired
   }
 
   render() {
-    const profile = Meteor.user().profile
+    const profile = this.props.user && this.props.user.profile
     return (
       <div>
         <Popover
           style={{ backgroundColor: "#fff", display: "flex" }}
           trigger="click"
-          content={
-            <InForm
-              isMobile={false}
-              closePopover={() => this.setState({ open: false })}
-              history={this.props.history}
-            />
-          }
+          content={<InForm isMobile={false} />}
         >
           <Button style={this.props.buttonStyle} icon="logout">
             {`${profile.name}, ${profile.degree}`}

@@ -13,11 +13,12 @@ import NewPatientForm from "../patients/patient/new-patient-form"
 
 import PrivacyPolicy from "../navigation/privacy-policy"
 import TermsOfUse from "../navigation/terms-of-use"
+import { createContainer } from "meteor/react-meteor-data"
 // App Component
 import { Layout } from "antd"
 let { Header, Content, Footer } = Layout
 
-export default class App extends React.Component {
+class App extends React.Component {
 	render() {
 		return (
 			<Router>
@@ -43,3 +44,8 @@ export default class App extends React.Component {
 		)
 	}
 }
+
+export default createContainer(() => {
+	let user = Meteor.user()
+	return { user }
+}, App)

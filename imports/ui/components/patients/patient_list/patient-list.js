@@ -12,8 +12,6 @@ class PatientList extends React.Component {
 	static propTypes = {
 		patients: PropTypes.array.isRequired,
 		users: PropTypes.array.isRequired
-		// selectedRowKeys: PropTypes.array.isRequired,
-		// setSelectedRowKeys: PropTypes.func.isRequired
 	}
 
 	state = {
@@ -25,7 +23,7 @@ class PatientList extends React.Component {
 	}
 
 	renderPatientCards() {
-		if (!Meteor.user()) return <LoggedOutBanner />
+		if (!this.props.user) return <LoggedOutBanner />
 
 		const patients = this.props.patients
 		if (patients.length === 0) {
@@ -49,7 +47,6 @@ class PatientList extends React.Component {
 	}
 
 	render() {
-		console.log(this.props)
 		return <div style={{ height: "100%" }}>{this.renderPatientCards()}</div>
 	}
 }

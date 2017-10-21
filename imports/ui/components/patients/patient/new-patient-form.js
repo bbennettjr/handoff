@@ -3,6 +3,7 @@ import React from "react"
 import MedicationSelect from "../../medications/MedicationSelect.js"
 import { insertPatient } from "/imports/api/patients/patient-methods.js"
 import HandoffTag from "/imports/ui/components/patients/patient/HandoffTag"
+import { withRouter } from "react-router"
 const FormItem = Form.Item
 const { TextArea } = Input
 const Option = Select.Option
@@ -218,4 +219,4 @@ class NewPatientForm extends React.Component {
   }
 }
 
-export default Form.create()(NewPatientForm)
+export default withRouter(Form.create()(NewPatientForm))

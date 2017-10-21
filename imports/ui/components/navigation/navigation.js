@@ -54,11 +54,11 @@ class Navigation extends React.Component {
           </Link>
         </div>
         <div style={styles.right}>
-          {Meteor.user() ? <Search style={styles.rightSearch} /> : null}
-          {Meteor.user() ? (
+          {this.props.user ? <Search style={styles.rightSearch} /> : null}
+          {this.props.user ? (
             <AccountPopover
-              history={this.props.history}
               buttonStyle={styles.rightButtons}
+              user={this.props.user}
             />
           ) : (
             <CallToActionWeb />

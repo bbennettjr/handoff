@@ -2,17 +2,15 @@ Things we need to do:
 1. Create a landing page (which might be the real app)
 
 Bugs:
-1. If I change a patient, it pushes to Brad, but it doesn't update Modal
 4. Layout change (move navbar to sidebar drawer thing)
 6. Can't handoff patient to multiple doctors. (this one's pretty easy)
 8. Sort features on table (brad)
 10. Create idea of groups, and think about logging in.
-12. If you change your name then everybody refreshes
-
+11. More work to get 100% completion on medications list
+12. Validated method for users
 
 
 Things to do:
-3. Somehow indicate who you are when you are logged in.
 4. Add doctor chat
 2. Build mobile app
 7. Either manually add users or do email verification somehow.
