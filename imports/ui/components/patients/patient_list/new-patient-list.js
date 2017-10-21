@@ -2,7 +2,7 @@ import { Table, Tag } from "antd"
 import React from "react"
 import PropTypes from "prop-types"
 import PatientModal from "./PatientModal.js"
-
+import HandoffTag from "/imports/ui/components/patients/patient/HandoffTag"
 const columns = [
   {
     title: "Name",
@@ -21,7 +21,11 @@ const columns = [
     render: text => {
       let color =
         text === "Unstable" ? "red" : text === "Watcher" ? "orange" : "blue"
-      return <Tag color={color}>{text}</Tag>
+      return (
+        <HandoffTag color={color} style={{ transition: null }}>
+          {text}
+        </HandoffTag>
+      )
     },
     width: "70px"
   },
