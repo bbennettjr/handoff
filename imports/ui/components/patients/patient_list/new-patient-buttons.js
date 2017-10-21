@@ -33,7 +33,7 @@ const styles = {
     flex: 1
   },
   leftButtons: {
-    marginRight: "16px"
+    marginRight: "8px"
   },
   rightSearch: {
     maxWidth: "400px",
@@ -123,27 +123,29 @@ export default class NewPatientButtons extends React.Component {
       >
         <div style={styles.menu}>
           <div style={styles.left}>
-            {this.props.selectedRowKeys.length > 0 && (
-              <Dropdown overlay={menu}>
-                <Button
-                  icon="share-alt"
-                  type="primary"
-                  style={styles.leftButtons}
-                >
-                  Handoff
-                </Button>
-              </Dropdown>
-            )}
-            {this.props.selectedRowKeys.length > 0 && (
+            <Dropdown
+              overlay={menu}
+              disabled={this.props.selectedRowKeys.length === 0}
+            >
               <Button
-                icon="close"
-                type="danger"
+                icon="share-alt"
+                type="primary"
                 style={styles.leftButtons}
-                onClick={this.onRemoveClick}
+                disabled={this.props.selectedRowKeys.length === 0}
               >
-                Remove
+                Handoff
               </Button>
-            )}
+            </Dropdown>
+
+            <Button
+              icon="close"
+              type="danger"
+              style={styles.leftButtons}
+              onClick={this.onRemoveClick}
+              disabled={this.props.selectedRowKeys.length === 0}
+            >
+              Remove
+            </Button>
           </div>
         </div>
       </div>
