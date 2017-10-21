@@ -8,14 +8,13 @@ class SignOutButton extends React.Component {
     // Agreed
     return (
       <div
-        style={{ textAlign: "center", marginTop: "8px", marginBottom: "8px" }}
+        style={{
+          textAlign: "center",
+          marginTop: "8px",
+          marginBottom: "8px"
+        }}
       >
-        <Button
-          onClick={() => Meteor.logout()}
-          style={{ width: "80%", maxWidth: "256px" }}
-        >
-          Sign Out
-        </Button>
+        <Button onClick={() => Meteor.logout()}>Sign Out</Button>
       </div>
     )
   }

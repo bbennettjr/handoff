@@ -32,7 +32,9 @@ class Navigation extends React.Component {
     return (
       <div style={styles.menu}>
         <div style={styles.right}>
-          {this.props.user ? <Search style={styles.rightSearch} /> : null}
+          {this.props.user && !this.props.isMobile ? (
+            <Search style={styles.rightSearch} />
+          ) : null}
           {this.props.user ? (
             <AccountPopover
               buttonStyle={styles.rightButtons}
