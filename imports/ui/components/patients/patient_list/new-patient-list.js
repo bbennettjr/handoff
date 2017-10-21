@@ -78,7 +78,7 @@ export default class NewPatientList extends React.Component {
       {
         title: "History",
         dataIndex: "hpi",
-        width: "250px"
+        width: "100px"
       },
       {
         title: "Vitals",
