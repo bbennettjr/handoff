@@ -19,6 +19,8 @@ import { Layout, Menu, Breadcrumb, Icon } from "antd"
 const { Header, Content, Footer, Sider } = Layout
 const SubMenu = Menu.SubMenu
 
+import { Link } from "react-router-dom"
+
 class App extends React.Component {
 	state = {
 		collapsed: false
@@ -47,7 +49,16 @@ class App extends React.Component {
 								marginLeft: "20px"
 							}}
 						>
-							Handoff
+							<Link
+								to="/"
+								style={{
+									cursor: "pointer",
+									color: "white",
+									textDecoration: "none"
+								}}
+							>
+								Handoff
+							</Link>
 						</div>
 						<Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
 							<Menu.Item key="1">
