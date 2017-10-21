@@ -17,7 +17,6 @@ import { createContainer } from "meteor/react-meteor-data"
 // App Component
 import { Layout, Menu, Icon } from "antd"
 const { Header, Content, Footer, Sider } = Layout
-const SubMenu = Menu.SubMenu
 
 import { Link } from "react-router-dom"
 
@@ -47,66 +46,67 @@ class App extends React.Component {
 		return (
 			<Router>
 				<Layout style={{ minHeight: "100vh" }}>
-					<Sider
-						collapsible
-						collapsed={this.state.collapsed}
-						onCollapse={this.onCollapse}
-					>
-						<div
-							className="logo"
-							style={{
-								height: "64px",
-								color: "white",
-								display: "flex",
-								alignItems: "center",
-								fontSize: "20px",
-								marginLeft: "20px"
-							}}
+					{Meteor.user() && (
+						<Sider
+							collapsible
+							collapsed={this.state.collapsed}
+							onCollapse={this.onCollapse}
 						>
-							<Link
-								to="/"
+							<div
+								className="logo"
 								style={{
-									cursor: "pointer",
+									height: "64px",
 									color: "white",
-									textDecoration: "none"
+									display: "flex",
+									alignItems: "center",
+									fontSize: "20px",
+									marginLeft: "20px"
 								}}
 							>
-								Handoff
-							</Link>
-						</div>
-						<Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-							{Meteor.user() && (
-								<Menu.Item key="sub2">
-									<Link to={`/`}>
-										<span>
-											<Icon type="team" />
-											<span>Patient List</span>
-										</span>
-									</Link>
-								</Menu.Item>
-							)}
-							{Meteor.user() && (
-								<Menu.Item key="1">
-									<Link to="/newpatient">
-										<Icon type="user-add" />
-										<span>New Patient</span>
-									</Link>
-								</Menu.Item>
-							)}
+								<Link
+									to="/"
+									style={{
+										cursor: "pointer",
+										color: "white",
+										textDecoration: "none"
+									}}
+								>
+									Handoff
+								</Link>
+							</div>
+							<Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+								{Meteor.user() && (
+									<Menu.Item key="sub2">
+										<Link to={`/`}>
+											<span>
+												<Icon type="team" />
+												<span>Patient List</span>
+											</span>
+										</Link>
+									</Menu.Item>
+								)}
+								{Meteor.user() && (
+									<Menu.Item key="1">
+										<Link to="/newpatient">
+											<Icon type="user-add" />
+											<span>New Patient</span>
+										</Link>
+									</Menu.Item>
+								)}
 
-							{Meteor.user() && (
-								<Menu.Item key="sub1">
-									<Link to={`/account/${Meteor.user()._id}`}>
-										<span>
-											<Icon type="user" />
-											<span>Account</span>
-										</span>
-									</Link>
-								</Menu.Item>
-							)}
-						</Menu>
-					</Sider>
-
+								{Meteor.user() && (
+									<Menu.Item key="sub1">
+										<Link to={`/account/${Meteor.user()._id}`}>
+											<span>
+												<Icon type="user" />
+												<span>Account</span>
+											</span>
+										</Link>
+									</Menu.Item>
+								)}
+							</Menu>
+						</Sider>
+					)}
 					<Layout className="layout">
 						<Header>
 							<Navigation isMobile={this.state.isMobile} />

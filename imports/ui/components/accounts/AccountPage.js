@@ -44,6 +44,9 @@ class AccountPage extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form
     const user = Meteor.user()
+    if (!user) {
+      return null
+    }
     return (
       <Card>
         <Form onSubmit={this.handleSubmit} className="login-form">

@@ -16,6 +16,14 @@ const styles = {
     alignItems: "baseline",
     flex: 1
   },
+  left: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "baseline",
+    flex: 1,
+    color: "white",
+    fontSize: "20px"
+  },
   rightSearch: {
     maxWidth: "400px",
     alignSelf: "center",
@@ -31,6 +39,7 @@ class Navigation extends React.Component {
   render() {
     return (
       <div style={styles.menu}>
+        {!Meteor.user() && <div style={styles.left}>Handoff</div>}
         <div style={styles.right}>
           {this.props.user && !this.props.isMobile ? (
             <Search style={styles.rightSearch} />

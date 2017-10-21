@@ -1,4 +1,4 @@
-import { Modal, Button } from "antd"
+import { Modal } from "antd"
 import PatientModalForm from "./patient-modal-form.js"
 import React from "react"
 import PropTypes from "prop-types"
@@ -22,6 +22,7 @@ class PatientModal extends React.Component {
           onOk={() => this.props.setVisible(false)}
           onCancel={() => this.props.setVisible(false)}
           footer={null}
+          style={{ top: 20 }}
         >
           <PatientModalForm
             patient={this.props.patient}
