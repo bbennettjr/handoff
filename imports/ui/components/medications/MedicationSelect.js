@@ -20,9 +20,12 @@ class MedicationSelect extends React.Component {
   }
   renderOptions() {
     let meds = this.props.medications
-    let key = 0
-    return meds.map(m => {
-      return <Option key={key++}>{`${m.name}`}</Option>
+    return meds.map((m, i) => {
+      return (
+        <Option
+          key={`${m.name} ${m.strength.toString()} ${m.unit} ${m.route.toString()} ${m.frequency.toString()}`}
+        >{`${m.name}`}</Option>
+      )
     })
   }
   render() {
@@ -30,8 +33,6 @@ class MedicationSelect extends React.Component {
       <Select
         mode="multiple"
         placeholder="Select medications"
-        defaultValue={[""]}
-        allowClear
         onChange={this.handleChange.bind(this)}
       >
         {this.renderOptions()}
