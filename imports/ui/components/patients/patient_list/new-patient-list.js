@@ -31,7 +31,10 @@ export default class NewPatientList extends React.Component {
       {
         title: "Name",
         dataIndex: "name",
-        render: (text, record) => <Button type="dashed">{record.name}</Button>,
+        render: (text, record) =>
+          <Button type="dashed">
+            {record.name}
+          </Button>,
         width: "150px",
         onCellClick: (record, event) => {
           this.setState({ visible: true, patient: record })
@@ -45,7 +48,7 @@ export default class NewPatientList extends React.Component {
         sorter: (a, b) => {
           return a.room.charCodeAt(0) - b.room.charCodeAt(0)
         },
-        width: "200px"
+        width: "70px"
       },
       {
         title: "Condition",
@@ -53,7 +56,11 @@ export default class NewPatientList extends React.Component {
         render: text => {
           let color =
             text === "Unstable" ? "red" : text === "Watcher" ? "orange" : "blue"
-          return <HandoffTag color={color}>{text}</HandoffTag>
+          return (
+            <HandoffTag color={color}>
+              {text}
+            </HandoffTag>
+          )
         },
         sorter: (a, b) => {
           return a.condition.length - b.condition.length
