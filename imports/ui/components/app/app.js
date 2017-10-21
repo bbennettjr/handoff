@@ -80,7 +80,6 @@ const history = createHistory()
 export default createContainer(() => {
 	Meteor.subscribe("allUsers")
 	let users = Meteor.users.find().fetch()
-	console.log(users)
 	let user = Meteor.user()
 	return { history, users, user }
 }, App)

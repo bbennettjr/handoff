@@ -187,7 +187,12 @@ class NewPatientForm extends React.Component {
 
         <FormItem {...formItemLayout} label="Condition" hasFeedback>
           {getFieldDecorator("condition", {
-            rules: []
+            rules: [
+              {
+                required: true,
+                message: "Please select condition"
+              }
+            ]
           })(
             <Select>
               <Option value="Unstable">

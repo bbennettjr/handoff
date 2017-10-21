@@ -193,7 +193,12 @@ class PatientModalForm extends React.Component {
 
         <FormItem {...formItemLayout} label="Condition" hasFeedback>
           {getFieldDecorator("condition", {
-            rules: [],
+            rules: [
+              {
+                required: true,
+                message: "Please select condition"
+              }
+            ],
             initialValue: patient.condition
           })(
             <Select>

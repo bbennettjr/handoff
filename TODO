@@ -1,24 +1,17 @@
 Things we need to do:
 1. Create a landing page (which might be the real app)
-2. Add medications (Brad killin it)
 
 Bugs:
 1. If I change a patient, it pushes to Brad, but it doesn't update Modal
-2. If I remove a patient, then it refreshes everybody
 4. Layout change (move navbar to sidebar drawer thing)
-5. Modals flash when anybody does anything (removes a patient) (dan)
 6. Can't handoff patient to multiple doctors. (this one's pretty easy)
 8. Sort features on table (brad)
-9. Figure out way to not wrap text in table (put more dividers in )
 10. Create idea of groups, and think about logging in.
-11. Do validated methods, and user checking for meteor methods
-
+12. If you change your name then everybody refreshes
 
 
 
 Things to do:
-1. Fix flashing condition bug when list item is checked.
-2. Fix empty condition blue rectangle bug
 3. Somehow indicate who you are when you are logged in.
 4. Add doctor chat
 2. Build mobile app

@@ -28,7 +28,7 @@ const schemas = {
       createdAt: { type: "date" },
       updatedAt: { type: "date" }
     },
-    required: ["firstName", "lastName", "room", "diagnosis"]
+    required: ["firstName", "lastName", "room", "diagnosis", "condition"]
   },
   patientId: { type: "string" },
   patientIdList: { type: "array", items: { type: "string" } }
