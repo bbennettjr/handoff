@@ -5,6 +5,10 @@ import CallToActionWeb from "../accounts/CallToActionWeb"
 import Search from "./navigation-controls/search.js"
 import "antd/dist/antd.css"
 import PropTypes from "prop-types"
+import {
+  addPatientsToUser,
+  removePatientsFromUser
+} from "/imports/api/patients/patient-methods.js"
 import { Menu, Dropdown, notification, Button } from "antd"
 
 const styles = {
@@ -53,47 +57,43 @@ export default class Navigation extends React.Component {
   }
 
   onClickDoctor = (otherUserId, name) => {
-    Meteor.call(
-      "addPatientsToUser",
-      this.props.selectedRowKeys,
-      otherUserId,
+    addPatientsToUser.call(
+      { patientIdList: this.props.selectedRowKeys, otherUserId: otherUserId },
       err => {
         if (err) {
           notification.error({
             message: "Error",
             description: `Error moving patient to ${name}`
           })
+        } else {
+          notification.success({
+            message: "Success",
+            description: `${name} received your handoff.`
+          })
         }
-        notification.success({
-          message: "Success",
-          description: `${name} received your handoff.`
-        })
       }
     )
-    // Remove patients from current user to complete 'handoff'
-    this.onRemoveClick()
   }
 
   onRemoveClick = () => {
     let myUserId = Meteor.userId()
-    const plural = this.props.selectedRowKeys.length
-    Meteor.call(
-      "removePatientsFromUser",
-      this.props.selectedRowKeys,
-      myUserId,
+    const plural = this.props.selectedRowKeys.length > 1 ? true : false
+    removePatientsFromUser.call(
+      { patientIdList: this.props.selectedRowKeys, userId: myUserId },
       err => {
         if (err) {
           notification.error({
             message: "Error",
             description: `Problem removing patients from user`
           })
+        } else {
+          notification.info({
+            message: "Removed",
+            description: `Patient${plural
+              ? "s"
+              : ""} removed from covered list.`
+          })
         }
-        notification.info({
-          message: "Removed",
-          description: `Patient${plural > 1
-            ? "s"
-            : ""} removed from covered list.`
-        })
       }
     )
     this.props.setSelectedRowKeys([])

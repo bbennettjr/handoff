@@ -18,6 +18,9 @@ class MedicationSelect extends React.Component {
   handleChange(value) {
     console.log(`selected ${value}`)
   }
+  filterOption(inputValue, option) {
+    return !!option.key.toLowerCase().includes(inputValue.toLowerCase())
+  }
   renderOptions() {
     let meds = this.props.medications
     return meds.map((m, i) => {
@@ -33,6 +36,7 @@ class MedicationSelect extends React.Component {
       <Select
         mode="multiple"
         placeholder="Select medications"
+        filterOption={this.filterOption.bind(this)}
         onChange={this.handleChange.bind(this)}
       >
         {this.renderOptions()}

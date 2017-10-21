@@ -1,5 +1,6 @@
 import { Form, Input, Button, Tag, Select, notification } from "antd"
 import React from "react"
+import { updatePatient } from "/imports/api/patients/patient-methods.js"
 const FormItem = Form.Item
 const { TextArea } = Input
 const Option = Select.Option
@@ -24,7 +25,7 @@ class PatientModalForm extends React.Component {
       let patient = this.props.patient
       patient.updatedAt = new Date()
       patient = Object.assign(patient, values)
-      Meteor.call("patient.update", patient, (error, result) => {
+      updatePatient.call({ patient }, (error, result) => {
         if (error) {
           notification.error({
             message: "Can't update patient",

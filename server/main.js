@@ -6,8 +6,9 @@ import "./fixtures/patients.js"
 import "./fixtures/medications.js"
 
 // Collections and Methods
-import "../imports/api/patients/patients.js"
-import "../imports/api/users/users.js"
+import "/imports/api/patients/patients.js"
+import "/imports/api/patients/patient-methods.js"
+import "/imports/api/users/users.js"
 
 Accounts.onCreateUser((options, user) => {
   const customizedUser = Object.assign({}, user)

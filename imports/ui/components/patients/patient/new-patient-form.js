@@ -1,6 +1,7 @@
 import { Form, Input, Button, Tag, Select, notification } from "antd"
 import React from "react"
 import MedicationSelect from "../../medications/MedicationSelect.js"
+import { insertPatient } from "/imports/api/patients/patient-methods.js"
 import HandoffTag from "/imports/ui/components/patients/patient/HandoffTag"
 const FormItem = Form.Item
 const { TextArea } = Input
@@ -29,7 +30,7 @@ class NewPatientForm extends React.Component {
         },
         values
       )
-      Meteor.call("patient.insert", patient, (error, result) => {
+      insertPatient.call({ patient }, (error, result) => {
         if (error) {
           notification.error({
             message: "Can't add patient",
