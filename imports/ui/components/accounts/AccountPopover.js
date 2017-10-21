@@ -2,6 +2,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import { Button, Popover } from "antd"
 import InForm from "./InForm.js"
+import SignOutButton from "./SignOutButton"
 class AccountPopover extends React.Component {
   static propTypes = {
     buttonStyle: PropTypes.object.isRequired
@@ -14,7 +15,7 @@ class AccountPopover extends React.Component {
         <Popover
           style={{ backgroundColor: "#fff", display: "flex" }}
           trigger="click"
-          content={<InForm isMobile={false} />}
+          content={<SignOutButton />}
         >
           <Button style={this.props.buttonStyle} icon="logout">
             {`${profile.name}, ${profile.degree}`}

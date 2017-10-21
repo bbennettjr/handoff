@@ -123,17 +123,6 @@ export default class NewPatientButtons extends React.Component {
       >
         <div style={styles.menu}>
           <div style={styles.left}>
-            {Meteor.user() && (
-              <Link to="/newpatient">
-                <Button
-                  icon="user-add"
-                  type="primary"
-                  style={styles.leftButtons}
-                >
-                  New Patient
-                </Button>
-              </Link>
-            )}
             {this.props.selectedRowKeys.length > 0 && (
               <Dropdown overlay={menu}>
                 <Button
