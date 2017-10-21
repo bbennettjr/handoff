@@ -111,7 +111,15 @@ class App extends React.Component {
 						<Header>
 							<Navigation isMobile={this.state.isMobile} />
 						</Header>
-						<Content style={{ padding: "30px 50px" }}>
+						<Content
+							style={
+								this.state.isMobile ? (
+									{ paddingTop: "20px" }
+								) : (
+									{ padding: "30px 50px" }
+								)
+							}
+						>
 							<Switch>
 								<Route exact path="/newpatient" component={NewPatientForm} />
 								<Route exact path="/account/:_id" component={AccountPage} />
