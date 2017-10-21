@@ -13,8 +13,7 @@ export default class NewPatientList extends React.Component {
 
   state = {
     visible: false,
-    patient: null,
-    sort: "descend"
+    patient: null
   }
 
   onRowClick = record => {
@@ -49,7 +48,7 @@ export default class NewPatientList extends React.Component {
         sorter: (a, b) => {
           return a.room.charCodeAt(0) - b.room.charCodeAt(0)
         },
-        width: "60px"
+        width: "70px"
       },
       {
         title: "Condition",
