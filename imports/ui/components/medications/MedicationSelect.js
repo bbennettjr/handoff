@@ -8,7 +8,11 @@ const Option = Select.Option
 
 const children = []
 for (let i = 10; i < 36; i++) {
-  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>)
+  children.push(
+    <Option key={i.toString(36) + i}>
+      {i.toString(36) + i}
+    </Option>
+  )
 }
 
 class MedicationSelect extends React.Component {
@@ -16,18 +20,21 @@ class MedicationSelect extends React.Component {
     medications: PropTypes.array.isRequired
   }
   handleChange(value) {
-    console.log(`selected ${value}`)
+    // console.slog(`selected ${value}`)
   }
   filterOption(inputValue, option) {
+    // consider using Fuse.js -> npm install fuse.js as a fuzzy search js library
+    // make module import for regexp creation function based on user string input
+    // -> /(ta)+\w*\s?\w*(3)+\d*/ig where ta are digits, 3 is number
     return !!option.key.toLowerCase().includes(inputValue.toLowerCase())
   }
   renderOptions() {
     let meds = this.props.medications
     return meds.map((m, i) => {
       return (
-        <Option
-          key={`${m.name} ${m.strength.toString()} ${m.unit} ${m.route.toString()} ${m.frequency.toString()}`}
-        >{`${m.name}`}</Option>
+        <Option key={m.prescription}>
+          {m.prescription}
+        </Option>
       )
     })
   }
