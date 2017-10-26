@@ -2,17 +2,14 @@ import { Meteor } from "meteor/meteor"
 import React from "react"
 import PropTypes from "prop-types"
 import { withTracker } from "meteor/react-meteor-data"
-import { Medications } from "../../../api/medications/medications.js"
+import { Medications } from "/imports/api/medications/medications.js"
+import filter from "/imports/api/medications/select-regexp.js"
 import { Select } from "antd"
 const Option = Select.Option
 
 const children = []
 for (let i = 10; i < 36; i++) {
-  children.push(
-    <Option key={i.toString(36) + i}>
-      {i.toString(36) + i}
-    </Option>
-  )
+  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>)
 }
 
 class MedicationSelect extends React.Component {
@@ -26,16 +23,12 @@ class MedicationSelect extends React.Component {
     // consider using Fuse.js -> npm install fuse.js as a fuzzy search js library
     // make module import for regexp creation function based on user string input
     // -> /(ta)+\w*\s?\w*(3)+\d*/ig where ta are digits, 3 is number
-    return !!option.key.toLowerCase().includes(inputValue.toLowerCase())
+    return filter(inputValue, option.props.children)
   }
   renderOptions() {
     let meds = this.props.medications
     return meds.map((m, i) => {
-      return (
-        <Option key={m.prescription}>
-          {m.prescription}
-        </Option>
-      )
+      return <Option key={m._id}>{m.prescription}</Option>
     })
   }
   render() {
