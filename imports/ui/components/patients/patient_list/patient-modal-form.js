@@ -35,6 +35,10 @@ class PatientModalForm extends React.Component {
             description: error.reason
           })
         } else {
+          notification.success({
+            message: "Patient update",
+            description: `${patient.name} updated successfully`
+          })
           this.props.form.resetFields()
           this.props.closeModal()
         }
@@ -142,8 +146,8 @@ class PatientModalForm extends React.Component {
 
         <FormItem {...formItemLayout} label="Medications" hasFeedback>
           {getFieldDecorator("medications", {
-            rules: []
-            // initialValue: patient.medications
+            rules: [],
+            initialValue: patient.medications
           })(<MedicationSelect autosize />)}
         </FormItem>
 

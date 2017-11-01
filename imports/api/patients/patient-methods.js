@@ -31,7 +31,8 @@ const schemas = {
     required: ["firstName", "lastName", "room", "diagnosis", "condition"]
   },
   patientId: { type: "string" },
-  patientIdList: { type: "array", items: { type: "string" } }
+  patientIdList: { type: "array", items: { type: "string" } },
+  userId: { type: "string" }
 }
 
 // Validated methods
@@ -42,18 +43,16 @@ export const insertPatient = new ValidatedMethod({
     if (!result.valid) throw new ValidationError()
   },
   run({ patient }) {
-    let userId = Meteor.userId()
-    if (!userId) {
+    if (!this.userId) {
       throw new Meteor.Error(
         "Not authorized",
         "You must sign in to create a patient"
       )
     }
     let insertedId = Patients.insert(patient)
-    Meteor.users.update(
-      { _id: userId },
-      { $addToSet: { "profile.coveredPatients": insertedId } }
-    )
+    Meteor.users.update(this.userId, {
+      $addToSet: { "profile.coveredPatients": insertedId }
+    })
     return { _id: insertedId }
   }
 })
@@ -65,8 +64,7 @@ export const updatePatient = new ValidatedMethod({
     if (!result.valid) throw new ValidationError()
   },
   run({ patient }) {
-    let userId = Meteor.userId()
-    if (!userId) {
+    if (!this.userId) {
       throw new Meteor.Error(
         "Not authorized",
         "You must sign in to update a patient"
@@ -81,28 +79,28 @@ export const updatePatient = new ValidatedMethod({
 
     Patients.update(patient._id, { $set: patient })
 
-    Meteor.users.update(userId, {
+    Meteor.users.update(this.userId, {
       $addToSet: { "profile.coveredPatients": patient._id }
     })
     return { _id: patient._id }
   }
 })
 
-export const addPatientToUser = new ValidatedMethod({
-  name: "addPatientToUser",
-  validate({ patientId, userId }) {
-    const result = v.validate(patientId, schemas.patientId)
-    if (!result.valid) throw new ValidationError()
+export const addPatientToSelf = new ValidatedMethod({
+  name: "addPatientToSelf",
+  validate({ patientId }) {
+    const r = v.validate(patientId, schemas.patientId)
+    if (!r.valid) throw new ValidationError()
   },
-  run({ patientId, userId }) {
-    if (userId !== Meteor.userId()) {
+  run({ patientId }) {
+    if (!this.userId) {
       throw new Meteor.Error(
         "Handoff error",
         "Error adding patient to yourself"
       )
     }
     Meteor.users.update(
-      { _id: userId },
+      { _id: this.userId },
       {
         $addToSet: {
           "profile.coveredPatients": patientId
@@ -115,11 +113,12 @@ export const addPatientToUser = new ValidatedMethod({
 export const addPatientsToUser = new ValidatedMethod({
   name: "addPatientsToUser",
   validate({ patientIdList, otherUserId }) {
-    const result = v.validate(patientIdList, schemas.patientIdList)
-    if (!result.valid) throw new ValidationError()
+    const r1 = v.validate(patientIdList, schemas.patientIdList)
+    const r2 = v.validate(otherUserId, schemas.userId)
+    if (!r1.valid || !r2.valid) throw new ValidationError()
   },
   run({ patientIdList, otherUserId }) {
-    if (!Meteor.userId()) {
+    if (!this.userId) {
       throw new Meteor.Error(
         "Handoff error",
         "You must be logged in to handoff patients"

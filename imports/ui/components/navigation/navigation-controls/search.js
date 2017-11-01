@@ -3,29 +3,26 @@ import React from "react"
 import { Icon, Input, AutoComplete, notification } from "antd"
 import { Patients } from "/imports/api/patients/patients.js"
 import { createContainer } from "meteor/react-meteor-data"
-import { addPatientToUser } from "/imports/api/patients/patient-methods.js"
+import { addPatientToSelf } from "/imports/api/patients/patient-methods.js"
 
 const Option = AutoComplete.Option
 const OptGroup = AutoComplete.OptGroup
 
 class Search extends React.Component {
   handleSelect = value => {
-    addPatientToUser.call(
-      { patientId: value, userId: Meteor.userId() },
-      err => {
-        if (err) {
-          notification.error({
-            message: "Error",
-            description: "Can't add this patient to user"
-          })
-        } else {
-          notification.success({
-            message: "Success",
-            description: "Patient added to your covered list."
-          })
-        }
+    addPatientToSelf.call({ patientId: value }, err => {
+      if (err) {
+        notification.error({
+          message: "Error",
+          description: "Can't add this patient to user"
+        })
+      } else {
+        notification.success({
+          message: "Success",
+          description: "Patient added to your covered list."
+        })
       }
-    )
+    })
   }
 
   filterOption = (inputValue, option) => {

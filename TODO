@@ -4,7 +4,7 @@ Things we need to do:
 Bugs:
 6. Can't handoff patient to multiple doctors. (this one's pretty easy)
 10. Create idea of groups, and think about logging in.
-11. More work to get 100% completion on medications list
+11. More work to get 100% completion on medications list, fix bug where persists for all patient modals after update (does not reset to initialValue like other fields)
 13. add statins, gabapentin to meds
 
 
