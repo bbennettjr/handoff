@@ -26,6 +26,8 @@ class PatientModalForm extends React.Component {
       let patient = this.props.patient
       patient.updatedAt = new Date()
       patient = Object.assign(patient, values)
+
+      // call Meteor Method to update patient
       updatePatient.call({ patient }, (error, result) => {
         if (error) {
           notification.error({
@@ -33,6 +35,7 @@ class PatientModalForm extends React.Component {
             description: error.reason
           })
         } else {
+          this.props.form.resetFields()
           this.props.closeModal()
         }
       })
@@ -40,31 +43,31 @@ class PatientModalForm extends React.Component {
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form
-    const patient = this.props.patient
-
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 14 }
-      }
-    }
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0
+    const { getFieldDecorator } = this.props.form,
+      patient = this.props.patient,
+      formItemLayout = {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 6 }
         },
-        sm: {
-          span: 14,
-          offset: 6
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 14 }
+        }
+      },
+      tailFormItemLayout = {
+        wrapperCol: {
+          xs: {
+            span: 24,
+            offset: 0
+          },
+          sm: {
+            span: 14,
+            offset: 6
+          }
         }
       }
-    }
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem {...formItemLayout} label="First Name" hasFeedback>
@@ -78,6 +81,7 @@ class PatientModalForm extends React.Component {
             initialValue: patient.firstName
           })(<Input />)}
         </FormItem>
+
         <FormItem {...formItemLayout} label="Last Name" hasFeedback>
           {getFieldDecorator("lastName", {
             rules: [
@@ -138,8 +142,8 @@ class PatientModalForm extends React.Component {
 
         <FormItem {...formItemLayout} label="Medications" hasFeedback>
           {getFieldDecorator("medications", {
-            rules: [],
-            initialValue: patient.medications
+            rules: []
+            // initialValue: patient.medications
           })(<MedicationSelect autosize />)}
         </FormItem>
 
