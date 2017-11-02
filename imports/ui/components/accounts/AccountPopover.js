@@ -17,7 +17,7 @@ class AccountPopover extends React.Component {
           trigger="click"
           content={<SignOutButton />}
         >
-          <Button style={this.props.buttonStyle} icon="logout">
+          <Button style={this.props.buttonStyle} icon="logout" type="primary">
             {`${profile.name}, ${profile.degree}`}
           </Button>
         </Popover>

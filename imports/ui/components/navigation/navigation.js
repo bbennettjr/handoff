@@ -25,8 +25,6 @@ const styles = {
     fontSize: "20px"
   },
   rightSearch: {
-    maxWidth: "400px",
-    alignSelf: "center",
     flex: 1
   },
   rightButtons: {
@@ -41,14 +39,14 @@ class Navigation extends React.Component {
       <div style={styles.menu}>
         {!Meteor.user() && <div style={styles.left}>Handoff</div>}
         <div style={styles.right}>
-          {this.props.user && !this.props.isMobile ? (
-            <Search style={styles.rightSearch} />
-          ) : null}
           {this.props.user ? (
-            <AccountPopover
-              buttonStyle={styles.rightButtons}
-              user={this.props.user}
-            />
+            [
+              <Search style={styles.rightSearch} />,
+              <AccountPopover
+                buttonStyle={styles.rightButtons}
+                user={this.props.user}
+              />
+            ]
           ) : (
             <CallToActionWeb />
           )}
