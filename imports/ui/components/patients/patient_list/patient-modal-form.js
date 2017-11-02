@@ -1,5 +1,7 @@
 import { Form, Input, Button, Tag, Select, notification } from "antd"
 import React from "react"
+import PropTypes from "prop-types"
+import _ from "lodash"
 import { updatePatient } from "/imports/api/patients/patient-methods.js"
 const FormItem = Form.Item
 const { TextArea } = Input
@@ -8,6 +10,9 @@ import MedicationSelect from "/imports/ui/components/medications/MedicationSelec
 import HandoffTag from "/imports/ui/components/patients/patient/HandoffTag"
 
 class PatientModalForm extends React.Component {
+  static propTypes = {
+    patient: PropTypes.object.isRequired
+  }
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -17,7 +22,7 @@ class PatientModalForm extends React.Component {
           "All input fields must meet the validation requirement"
         )
       }
-
+      if (values.medications) debugger
       // destructure out the names to combine them
       let { firstName, lastName } = values
       values.name = `${firstName} ${lastName}`
@@ -39,7 +44,6 @@ class PatientModalForm extends React.Component {
             message: "Patient update",
             description: `${patient.name} updated successfully`
           })
-          this.props.form.resetFields()
           this.props.closeModal()
         }
       })
@@ -72,6 +76,8 @@ class PatientModalForm extends React.Component {
         }
       }
 
+    console.log(patient.medications)
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem {...formItemLayout} label="First Name" hasFeedback>
@@ -81,8 +87,7 @@ class PatientModalForm extends React.Component {
                 required: true,
                 message: "Please input first name"
               }
-            ],
-            initialValue: patient.firstName
+            ]
           })(<Input />)}
         </FormItem>
 
@@ -93,8 +98,7 @@ class PatientModalForm extends React.Component {
                 required: true,
                 message: "Please input last name"
               }
-            ],
-            initialValue: patient.lastName
+            ]
           })(<Input />)}
         </FormItem>
 
@@ -109,8 +113,7 @@ class PatientModalForm extends React.Component {
                 required: true,
                 message: "Please input room number"
               }
-            ],
-            initialValue: patient.room
+            ]
           })(<Input />)}
         </FormItem>
 
@@ -125,78 +128,67 @@ class PatientModalForm extends React.Component {
                 required: true,
                 message: "Please input diagnosis"
               }
-            ],
-            initialValue: patient.diagnosis
+            ]
           })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="HPI" hasFeedback>
           {getFieldDecorator("hpi", {
-            rules: [],
-            initialValue: patient.hpi
+            rules: []
           })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="PMH" hasFeedback>
           {getFieldDecorator("pmh", {
-            rules: [],
-            initialValue: patient.pmh
+            rules: []
           })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Medications" hasFeedback>
           {getFieldDecorator("medications", {
-            rules: [],
-            initialValue: patient.medications
+            rules: []
           })(<MedicationSelect autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Allergies" hasFeedback>
           {getFieldDecorator("allergies", {
-            rules: [],
-            initialValue: patient.allergies
+            rules: []
           })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Vitals" hasFeedback>
           {getFieldDecorator("vitals", {
-            rules: [],
-            initialValue: patient.vitals
+            rules: []
           })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Labs" hasFeedback>
           {getFieldDecorator("labs", {
-            rules: [],
-            initialValue: patient.labs
+            rules: []
           })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Radiology" hasFeedback>
           {getFieldDecorator("radiology", {
-            rules: [],
-            initialValue: patient.radiology
+            rules: []
           })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Care Plan" hasFeedback>
           {getFieldDecorator("plan", {
-            rules: [],
-            initialValue: patient.plan
+            rules: []
           })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="To Do" hasFeedback>
           {getFieldDecorator("todo", {
-            rules: [],
-            initialValue: patient.todo
+            rules: []
           })(<TextArea autosize />)}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Coverage Instructions" hasFeedback>
           {getFieldDecorator("coverage", {
-            rules: [],
-            initialValue: patient.coverage
+            rules: []
           })(<TextArea autosize />)}
         </FormItem>
 
@@ -207,8 +199,7 @@ class PatientModalForm extends React.Component {
                 required: true,
                 message: "Please select condition"
               }
-            ],
-            initialValue: patient.condition
+            ]
           })(
             <Select>
               <Option value="Unstable">
@@ -234,4 +225,15 @@ class PatientModalForm extends React.Component {
   }
 }
 
-export default Form.create()(PatientModalForm)
+function mapPatient(props) {
+  return _.reduce(
+    props.patient,
+    (result, value, key) => {
+      result[key] = { value: value }
+      return result
+    },
+    {}
+  )
+}
+
+export default Form.create({ mapPropsToFields: mapPatient })(PatientModalForm)

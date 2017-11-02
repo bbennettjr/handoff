@@ -41,8 +41,9 @@ class Navigation extends React.Component {
         <div style={styles.right}>
           {this.props.user ? (
             [
-              <Search style={styles.rightSearch} />,
+              <Search key={1} style={styles.rightSearch} />,
               <AccountPopover
+                key={2}
                 buttonStyle={styles.rightButtons}
                 user={this.props.user}
               />
