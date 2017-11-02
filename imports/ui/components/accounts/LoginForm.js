@@ -16,8 +16,8 @@ class NormalLoginForm extends React.Component {
         err => {
           if (err) {
             notification.error({
-              message: "Can't log in",
-              description: "There was an error logging you in!"
+              message: "Unable to log in",
+              description: err.reason
             })
           }
         }

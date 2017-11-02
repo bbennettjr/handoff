@@ -25,9 +25,8 @@ class NormalLoginForm extends React.Component {
           if (err) {
             notification.error({
               description: "There was an error creating your account",
-              message: "Error in Create"
+              message: err.reason
             })
-            console.log("Create Account error: " + err.reason)
           } else {
             // this.context.router.push("/app")
           }

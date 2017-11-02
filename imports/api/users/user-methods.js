@@ -17,21 +17,22 @@ const schemas = {
 
 export const updateUser = new ValidatedMethod({
   name: "updateUser",
-  validate({ profile, userId }) {
+  validate({ profile }) {
     const result = v.validate(profile, schemas.userProfile)
     if (!result.valid) throw new ValidationError()
   },
-  run({ profile, userId }) {
-    if (userId !== Meteor.userId()) {
-      throw new Meteor.Error("Not authorized", "Wrong account.")
+  run({ profile }) {
+    if (!this.userId) {
+      throw new Meteor.Error(
+        "Not authorized",
+        "Wrong account",
+        "You cannot update another user's account"
+      )
     }
-    Meteor.users.update(
-      { _id: userId },
-      {
-        $set: {
-          profile: profile
-        }
+    Meteor.users.update(this.userId, {
+      $set: {
+        profile: profile
       }
-    )
+    })
   }
 })

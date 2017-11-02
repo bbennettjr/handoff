@@ -59,12 +59,12 @@ export default class NewPatientButtons extends React.Component {
       err => {
         if (err) {
           notification.error({
-            message: "Error",
-            description: `Error moving patient to ${name}`
+            message: "Handoff error",
+            description: `Error moving patient to ${name}. ${err.reason}`
           })
         } else {
           notification.success({
-            message: "Success",
+            message: "Handoff",
             description: `${name} received your handoff.`
           })
         }

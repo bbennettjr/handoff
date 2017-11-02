@@ -21,23 +21,23 @@ class AccountPage extends React.Component {
         console.log("Received values of form: ", values)
       }
 
-      const userId = Meteor.userId()
-
       const profile = {
         name: values.name,
         degree: values.degree,
         company: values.company
       }
 
-      updateUser.call({ profile, userId }, err => {
+      updateUser.call({ profile }, err => {
         if (err) {
           notification.error({
-            description: "There was an error creating your account",
-            message: "Error in Create"
+            description: err.reason,
+            message: err.details
           })
-        } else {
-          // this.context.router.push("/app")
         }
+        notification.success({
+          description: "Account updated",
+          message: "Profile updated successfully"
+        })
       })
     })
   }

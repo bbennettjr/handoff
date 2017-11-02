@@ -76,7 +76,7 @@ class App extends React.Component {
 							</div>
 							<Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
 								{Meteor.user() && (
-									<Menu.Item key="sub2">
+									<Menu.Item key="1">
 										<Link to={`/`}>
 											<span>
 												<Icon type="team" />
@@ -86,7 +86,7 @@ class App extends React.Component {
 									</Menu.Item>
 								)}
 								{Meteor.user() && (
-									<Menu.Item key="1">
+									<Menu.Item key="2">
 										<Link to="/newpatient">
 											<Icon type="user-add" />
 											<span>New Patient</span>
@@ -95,7 +95,7 @@ class App extends React.Component {
 								)}
 
 								{Meteor.user() && (
-									<Menu.Item key="sub1">
+									<Menu.Item key="3">
 										<Link to={`/account/${Meteor.user()._id}`}>
 											<span>
 												<Icon type="user" />

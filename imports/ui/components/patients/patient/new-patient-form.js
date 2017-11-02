@@ -31,17 +31,17 @@ class NewPatientForm extends React.Component {
         },
         values
       )
-      insertPatient.call({ patient }, (error, result) => {
-        if (error) {
+      insertPatient.call({ patient }, (err, result) => {
+        if (err) {
           notification.error({
-            message: "Can't add patient",
-            description: "Something went wrong"
+            message: "New patient error",
+            description: err.reason
           })
         } else {
           this.props.history.push("/")
           notification.success({
-            message: "Success",
-            description: "Patient added to your covered list."
+            message: "Created",
+            description: "Patient created and added to your covered list."
           })
         }
       })

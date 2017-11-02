@@ -13,12 +13,12 @@ class Search extends React.Component {
     addPatientToSelf.call({ patientId: value }, err => {
       if (err) {
         notification.error({
-          message: "Error",
-          description: "Can't add this patient to user"
+          message: "Error adding patient",
+          description: err.reason
         })
       } else {
         notification.success({
-          message: "Success",
+          message: "Covering",
           description: "Patient added to your covered list."
         })
       }
