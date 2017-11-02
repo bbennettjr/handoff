@@ -16,7 +16,10 @@ const schemas = {
       doctors: { type: "array", items: { type: "string" } },
       hpi: { type: "string" },
       pmh: { type: "string" },
-      medications: { type: ["string", "array"], items: { type: "string" } },
+      medications: {
+        type: ["string", "array"],
+        items: { type: "object", items: { type: "string" } }
+      },
       allergies: { type: "string" },
       vitals: { type: "string" },
       labs: { type: "string" },
@@ -156,31 +159,3 @@ export const removePatientsFromUser = new ValidatedMethod({
   }
 })
 
-//   // update a patient
-//   "patient.update"(patient) {
-//     // check that a user is signed in
-//     let userId = Meteor.userId()
-//     if (!userId) {
-//       throw new Meteor.Error(
-//         "Not authorized",
-//         "You must sign in to create a patient"
-//       )
-//     }
-
-//     if (!patient._id) {
-//       throw new Meteor.Error(
-//         "Patient has no _id!",
-//         "You must give patient an _id"
-//       )
-//     }
-
-//     // update the patient
-//     // kvothe: throwing Meteor.Error reason: "MinimongoError: Mod on _id not allowed"
-//     // IDK what this is.
-//     Patients.update(patient._id, { $set: patient })
-
-//     Meteor.users.update(userId, {
-//       $addToSet: { "profile.coveredPatients": patient._id }
-//     })
-//     return { _id: patient._id }
-//   },

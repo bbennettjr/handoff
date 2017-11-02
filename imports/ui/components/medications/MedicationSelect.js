@@ -17,7 +17,7 @@ class MedicationSelect extends React.Component {
     medications: PropTypes.array.isRequired
   }
   handleChange = value => {
-    console.log(value)
+    console.log("select handle change", value)
   }
   filterOption(inputValue, option) {
     // consider using Fuse.js -> npm install fuse.js as a fuzzy search js library
@@ -36,6 +36,7 @@ class MedicationSelect extends React.Component {
       <Select
         mode="multiple"
         placeholder="Select medications"
+        defaultValue={this.props.value}
         labelInValue={true}
         filterOption={this.filterOption.bind(this)}
         onChange={this.handleChange.bind(this)}
