@@ -1,9 +1,8 @@
 {
   "galaxy.meteor.com": {
     "env": {
-      "ROOT_URL": "http://www.handoff.coffee",
-      "MONGO_URL":
-        "mongodb://handoff:101elimS@aws-us-east-1-portal.5.dblayer.com:24661/handoff?ssl=true"
+      "ROOT_URL": "http://www.handoff.io",
+      "MONGO_URL": "mongodb://handoff:101elimS@aws-us-east-1-portal.5.dblayer.com:24661/handoff?ssl=true"
     }
   }
 }
