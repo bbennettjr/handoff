@@ -33,11 +33,12 @@ class AccountPage extends React.Component {
             description: err.reason,
             message: err.details
           })
+        } else {
+          notification.success({
+            description: "Account updated",
+            message: "Profile updated successfully"
+          })
         }
-        notification.success({
-          description: "Account updated",
-          message: "Profile updated successfully"
-        })
       })
     })
   }
