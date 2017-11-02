@@ -17,7 +17,7 @@ const schemas = {
       hpi: { type: "string" },
       pmh: { type: "string" },
       medications: {
-        type: ["string", "array"],
+        type: "array",
         items: { type: "object", items: { type: "string" } }
       },
       allergies: { type: "string" },

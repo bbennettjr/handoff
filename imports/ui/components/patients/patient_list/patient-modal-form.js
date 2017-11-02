@@ -22,7 +22,8 @@ class PatientModalForm extends React.Component {
           "All input fields must meet the validation requirement"
         )
       }
-      if (values.medications) debugger
+      if (values.medications)
+        console.log("medications from form:", values.medications)
       // destructure out the names to combine them
       let { firstName, lastName } = values
       values.name = `${firstName} ${lastName}`
@@ -235,5 +236,17 @@ function mapPatient(props) {
     {}
   )
 }
+function onValuesChange(...rest) {
+  console.log("values change")
+  console.log(...rest)
+}
+function onFieldsChange(...rest) {
+  console.log("fields change")
+  console.log(...rest)
+}
 
-export default Form.create({ mapPropsToFields: mapPatient })(PatientModalForm)
+export default Form.create({
+  mapPropsToFields: mapPatient,
+  onValuesChange: onValuesChange,
+  onFieldsChange: onFieldsChange
+})(PatientModalForm)

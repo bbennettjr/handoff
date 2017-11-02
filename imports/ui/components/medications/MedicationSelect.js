@@ -36,7 +36,7 @@ class MedicationSelect extends React.Component {
       <Select
         mode="multiple"
         placeholder="Select medications"
-        defaultValue={this.props.value}
+        value={this.props.value}
         labelInValue={true}
         filterOption={this.filterOption.bind(this)}
         onChange={this.handleChange.bind(this)}
