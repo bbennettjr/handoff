@@ -10,7 +10,7 @@ const fixtures = [
 		hpi:
 			"64 yo f whio was recently diagnosed with lung cancer likelpy mesthothilioma c/o acute onset of sob this am. Ems was called and they noted herto be hypoxic, tachypneac and tachycardic. In ed received cta: which showed extensive pe but questionable right heart strain as the tumor invades her pericardium.",
 		pmh: "Recently diagnosied mesothelioma",
-		medications: "Heparin drip, Tylenol 650mg PO Q6 PRN",
+		medications: [],
 		allergies: "Penicillin, Augmentin",
 		vitals: "Tachy, BP stable",
 		labs: "",
@@ -48,8 +48,7 @@ Cad s/p cabg
 Aicd with dual chamber pacer
 Endocarditis
 Cva `,
-		medications:
-			"Zosin 3.375 Gm IV Q8, Vancomycin 1 Gm IV Q12, Digoxin 250 mcg PO Daily, Duloxetine 60mg PO Daily, Hydromorphone 0.25mg IV Q2 PRN Pain 4-7, Hydromorphone 0.5mg IV Q2 PRN Pain 8-10",
+		medications: [],
 		allergies: "NKDA",
 		vitals: "Septic, Febrile 102",
 		labs: "Cx pending",
@@ -89,8 +88,7 @@ Heart block with pacemaker
 Savr
 Hypothyroidism
 Afib on eliquis`,
-		medications:
-			"Apixaban 5mg PO BID, ASA 81mg PO QD, Furosemide 40mg IV BID, Levothydroxine 100mcg PO QDaily, Nitroglycerine 0.4mg SubLingual PRN, Pantoprazole 40mg PO QDaily",
+		medications: [],
 		allergies: "Ace inhibitor",
 		vitals: "Tachy 102, afebrile, BP 95/56, Pox 93% 4LNC",
 		labs: "",
@@ -114,8 +112,7 @@ No chest pain, trop nd, ekg paced
 		hpi: `69 f c/o sob x Friday . For the past 2 weeks has been fighting a cold. Cough with yellow sputum. Had sick contatcts around new years time when she visited a pub. In ed was tachycardic with hypoxia so d dimer was checked >1.5 cta: no pe. 
 Ed meds: kcl 40 meq iv, ns 500ml, oplumedrol `,
 		pmh: "COPD, HTN, Hypothyroidism",
-		medications:
-			"Albuterol-Ipratropium 3mL INH Q4, Azithromycin 250mg PO Q24, Fluticason-Salmeterol 230/21 2 PUFF INH Q12, Guaifenesin 600mg PO Q8, Methylprednisone 40mg IV Q6",
+		medications: [],
 		allergies: "Shellfish, Sulfa drugs",
 		vitals: "Septic, Febrile 101, tachypnic and tachycardic, Pox 94% BIPAP",
 		labs: "Cx pending",
@@ -142,7 +139,7 @@ Ckd stage 3 a stable
 		hpi:
 			"83 m with melanotic stools x yesterday 2pm. On eliqus. Dropped 5gm hebmoglobin however vitals are stable. ",
 		pmh: "HTN, HLD, Afib on Eliquis, CVA",
-		medications: "Pantoprazole 40mg IV Q12, NS @ 75cc/hr",
+		medications: [],
 		allergies: "NKDA",
 		vitals: "Tachy, BP stable",
 		labs: "Hgb 7.7",
@@ -170,8 +167,7 @@ HB at 1700 and 2300`,
 		pmh: `Severe progressive ms
 Seizures
 Peripheral neuropathy`,
-		medications:
-			"Ampecillin 2gm IV Q4, Baclofen 20mg PO TID, Ceftriaxone 2gm IV Q12",
+		medications: [],
 		allergies: "PCN",
 		vitals: "Stable, afebrile",
 		labs: "CSF pending, Bcx pending",
@@ -198,7 +194,7 @@ mrsa`,
 		diagnosis: "Acute thalamic ICH",
 		hpi: `87-year-old female presents via EMS status post being found down following an apparent fall. Apparently patient lives in independent living at Riddle Village, believed to have had a fall last night and then was found on the floor this morning. On EMS arrival, they found patient to be confused and somewhat combative, noted blood on the wall and in her posterior head–––to the ED. On arrival patient is awake and alert, does not appear confused and is answering questions appropriately.`,
 		pmh: "HTN, HLD, Chronic pain",
-		medications: "Insulin SS, Pantoprazole 40mg QD",
+		medications: [],
 		allergies: "NKDA",
 		vitals: "",
 		labs: "Hgb: 12",
@@ -238,8 +234,7 @@ AF
 DM
 COPD
 CKD`,
-		medications:
-			"Albuterol-Ipratropium 1INH Q4, Insulin SS Lispro, SubQ Heparin",
+		medications: [],
 		allergies: "Latex",
 		vitals: "Pox 89%, RR 35, BP 102/34",
 		labs: "K: 3.9, Na: 135, Cr: 1.7",
@@ -302,8 +297,7 @@ No NSAIDs
 		diagnosis: "DKA",
 		hpi: `56yo with hyperglycemia , woke up this AM with abd pain, associated with nausea and vomiting. Patient has been in DKA before, so family promptly brought her to ED.`,
 		pmh: "CVA 2014, T1 DM",
-		medications:
-			"Insulin Critical Care Drip, KCL 40meq repletion, Ondansetron 4mg IV Q6 PRN",
+		medications: [],
 		allergies: "NKDA",
 		vitals: "Stable",
 		labs: "AG 25, LA 3.5, pH 7.1",
