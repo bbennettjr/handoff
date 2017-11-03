@@ -148,7 +148,13 @@ class PatientModalForm extends React.Component {
         <FormItem {...formItemLayout} label="Medications" hasFeedback>
           {getFieldDecorator("medications", {
             rules: []
-          })(<MedicationSelect autosize />)}
+          })(
+            <Select mode="multiple" labelInValue={true}>
+              <Option value="red">Red</Option>
+              <Option value="blue">blue</Option>
+              <Option value="green">green</Option>
+            </Select>
+          )}
         </FormItem>
 
         <FormItem {...formItemLayout} label="Allergies" hasFeedback>
