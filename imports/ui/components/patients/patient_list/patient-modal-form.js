@@ -14,6 +14,10 @@ class PatientModalForm extends React.Component {
     patient: PropTypes.object.isRequired
   }
 
+  handleChange = value => {
+    this.props.form.setFieldsValue({ medications: value })
+  }
+
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -23,8 +27,6 @@ class PatientModalForm extends React.Component {
           "All input fields must meet the validation requirement"
         )
       }
-      if (values.medications)
-        console.log("medications from form:", values.medications)
       // destructure out the names to combine them
       let { firstName, lastName } = values
       values.name = `${firstName} ${lastName}`
@@ -46,6 +48,7 @@ class PatientModalForm extends React.Component {
             message: "Patient update",
             description: `${patient.name} updated successfully`
           })
+          this.props.form.resetFields()
           this.props.closeModal()
         }
       })
@@ -77,8 +80,6 @@ class PatientModalForm extends React.Component {
           }
         }
       }
-
-    console.log(patient.medications)
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -152,6 +153,7 @@ class PatientModalForm extends React.Component {
           })(
             <MedicationSelect
               autosize
+              handleChange={this.handleChange.bind(this)}
               setValue={this.props.form.setFieldsValue}
             />
           )}
@@ -242,17 +244,7 @@ function mapPatient(props) {
     {}
   )
 }
-function onValuesChange(...rest) {
-  console.log("values change")
-  // console.log(...rest)
-}
-function onFieldsChange(...rest) {
-  console.log("fields change")
-  // console.log(...rest)
-}
 
 export default Form.create({
-  mapPropsToFields: mapPatient,
-  onValuesChange: onValuesChange,
-  onFieldsChange: onFieldsChange
+  mapPropsToFields: mapPatient
 })(PatientModalForm)
