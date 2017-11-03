@@ -13,6 +13,7 @@ class PatientModalForm extends React.Component {
   static propTypes = {
     patient: PropTypes.object.isRequired
   }
+
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -149,11 +150,10 @@ class PatientModalForm extends React.Component {
           {getFieldDecorator("medications", {
             rules: []
           })(
-            <Select mode="multiple" labelInValue={true}>
-              <Option value="red">Red</Option>
-              <Option value="blue">blue</Option>
-              <Option value="green">green</Option>
-            </Select>
+            <MedicationSelect
+              autosize
+              setValue={this.props.form.setFieldsValue}
+            />
           )}
         </FormItem>
 
@@ -244,11 +244,11 @@ function mapPatient(props) {
 }
 function onValuesChange(...rest) {
   console.log("values change")
-  console.log(...rest)
+  // console.log(...rest)
 }
 function onFieldsChange(...rest) {
   console.log("fields change")
-  console.log(...rest)
+  // console.log(...rest)
 }
 
 export default Form.create({

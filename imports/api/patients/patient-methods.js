@@ -17,8 +17,8 @@ const schemas = {
       hpi: { type: "string" },
       pmh: { type: "string" },
       medications: {
-        type: "array",
-        items: { type: "object", items: { type: "string" } }
+        type: ["string", "array"],
+        items: { type: ["string", "object"], items: { type: "string" } }
       },
       allergies: { type: "string" },
       vitals: { type: "string" },
@@ -158,4 +158,3 @@ export const removePatientsFromUser = new ValidatedMethod({
     )
   }
 })
-
