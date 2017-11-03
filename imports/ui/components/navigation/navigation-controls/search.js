@@ -9,6 +9,19 @@ const Option = AutoComplete.Option
 const OptGroup = AutoComplete.OptGroup
 
 class Search extends React.Component {
+  state = {
+    value: ""
+  }
+  onChange = v => {
+    this.setState({ value: v })
+  }
+  filterOption = (inputValue, option) => {
+    return option.props.name
+      ? option.props.name.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+      : option.props.diagnosis
+          .toUpperCase()
+          .indexOf(inputValue.toUpperCase()) !== -1
+  }
   handleSelect = value => {
     addPatientToSelf.call({ patientId: value }, err => {
       if (err) {
@@ -21,16 +34,9 @@ class Search extends React.Component {
           message: "Covering",
           description: "Patient added to your covered list."
         })
+        this.setState({ value: "" })
       }
     })
-  }
-
-  filterOption = (inputValue, option) => {
-    return option.props.name
-      ? option.props.name.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-      : option.props.diagnosis
-          .toUpperCase()
-          .indexOf(inputValue.toUpperCase()) !== -1
   }
 
   render() {
@@ -62,14 +68,20 @@ class Search extends React.Component {
           size="large"
           style={{ width: "100%" }}
           dataSource={data}
-          allowClear={true}
-          placeholder="Search"
+          allowClear={this.state.value ? true : false}
           optionLabelProp="name"
+          value={this.state.value}
+          onChange={this.onChange}
           onSelect={this.handleSelect}
           filterOption={this.filterOption}
         >
           <Input
-            suffix={<Icon type="search" className="certain-category-icon" />}
+            suffix={
+              <Icon
+                type={this.state.value ? null : "search"}
+                className="certain-category-icon"
+              />
+            }
           />
         </AutoComplete>
       </div>

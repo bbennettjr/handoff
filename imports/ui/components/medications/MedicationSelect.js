@@ -11,10 +11,7 @@ class MedicationSelect extends React.Component {
   static propTypes = {
     medications: PropTypes.array.isRequired
   }
-  handleChange(value) {
-    // console.slog(`selected ${value}`)
-    console.log(value)
-  }
+
   filterOption(inputValue, option) {
     // consider using Fuse.js -> npm install fuse.js as a fuzzy search js library
     // make module import for regexp creation function based on user string input
@@ -36,9 +33,13 @@ class MedicationSelect extends React.Component {
       <Select
         mode="multiple"
         placeholder="Select medications"
+<<<<<<< HEAD
+=======
+        value={this.props.value}
+>>>>>>> ce1cceb802a0c5304159adf5463982d586cce241
         labelInValue={true}
         filterOption={this.filterOption.bind(this)}
-        onChange={this.handleChange.bind(this)}
+        onChange={this.props.handleChange}
       >
         {this.renderOptions()}
       </Select>
