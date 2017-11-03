@@ -7,17 +7,13 @@ import filter from "/imports/api/medications/select-regexp.js"
 import { Select } from "antd"
 const Option = Select.Option
 
-const children = []
-for (let i = 10; i < 36; i++) {
-  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>)
-}
-
 class MedicationSelect extends React.Component {
   static propTypes = {
     medications: PropTypes.array.isRequired
   }
   handleChange(value) {
     // console.slog(`selected ${value}`)
+    console.log(value)
   }
   filterOption(inputValue, option) {
     // consider using Fuse.js -> npm install fuse.js as a fuzzy search js library
@@ -28,7 +24,11 @@ class MedicationSelect extends React.Component {
   renderOptions() {
     let meds = this.props.medications
     return meds.map((m, i) => {
-      return <Option key={m._id}>{m.prescription}</Option>
+      return (
+        <Option key={m._id}>
+          {m.prescription}
+        </Option>
+      )
     })
   }
   render() {
@@ -36,6 +36,7 @@ class MedicationSelect extends React.Component {
       <Select
         mode="multiple"
         placeholder="Select medications"
+        labelInValue={true}
         filterOption={this.filterOption.bind(this)}
         onChange={this.handleChange.bind(this)}
       >
