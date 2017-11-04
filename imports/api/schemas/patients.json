@@ -1,0 +1,40 @@
+{
+  "patient": {
+    "type": "object",
+    "properties": {
+      "_id": { "type": "string" },
+      "firstName": { "type": "string" },
+      "lastName": { "type": "string" },
+      "name": { "type": "string" },
+      "room": { "type": "string" },
+      "diagnosis": { "type": "string" },
+      "doctors": { "type": "array", "items": { "type": "string" } },
+      "hpi": { "type": "string" },
+      "pmh": { "type": "string" },
+      "medications": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "key": { "type": "string" },
+            "label": { "type": "string" }
+          }
+        }
+      },
+      "allergies": { "type": "string" },
+      "vitals": { "type": "string" },
+      "labs": { "type": "string" },
+      "radiology": { "type": "string" },
+      "plan": { "type": "string" },
+      "todo": { "type": "string" },
+      "coverage": { "type": "string" },
+      "condition": { "type": "string" },
+      "createdAt": { "type": "date" },
+      "updatedAt": { "type": "date" }
+    },
+    "required": ["firstName", "lastName", "room", "diagnosis", "condition"]
+  },
+  "patientId": { "type": "string" },
+  "patientIdList": { "type": "array", "items": { "type": "string" } },
+  "userId": { "type": "string" }
+}

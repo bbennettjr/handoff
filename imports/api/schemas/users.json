@@ -1,0 +1,12 @@
+{
+  "userId": { "type": "string" },
+  "userProfile": {
+    "type": "object",
+    "properties": {
+      "name": { "type": "string" },
+      "degree": { "type": "string" },
+      "company": { "type": "string" },
+      "npi": { "type": "string" }
+    }
+  }
+}

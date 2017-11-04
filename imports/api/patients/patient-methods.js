@@ -1,48 +1,14 @@
 import { Patients } from "./patients.js"
 import { ValidatedMethod } from "meteor/mdg:validated-method"
 import { Validator } from "jsonschema"
+import schema from "/imports/api/schemas/patients.json"
 const v = new Validator()
-
-const schemas = {
-  patient: {
-    type: "object",
-    properties: {
-      _id: { type: "string" },
-      firstName: { type: "string" },
-      lastName: { type: "string" },
-      name: { type: "string" },
-      room: { type: "string" },
-      diagnosis: { type: "string" },
-      doctors: { type: "array", items: { type: "string" } },
-      hpi: { type: "string" },
-      pmh: { type: "string" },
-      medications: {
-        type: ["string", "array"],
-        items: { type: ["string", "object"], items: { type: "string" } }
-      },
-      allergies: { type: "string" },
-      vitals: { type: "string" },
-      labs: { type: "string" },
-      radiology: { type: "string" },
-      plan: { type: "string" },
-      todo: { type: "string" },
-      coverage: { type: "string" },
-      condition: { type: "string" },
-      createdAt: { type: "date" },
-      updatedAt: { type: "date" }
-    },
-    required: ["firstName", "lastName", "room", "diagnosis", "condition"]
-  },
-  patientId: { type: "string" },
-  patientIdList: { type: "array", items: { type: "string" } },
-  userId: { type: "string" }
-}
 
 // Validated methods
 export const insertPatient = new ValidatedMethod({
   name: "insertPatient",
   validate({ patient }) {
-    const result = v.validate(patient, schemas.patient)
+    const result = v.validate(patient, schema.patient)
     if (!result.valid) throw new ValidationError()
   },
   run({ patient }) {
@@ -63,7 +29,7 @@ export const insertPatient = new ValidatedMethod({
 export const updatePatient = new ValidatedMethod({
   name: "updatePatient",
   validate({ patient }) {
-    const result = v.validate(patient, schemas.patient)
+    const result = v.validate(patient, schema.patient)
     if (!result.valid) throw new ValidationError()
   },
   run({ patient }) {
@@ -92,7 +58,7 @@ export const updatePatient = new ValidatedMethod({
 export const addPatientToSelf = new ValidatedMethod({
   name: "addPatientToSelf",
   validate({ patientId }) {
-    const r = v.validate(patientId, schemas.patientId)
+    const r = v.validate(patientId, schema.patientId)
     if (!r.valid) throw new ValidationError()
   },
   run({ patientId }) {
@@ -116,8 +82,8 @@ export const addPatientToSelf = new ValidatedMethod({
 export const addPatientsToUser = new ValidatedMethod({
   name: "addPatientsToUser",
   validate({ patientIdList, otherUserId }) {
-    const r1 = v.validate(patientIdList, schemas.patientIdList)
-    const r2 = v.validate(otherUserId, schemas.userId)
+    const r1 = v.validate(patientIdList, schema.patientIdList)
+    const r2 = v.validate(otherUserId, schema.userId)
     if (!r1.valid || !r2.valid) throw new ValidationError()
   },
   run({ patientIdList, otherUserId }) {
@@ -141,7 +107,7 @@ export const addPatientsToUser = new ValidatedMethod({
 export const removePatientsFromUser = new ValidatedMethod({
   name: "removePatientsFromUser",
   validate({ patientIdList, userId }) {
-    const result = v.validate(patientIdList, schemas.patientIdList)
+    const result = v.validate(patientIdList, schema.patientIdList)
     if (!result.valid) throw new ValidationError()
   },
   run({ patientIdList, userId }) {

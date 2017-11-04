@@ -1,24 +1,13 @@
 import { ValidatedMethod } from "meteor/mdg:validated-method"
 import { Validator } from "jsonschema"
-const v = new Validator()
+import schema from "/imports/api/schemas/users.json"
 
-const schemas = {
-  userId: { type: "string" },
-  userProfile: {
-    type: "object",
-    properties: {
-      name: { type: "string" },
-      degree: { type: "string" },
-      company: { type: "string" },
-      npi: { type: "string" }
-    }
-  }
-}
+const v = new Validator()
 
 export const updateUser = new ValidatedMethod({
   name: "updateUser",
   validate({ profile }) {
-    const result = v.validate(profile, schemas.userProfile)
+    const result = v.validate(profile, schema.userProfile)
     if (!result.valid) throw new ValidationError()
   },
   run({ profile }) {

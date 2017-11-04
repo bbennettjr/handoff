@@ -1,0 +1,16 @@
+{
+  "_id": { "type": "string" },
+  "name": { "type": "string" },
+  "organization": { "type": "string" },
+  "members": { "type": "array", "items": { "type": "string" } },
+  "children": { "type": "array", "items": { "type": "string" } },
+  "parents": { "type": "array", "items": { "type": "string" } },
+  "admins": { "type": "array", "items": { "type": "string" } },
+  "options": {
+    "type": "object",
+    "properties": {
+      "status": { "type": "string" },
+      "control": { "type": ["string", "array"] }
+    }
+  }
+}
