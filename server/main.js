@@ -2,13 +2,16 @@ import { Meteor } from "meteor/meteor"
 import { Accounts } from "meteor/accounts-base"
 
 // Fixtures
-import "./fixtures/patients.js"
-import "./fixtures/medications.js"
+import "/server/fixtures/patients.js"
+import "/server/fixtures/medications.js"
 
 // Collections and Methods
 import "/imports/api/patients/patients.js"
 import "/imports/api/patients/patient-methods.js"
 import "/imports/api/users/users.js"
+
+// Group
+import createPrivateGroup from "/imports/api/groups/create-private-group.js"
 
 Accounts.onCreateUser((options, user) => {
   const customizedUser = Object.assign({}, user)
@@ -16,5 +19,7 @@ Accounts.onCreateUser((options, user) => {
   if (options.profile) {
     customizedUser.profile = options.profile
   }
+  // create a private group for this user to add doctors
+  createPrivateGroup(options.profile.name)
   return customizedUser
 })
