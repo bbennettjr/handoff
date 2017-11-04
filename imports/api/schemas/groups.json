@@ -4,16 +4,4 @@
   "owner": { "type": "string" },
   "members": { "type": "array", "items": { "type": "string" } },
   "activity": { "type": "integer", "minimum": 1 }
-  // "organization": { "type": "string" },
-  // "specialty": { "type": "string" },
-  // "children": { "type": "array", "items": { "type": "string" } },
-  // "parents": { "type": "array", "items": { "type": "string" } },
-  // "admins": { "type": "array", "items": { "type": "string" } },
-  // "options": {
-  //   "type": "object",
-  //   "properties": {
-  //     "status": { "type": "string" },
-  //     "control": { "type": ["string", "array"] }
-  //   }
-  // }
 }

@@ -3,7 +3,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { createContainer } from "meteor/react-meteor-data"
 
-import { Patients } from "../../../../api/patients/patients.js"
+import { Patients } from "/imports/api/patients/patients.js"
 import NoPatientsList from "./no-patients.js"
 import LoggedOutBanner from "./LoggedOutBanner.js"
 import NewPatientList from "./new-patient-list"

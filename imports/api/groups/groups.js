@@ -12,13 +12,11 @@ if (Meteor.isServer) {
     )
   })
   Meteor.publish("member.groups", () => {
-    // all groups this user is a member, sorted descending order by activity
-    return Groups.find({ members: this.userId }, { members: true }).sort({
-      activity: -1
-    })
+    // all groups this user is a member
+    return Groups.find({ members: this.userId }, { members: true })
   })
   Meteor.publish("all.groups", () => {
     // all groups in collection
-    return Groups.find({}).sort({ activity: -1 })
+    return Groups.find({})
   })
 }

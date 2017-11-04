@@ -10,6 +10,7 @@ import Navigation from "../navigation/navigation.js"
 import PatientList from "../patients/patient_list/patient-list.js"
 import AccountPage from "../accounts/AccountPage.js"
 import NewPatientForm from "../patients/patient/new-patient-form"
+import GroupPage from "/imports/ui/components/groups/GroupPage.js"
 
 import PrivacyPolicy from "../navigation/privacy-policy"
 import TermsOfUse from "../navigation/terms-of-use"
@@ -93,9 +94,16 @@ class App extends React.Component {
 										</Link>
 									</Menu.Item>
 								)}
-
 								{Meteor.user() && (
 									<Menu.Item key="3">
+										<Link to="/groups">
+											<Icon type="fork" />
+											<span>Groups</span>
+										</Link>
+									</Menu.Item>
+								)}
+								{Meteor.user() && (
+									<Menu.Item key="4">
 										<Link to={`/account/${Meteor.user()._id}`}>
 											<span>
 												<Icon type="user" />
@@ -113,15 +121,14 @@ class App extends React.Component {
 						</Header>
 						<Content
 							style={
-								this.state.isMobile ? (
-									{ paddingTop: "20px" }
-								) : (
-									{ padding: "30px 50px" }
-								)
+								this.state.isMobile
+									? { paddingTop: "20px" }
+									: { padding: "30px 50px" }
 							}
 						>
 							<Switch>
 								<Route exact path="/newpatient" component={NewPatientForm} />
+								<Route exact path="/groups" component={GroupPage} />
 								<Route exact path="/account/:_id" component={AccountPage} />
 								<Route exact path="/privacy-policy" component={PrivacyPolicy} />
 								<Route exact path="/terms-of-use" component={TermsOfUse} />
