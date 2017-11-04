@@ -11,21 +11,25 @@ class GroupPage extends React.Component {
     groups: PropTypes.array.isRequired
   }
   renderGroups() {
-    return this.props.groups.map(g => {
-      return (
-        <Col span={4}>
-          <Button>{g.name}</Button>
-        </Col>
-      )
-    })
+    // fp not working, prob end up doing reduce
+    // return (function cols(acc, i, arr) {
+    //   if (i >= arr.length) return acc
+    //   if (i % 4 === 0) return acc.push(<Row>{cols([], i, arr)}</Row>)
+    //   acc.push(<Col>{arr[i].name}</Col>)
+    //   return cols(acc, arr, ++i)
+    // })([], 0, this.props.groups.slice())
+  }
+  join() {
+    // join group
+  }
+  leave() {
+    // leave group
   }
   render() {
     return (
       <div>
         <h2>Groups</h2>
-        <Row type="flex" justify="space-around" align="middle">
-          {this.renderGroups()}
-        </Row>
+        {this.renderGroups()}
       </div>
     )
   }
