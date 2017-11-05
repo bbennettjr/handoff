@@ -20,6 +20,6 @@ Accounts.onCreateUser((options, user) => {
     customizedUser.profile = options.profile
   }
   // create a private group for this user to add doctors
-  createPrivateGroup(options.profile.name)
+  // createPrivateGroup(options.profile.name)
   return customizedUser
 })
