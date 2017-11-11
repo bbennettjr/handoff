@@ -26,7 +26,7 @@ class GroupPage extends React.Component {
       </Menu>
     )
 
-    return (function rows(acc, arr) {
+    return ((acc, arr) => {
       return acc.map((r, i) => {
         start = i * COL_LENGTH
         end = start + COL_LENGTH
@@ -50,16 +50,18 @@ class GroupPage extends React.Component {
   }
 
   handleMenuClick({ key }) {
+    console.log(key)
+    debugger
     // const _id = key
     // // key === "1"
     // //   ? addToGroup.call({ key }, (err, res) => {
     // //       if (err) console.error(err)
     // //       message.info("Joined the team")
     // //     })
-    // removeFromGroup.call({ _id }, (err, res) => {
-    //   if (err) console.error(err)
-    //   message.info("Left the team")
-    // })
+    removeFromGroup.call({ _id }, (err, res) => {
+      if (err) console.error(err)
+      message.info("Left the team")
+    })
   }
 
   render() {
@@ -73,7 +75,7 @@ class GroupPage extends React.Component {
 }
 
 export default withTracker(props => {
-  const handle = Meteor.subscribe("member.groups")
+  const handle = Meteor.subscribe("all.groups")
   const groups = Groups.find().fetch()
   return { groups }
 })(GroupPage)

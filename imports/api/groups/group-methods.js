@@ -33,6 +33,8 @@ export const addToGroup = new ValidatedMethod({
   name: "addToGroup",
   validate({ _id }) {
     const result = v.validate({ _id: _id }, schema)
+    console.log(result)
+    debugger
     if (!result.valid) throw new ValidationError()
   },
   run({ _id }) {
@@ -56,6 +58,8 @@ export const removeFromGroup = new ValidatedMethod({
   name: "removeFromGroup",
   validate({ _id }) {
     const result = v.validate(_id, schema)
+    console.log(result)
+    debugger
     if (!result.valid) throw new ValidationError()
   },
   run({ _id }) {
@@ -66,6 +70,7 @@ export const removeFromGroup = new ValidatedMethod({
       )
     }
     console.log(_id)
+    debugger
     let result = Groups.update(_id, {
       $pull: { members: this.userId }
     })
