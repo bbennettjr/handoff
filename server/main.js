@@ -5,10 +5,15 @@ import { Accounts } from "meteor/accounts-base"
 import "/server/fixtures/patients.js"
 import "/server/fixtures/medications.js"
 
-// Collections and Methods
+// Collections
 import "/imports/api/patients/patients.js"
-import "/imports/api/patients/patient-methods.js"
 import "/imports/api/users/users.js"
+import "/imports/api/groups/groups.js"
+
+// Methods
+import "/imports/api/patients/patient-methods.js"
+import "/imports/api/users/user-methods.js"
+import "/imports/api/groups/group-methods.js"
 
 // Group
 import createPrivateGroup from "/imports/api/groups/create-private-group.js"

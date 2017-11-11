@@ -20,9 +20,10 @@ class GroupPage extends React.Component {
     const groups = this.props.groups.slice()
     let start, end
 
-    const menu = key => (
+    const menu = _id => (
       <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key={key}>Leave</Menu.Item>
+        <Menu.Item key={1 + _id}>Join</Menu.Item>
+        <Menu.Item key={2 + _id}>Leave</Menu.Item>
       </Menu>
     )
 
@@ -50,18 +51,18 @@ class GroupPage extends React.Component {
   }
 
   handleMenuClick({ key }) {
-    console.log(key)
-    debugger
-    // const _id = key
-    // // key === "1"
-    // //   ? addToGroup.call({ key }, (err, res) => {
-    // //       if (err) console.error(err)
-    // //       message.info("Joined the team")
-    // //     })
-    removeFromGroup.call({ _id }, (err, res) => {
-      if (err) console.error(err)
-      message.info("Left the team")
-    })
+    let _id = key.slice(1, key.length)
+    key.startsWith("1")
+      ? addToGroup.call({ _id }, (err, result) => {
+          console.log("addToGroup result:", result)
+          if (err) console.error(err)
+          message.info("Joined the team")
+        })
+      : removeFromGroup.call({ _id }, (err, result) => {
+          console.log("removeFromGroup result:", result)
+          if (err) console.error(err)
+          message.info("Left the team")
+        })
   }
 
   render() {
@@ -77,5 +78,6 @@ class GroupPage extends React.Component {
 export default withTracker(props => {
   const handle = Meteor.subscribe("all.groups")
   const groups = Groups.find().fetch()
+  console.log("groups in withTracker:", groups)
   return { groups }
 })(GroupPage)

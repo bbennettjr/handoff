@@ -11,9 +11,9 @@ if (Meteor.isServer) {
       { members: true }
     )
   })
-  Meteor.publish("member.groups", () => {
+  Meteor.publish("member.groups", ({ userId }) => {
     // all groups this user is a member
-    return Groups.find({ members: this.userId }, { members: true })
+    return Groups.find({ members: userId }, { members: true })
   })
   Meteor.publish("all.groups", () => {
     // all groups in collection
