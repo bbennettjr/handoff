@@ -10,8 +10,8 @@ import NewPatientList from "./new-patient-list"
 import NewPatientButtons from "/imports/ui/components/patients/patient_list/new-patient-buttons"
 class PatientList extends React.Component {
 	static propTypes = {
-		patients: PropTypes.array.isRequired,
-		users: PropTypes.array.isRequired
+		patients: PropTypes.array.isRequired
+		// users: PropTypes.array
 	}
 
 	state = {
@@ -35,7 +35,6 @@ class PatientList extends React.Component {
 				<NewPatientButtons
 					selectedRowKeys={this.state.selectedRowKeys}
 					setSelectedRowKeys={this.setSelectedRowKeys}
-					users={this.props.users}
 				/>
 				<NewPatientList
 					patients={patients}
@@ -63,7 +62,7 @@ export default createContainer(() => {
 		_id: { $in: coveredPatients }
 	}).fetch()
 
-	Meteor.subscribe("allUsers")
-	let users = Meteor.users.find().fetch()
-	return { users, user, patients }
+	// Meteor.subscribe("allUsers")
+	// let users = Meteor.users.find().fetch()
+	return { user, patients }
 }, PatientList)

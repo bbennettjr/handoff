@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor"
 import { Mongo } from "meteor/mongo"
-
+import _ from "lodash"
 export const Groups = new Mongo.Collection("groups")
 
 if (Meteor.isServer) {
@@ -13,10 +13,23 @@ if (Meteor.isServer) {
   })
   Meteor.publish("member.groups", ({ userId }) => {
     // all groups this user is a member
-    return Groups.find({ members: userId }, { members: true })
+    console.log("member.groups userId: ", userId)
+    const memberGroups = Groups.find(
+      { members: userId },
+      { members: true, name: true }
+    )
+    // kvothe: USE lodash to concat this into a set
+    const members = memberGroups.fetch().reduce((acc, m) => {
+      return acc.concat(m.members)
+    }, [])
+    console.log("member.groups members:", members)
+    return [
+      memberGroups,
+      Meteor.users.find({ _id: { $in: members } }, { name: true })
+    ]
   })
   Meteor.publish("all.groups", () => {
     // all groups in collection
-    return Groups.find({})
+    return Groups.find({}, { $sort: { members: -1 } })
   })
 }

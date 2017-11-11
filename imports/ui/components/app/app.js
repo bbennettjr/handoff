@@ -148,5 +148,5 @@ class App extends React.Component {
 
 export default createContainer(() => {
 	let user = Meteor.user()
-	return { user }
+	return {}
 }, App)

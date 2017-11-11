@@ -7,6 +7,9 @@ import {
   removePatientsFromUser
 } from "/imports/api/patients/patient-methods.js"
 import { Menu, Dropdown, notification, Button } from "antd"
+import { Groups } from "/imports/api/groups/groups.js"
+import { Users } from "/imports/api/users/users.js"
+import { withTracker } from "meteor/react-meteor-data"
 
 const styles = {
   title: {
@@ -46,7 +49,7 @@ const styles = {
   }
 }
 
-export default class NewPatientButtons extends React.Component {
+class NewPatientButtons extends React.Component {
   static propTypes = {
     selectedRowKeys: PropTypes.array.isRequired,
     setSelectedRowKeys: PropTypes.func.isRequired,
@@ -152,3 +155,10 @@ export default class NewPatientButtons extends React.Component {
     )
   }
 }
+
+export default withTracker(props => {
+  Meteor.subscribe("member.groups", { userId: Meteor.userId() })
+  const users = Meteor.users.find().fetch()
+  console.log("NewPatientButtons withTracker users: ", users)
+  return { users }
+})(NewPatientButtons)
