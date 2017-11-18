@@ -7,7 +7,18 @@ import { withTracker } from "meteor/react-meteor-data"
 import NewGroupModal from "/imports/ui/components/groups/NewGroupModal.js"
 import GroupCard from "/imports/ui/components/groups/GroupCard.js"
 import { styles } from "/imports/ui/styles/styles.js"
-import { Row, Col, Card, Badge, Avatar, Button, Icon, message } from "antd"
+import {
+  Row,
+  Col,
+  Card,
+  Badge,
+  Avatar,
+  Button,
+  Icon,
+  Input,
+  message
+} from "antd"
+const Search = Input.Search
 
 class GroupPage extends React.Component {
   static propTypes = {
@@ -60,6 +71,11 @@ class GroupPage extends React.Component {
             >
               <Icon type="usergroup-delete" />Leave All
             </Button>
+            <Search
+              placeholder="Search groups..."
+              style={{ width: "100%" }}
+              onSearch={() => message.success("Searching")}
+            />
           </div>
         </div>
 
