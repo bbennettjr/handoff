@@ -24,7 +24,7 @@ class GroupPage extends React.Component {
       >
         <div>{group.name}</div>
         <Button
-          type={isMember ? "danger" : "primary"}
+          type={isMember ? "danger" : "default"}
           icon={isMember ? "close" : "plus"}
           onClick={
             isMember ? () => this.leave(group._id) : () => this.join(group._id)
@@ -63,9 +63,7 @@ class GroupPage extends React.Component {
           bodyStyle={isMember ? { backgroundColor: "#42b1a724" } : null}
         >
           <Badge count={group.members.length}>
-            <Avatar shape="circle" style={{ backgroundColor: "#108ee9" }}>
-              USERS
-            </Avatar>
+            <Avatar shape="circle">USERS</Avatar>
           </Badge>
         </Card>
       </Row>
@@ -74,4 +72,3 @@ class GroupPage extends React.Component {
 }
 
 export default GroupPage
-
