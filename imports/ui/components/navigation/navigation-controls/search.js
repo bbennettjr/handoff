@@ -66,6 +66,7 @@ class Search extends React.Component {
           dropdownMatchSelectWidth={false}
           dropdownStyle={{ width: 300 }}
           size="large"
+          placeholder="Search patients..."
           style={{ width: "100%" }}
           dataSource={data}
           allowClear={this.state.value ? true : false}
