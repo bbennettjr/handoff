@@ -49,7 +49,8 @@ export const addToGroup = new ValidatedMethod({
     let result = Groups.update(
       { _id: _id },
       {
-        $addToSet: { members: this.userId }
+        $addToSet: { members: this.userId },
+        $inc: { activity: 1 }
       }
     )
     return { result }
@@ -73,7 +74,8 @@ export const removeFromGroup = new ValidatedMethod({
     let result = Groups.update(
       { _id: _id },
       {
-        $pull: { members: this.userId }
+        $pull: { members: this.userId },
+        $inc: { activity: 1 }
       }
     )
     return { result }

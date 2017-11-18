@@ -9,6 +9,7 @@ import {
 } from "/imports/api/groups/group-methods.js"
 import { withTracker } from "meteor/react-meteor-data"
 import NewGroupModal from "/imports/ui/components/groups/NewGroupModal.js"
+import GroupCard from "/imports/ui/components/groups/GroupCard.js"
 import { styles } from "/imports/ui/styles/styles.js"
 import { Row, Col, Card, Badge, Avatar, Button, Icon, message } from "antd"
 
@@ -20,34 +21,11 @@ class GroupPage extends React.Component {
   renderGroups() {
     const groups = this.props.groups.slice()
 
-    return groups.map((g, i) => {
-      return (
-        <Row type="flex" justify="space-around" align="middle" key={i}>
-          <Card style={{ width: "50%" }} title={g.name}>
-            <Button onClick={() => this.join(g._id)}>Join</Button>
-            <Button onClick={() => this.leave(g._id)}>Leave</Button>
-            <Badge count={g.members.length}>
-              <Avatar shape="circle" icon="user" />
-            </Badge>
-          </Card>
-        </Row>
-      )
-    })
-  }
-
-  join(_id) {
-    addToGroup.call({ _id }, (err, result) => {
-      console.log("addToGroup result:", result)
-      if (err) console.error(err)
-      message.info("Joined the team")
-    })
-  }
-
-  leave(_id) {
-    removeFromGroup.call({ _id }, (err, result) => {
-      console.log("removeFromGroup result:", result)
-      if (err) console.error(err)
-      message.info("Left the team")
+    return groups.map((group, i) => {
+      const isMember = group.members.some(_id => {
+        return _id === Meteor.userId()
+      })
+      return <GroupCard key={i} group={group} isMember={isMember} />
     })
   }
 
