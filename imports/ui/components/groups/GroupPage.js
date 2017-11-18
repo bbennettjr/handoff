@@ -8,7 +8,7 @@ import {
   removeFromGroup
 } from "/imports/api/groups/group-methods.js"
 import { withTracker } from "meteor/react-meteor-data"
-import { Row, Col, Menu, Dropdown, Button, Icon, message } from "antd"
+import { Row, Col, Card, Menu, Dropdown, Button, Icon, message } from "antd"
 
 class GroupPage extends React.Component {
   static propTypes = {
@@ -36,11 +36,13 @@ class GroupPage extends React.Component {
             {arr.slice(start, end).map((g, i) => {
               return (
                 <Col key={i}>
-                  <Dropdown overlay={menu(g._id)}>
-                    <Button>
-                      {g.name} <Icon type="down" />
-                    </Button>
-                  </Dropdown>
+                  <Card title={g.name}>
+                    <Dropdown overlay={menu(g._id)}>
+                      <Button>
+                        {"Actions"} <Icon type="down" />
+                      </Button>
+                    </Dropdown>
+                  </Card>
                 </Col>
               )
             })}
