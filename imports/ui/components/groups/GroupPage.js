@@ -8,7 +8,9 @@ import {
   removeFromGroup
 } from "/imports/api/groups/group-methods.js"
 import { withTracker } from "meteor/react-meteor-data"
-import { Row, Col, Card, Menu, Dropdown, Button, Icon, message } from "antd"
+import NewGroupModal from "/imports/ui/components/groups/NewGroupModal.js"
+import { styles } from "/imports/ui/styles/styles.js"
+import { Row, Col, Card, Badge, Avatar, Button, Icon, message } from "antd"
 
 class GroupPage extends React.Component {
   static propTypes = {
@@ -16,61 +18,57 @@ class GroupPage extends React.Component {
   }
 
   renderGroups() {
-    const COL_LENGTH = 4
     const groups = this.props.groups.slice()
-    let start, end
 
-    const menu = _id => (
-      <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key={1 + _id}>Join</Menu.Item>
-        <Menu.Item key={2 + _id}>Leave</Menu.Item>
-      </Menu>
-    )
-
-    return ((acc, arr) => {
-      return acc.map((r, i) => {
-        start = i * COL_LENGTH
-        end = start + COL_LENGTH
-        return (
-          <Row type="flex" justify="space-around" align="middle" key={i}>
-            {arr.slice(start, end).map((g, i) => {
-              return (
-                <Col key={i}>
-                  <Card title={g.name}>
-                    <Dropdown overlay={menu(g._id)}>
-                      <Button>
-                        {"Actions"} <Icon type="down" />
-                      </Button>
-                    </Dropdown>
-                  </Card>
-                </Col>
-              )
-            })}
-          </Row>
-        )
-      })
-    })(new Array(Math.ceil(groups.length / COL_LENGTH)).fill(1), groups)
+    return groups.map((g, i) => {
+      return (
+        <Row type="flex" justify="space-around" align="middle" key={i}>
+          <Card style={{ width: "50%" }} title={g.name}>
+            <Button onClick={() => this.join(g._id)}>Join</Button>
+            <Button onClick={() => this.leave(g._id)}>Leave</Button>
+            <Badge count={g.members.length}>
+              <Avatar shape="circle" icon="user" />
+            </Badge>
+          </Card>
+        </Row>
+      )
+    })
   }
 
-  handleMenuClick({ key }) {
-    let _id = key.slice(1, key.length)
-    key.startsWith("1")
-      ? addToGroup.call({ _id }, (err, result) => {
-          console.log("addToGroup result:", result)
-          if (err) console.error(err)
-          message.info("Joined the team")
-        })
-      : removeFromGroup.call({ _id }, (err, result) => {
-          console.log("removeFromGroup result:", result)
-          if (err) console.error(err)
-          message.info("Left the team")
-        })
+  join(_id) {
+    addToGroup.call({ _id }, (err, result) => {
+      console.log("addToGroup result:", result)
+      if (err) console.error(err)
+      message.info("Joined the team")
+    })
+  }
+
+  leave(_id) {
+    removeFromGroup.call({ _id }, (err, result) => {
+      console.log("removeFromGroup result:", result)
+      if (err) console.error(err)
+      message.info("Left the team")
+    })
   }
 
   render() {
     return (
       <div>
-        <h2>Groups</h2>
+        <div
+          style={{
+            display: "flex",
+            marginBottom: "20px",
+            marginLeft: "10px"
+          }}
+        >
+          <div style={styles.left}>
+            <NewGroupModal />
+            <Button style={styles.leftButtons} type="danger">
+              <Icon type="usergroup-delete" />Leave All
+            </Button>
+          </div>
+        </div>
+
         {this.renderGroups()}
       </div>
     )
